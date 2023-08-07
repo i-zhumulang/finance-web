@@ -28,6 +28,14 @@ export default class CategoryRequest<T extends BaseParamsInterface> extends Base
     }
 
     /**
+     * 新增
+     * @param formData
+     */
+    public create(formData: T) {
+        return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + "/category/create", {params: formData});
+    }
+
+    /**
      * 新增-保存
      * @param formData
      */
