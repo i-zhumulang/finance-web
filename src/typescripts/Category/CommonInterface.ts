@@ -1,6 +1,6 @@
 export interface CategoryTableInterface {
-    id?: string,
-    parent_id?: string,
+    id?: number,
+    parent_id?: number,
     name?: string,
 }
 

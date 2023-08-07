@@ -3,13 +3,13 @@ import type IndexClass from "@/typescripts/Category/IndexClass";
 import {reactive, ref} from "vue";
 import type {FormInstance, FormRules} from "element-plus";
 import type {CategoryTableInterface, OptionsInterface} from "@/typescripts/Category/CommonInterface";
+import type {InternalRuleItem} from "async-validator/dist-types/interface";
 import CategoryRequest from "@/requests/CategoryRequest";
 import type {AxiosError, AxiosResponse} from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
 import {ElMessage} from "element-plus";
-import type {InternalRuleItem} from "async-validator/dist-types/interface";
 
-export default class CreateClass extends BaseClass {
+export default class UpdateClass extends BaseClass {
     private _indexClass: IndexClass | undefined;
 
     public formRef = ref<FormInstance>();
@@ -54,16 +54,21 @@ export default class CreateClass extends BaseClass {
     }
 
     /**
-     * 新增
+     * 编辑
      */
-    public create() {
+    public edit(): void {
         const _this = this;
+        const params = _this.indexClass.params.value;
         new CategoryRequest()
-            .create({})
+            .edit(params.id)
             .then((response: AxiosResponse) => {
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
-                    _this.options.category = apiParams.data.category
+                    if (apiParams.data.formData.parent_id) {
+                        _this.data.parent_id = apiParams.data.formData.parent_id;
+                    }
+                    _this.data.name = apiParams.data.formData.name
+                    _this.options.category = apiParams.data.formOptions.category
                 } else {
                     ElMessage.error(apiParams.message);
                 }
@@ -80,20 +85,21 @@ export default class CreateClass extends BaseClass {
     }
 
     /**
-     * 新增-保存
+     *
      * @param formRef
      */
-    public store(formRef: FormInstance | undefined) {
+    public update(formRef: FormInstance | undefined) {
         if (formRef === undefined) {
             return false;
         }
         const _this = this;
+        const params = _this.indexClass.params.value;
         formRef.validate((valid: boolean) => {
             if (!valid) {
                 return false;
             }
             new CategoryRequest()
-                .store(_this.data)
+                .update(params.id, _this.data)
                 .then((response: AxiosResponse) => {
                     const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                     if (apiParams.flag === "Success") {
@@ -103,7 +109,6 @@ export default class CreateClass extends BaseClass {
                             onClose: function () {
                                 _this.close();
                                 _this.indexClass.index();
-                                _this.indexClass.count();
                             }
                         });
                     } else {
@@ -123,9 +128,9 @@ export default class CreateClass extends BaseClass {
     }
 
     /**
-     * 关闭新增页面
+     * 关闭页面
      */
     public close() {
-        this.indexClass.setCreateDialogFalse();
+        this.indexClass.setUpdateDialogFalse()
     }
 }
