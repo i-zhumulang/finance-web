@@ -1,13 +1,13 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/Category/IndexClass";
-import {reactive, ref} from "vue";
-import type {FormInstance, FormRules} from "element-plus";
-import type {CategoryTableInterface, OptionsInterface} from "@/typescripts/Category/CommonInterface";
-import type {InternalRuleItem} from "async-validator/dist-types/interface";
+import { reactive, ref } from "vue";
+import type { FormInstance, FormRules } from "element-plus";
+import type { CategoryTableInterface, OptionsInterface } from "@/typescripts/Category/CommonInterface";
+import type { InternalRuleItem } from "async-validator/dist-types/interface";
 import CategoryRequest from "@/requests/CategoryRequest";
-import type {AxiosError, AxiosResponse} from "axios";
+import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
-import {ElMessage} from "element-plus";
+import { ElMessage } from "element-plus";
 
 export default class UpdateClass extends BaseClass {
     private _indexClass: IndexClass | undefined;
@@ -27,8 +27,8 @@ export default class UpdateClass extends BaseClass {
         if (value === "") {
             callback(new Error("请输入分类名称"));
         } else if (value) {
-            let minLength = 2;
-            let maxLength = 30;
+            const minLength = 2;
+            const maxLength = 30;
             const valueLength = value.length;
             if (valueLength < minLength || valueLength > maxLength) {
                 callback(new Error("请输入2~30字符的分类名称"));

@@ -9,7 +9,7 @@ export declare const radioButtonProps: {
         __epPropKey: true;
     };
     readonly disabled: BooleanConstructor;
-    readonly label: import("element-plus/es/utils").EpPropFinalized<(BooleanConstructor | StringConstructor | NumberConstructor)[], unknown, unknown, string, boolean>;
+    readonly label: import("element-plus/es/utils").EpPropFinalized<(NumberConstructor | BooleanConstructor | StringConstructor)[], unknown, unknown, string, boolean>;
 };
 export declare type RadioButtonProps = ExtractPropTypes<typeof radioButtonProps>;
 export declare type RadioButtonInstance = InstanceType<typeof RadioButton>;

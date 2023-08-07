@@ -7,7 +7,7 @@ import IndexClass from "@/typescripts/Category/IndexClass";
 
 export default {
   name: "IndexView",
-  components: { IndexComponent, CreateComponent, UpdateComponent },
+  components: {IndexComponent, CreateComponent, UpdateComponent},
   setup() {
     const indexClass = new IndexClass();
     return {indexClass};
