@@ -1,10 +1,6 @@
 import axios from "axios";
 import type { AxiosError, AxiosResponse, RawAxiosRequestHeaders, InternalAxiosRequestConfig } from "axios";
-import { ElMessage } from "element-plus";
-import HmacSha256Encrypt from "@/typescripts/common/encrypt/aes/HmacSha256Encrypt";
-import { useUser } from "@/stores/user/User";
-
-const userStore = useUser();
+import HmacSha256Encrypt from "@/typescripts/Common/Encrypt/Aes/HmacSha256Encrypt";
 
 const headers: RawAxiosRequestHeaders = {
     'Content-Type': 'application/json; charset=utf-8',
@@ -17,7 +13,7 @@ const instance = axios.create({
 });
 // 请求拦截
 instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-    const authorization = 'Bearer ' + userStore.token;
+    const authorization = 'Bearer ';
     config.headers['Timestamp'] = new Date().getTime();
     config.headers['Authorization'] = authorization;
     const tokenObj = {
@@ -36,16 +32,6 @@ instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 });
 // 响应拦截
 instance.interceptors.response.use((response: AxiosResponse) => {
-    // 登录过期
-    if (response.data.code === 401) {
-        ElMessage({
-            type: "error",
-            message: "登录已经过期,请重新登录",
-            onClose: function () {
-                userStore.setUser({id: "", name: "", token: ""})
-            }
-        });
-    }
     return response;
 }, (error: AxiosError) => {
     // 错误提醒
