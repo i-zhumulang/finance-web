@@ -12,8 +12,7 @@ export default {
     // @ts-ignore
     const {ctx} = getCurrentInstance();
     const currentClass: IndexClass = ctx.$props.indexClass;
-    currentClass.index()
-    currentClass.count()
+    currentClass.search()
     currentClass.options()
     return {currentClass, PaginationClass};
   }
@@ -25,7 +24,18 @@ export default {
     <el-row style="margin-bottom: 10px;">
       <el-col :span="24">
         <el-card class="box-card">
-          搜索
+          <el-form :inline="true" :model="indexClass.data.query">
+            <el-form-item>
+              <el-select v-model="indexClass.data.query.parent_id"
+                         style="width: 100%"
+                         clearable
+                         placeholder="上级分类">
+              </el-select>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="indexClass.search">查询</el-button>
+            </el-form-item>
+          </el-form>
         </el-card>
       </el-col>
     </el-row>

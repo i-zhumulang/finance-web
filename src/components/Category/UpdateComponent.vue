@@ -30,7 +30,7 @@ export default {
       <el-select v-model="updateClass.data.parent_id"
                  style="width: 100%"
                  clearable
-                 placeholder="所属模块">
+                 placeholder="上级分类">
         <el-option v-for="category in updateClass.options.category"
                    :key="category.id"
                    :label="category.data.name"

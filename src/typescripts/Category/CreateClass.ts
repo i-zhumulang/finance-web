@@ -102,8 +102,7 @@ export default class CreateClass extends BaseClass {
                             message: apiParams.message,
                             onClose: function () {
                                 _this.close();
-                                _this.indexClass.index();
-                                _this.indexClass.count();
+                                _this.indexClass.search()
                             }
                         });
                     } else {

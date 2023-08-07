@@ -11,7 +11,8 @@ export default class IndexClass extends BaseClass {
     public data = reactive<IndexDataInterface>({
         query: {
             offset: 1,
-            limit: PaginationClass.indexPageSize
+            limit: PaginationClass.indexPageSize,
+            parent_id: undefined,
         },
         table: {
             index: [],
@@ -73,6 +74,12 @@ export default class IndexClass extends BaseClass {
 
     public setLogsDialogFalse() {
         this.dialog.dialogLogsVisible = false;
+    }
+
+    public search(): void {
+        const _this = this;
+        _this.index();
+        _this.count();
     }
 
     /**

@@ -3,7 +3,8 @@ import type OptsInterface from "@/typescripts/Common/Common/Interfaces/OptsInter
 export interface IndexDataInterface {
     query: {
         offset: number,
-        limit: number
+        limit: number,
+        parent_id?: number,
     },
     table: {
         index: [],
