@@ -1,12 +1,12 @@
 export interface CategoryTableInterface {
     id?: number,
     parent_id?: number,
-    name?: string,
+    name: string,
 }
 
 interface category {
-    id: string,
-    data: CategoryTableInterface[]
+    id: number,
+    data: CategoryTableInterface
 }
 
 export interface OptionsInterface {

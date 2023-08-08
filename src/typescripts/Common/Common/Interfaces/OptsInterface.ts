@@ -3,6 +3,6 @@
  */
 export default interface OptsInterface {
     type: string,
-    nameEn: string,
-    nameZh: string,
+    name_en: string,
+    name_zh: string,
 }
