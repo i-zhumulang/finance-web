@@ -68,6 +68,50 @@ export default class ContainerClass extends BaseClass {
      * 初始化左侧菜单
      */
     public initAside(): void {
-        this.data.aside = [];
+        this.data.aside = [
+            {
+                id: '1',
+                name_zh: "首页",
+                children: [
+                    {
+                        id: '1-1',
+                        component: 'index',
+                        name_zh: "首页",
+                    }
+                ]
+            },
+            {
+                id: '2',
+                name_zh: "设置",
+                children: [
+                    {
+                        id: '2-1',
+                        component: 'category',
+                        name_zh: "支出分类",
+                    },
+                    {
+                        id: '2-2',
+                        component: 'payment-method',
+                        name_zh: "支付方式",
+                    },
+                    {
+                        id: '2-3',
+                        component: 'payment-account',
+                        name_zh: "支付账号",
+                    },
+                ]
+            },
+            {
+                id: '3',
+                name_zh: "财务信息",
+                children: [
+                    {
+                        id: '3-1',
+                        component: 'financial-statement',
+                        name_zh: "财务流水",
+                    },
+                ]
+            }
+        ];
     }
 }

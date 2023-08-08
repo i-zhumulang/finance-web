@@ -1,12 +1,12 @@
 interface children {
     id: string,
     component: string,
-    nameZh: string
+    name_zh: string
 }
 
 interface aside {
     id: string,
-    nameZh: string,
+    name_zh: string,
     children: children[]
 }
 

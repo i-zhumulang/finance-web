@@ -44,14 +44,14 @@ export default {
                 :key="aside.id"
             >
               <template #title>
-                <span>{{ aside.nameZh }} </span>
+                <span>{{ aside.name_zh }} </span>
               </template>
               <el-menu-item
                   v-for="children in aside.children"
                   :index="containerClass.getUri(children.component)"
                   :key="children.id"
                   @click="containerClass.setAsideActivePath(children.component.toString())"
-              >{{ children.nameZh }}
+              >{{ children.name_zh }}
               </el-menu-item>
             </el-sub-menu>
           </el-menu>
