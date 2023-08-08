@@ -1,11 +1,11 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
-import {reactive, ref} from "vue";
-import type {IndexDataInterface, IndexDialogInterface} from "@/typescripts/PaymentAccount/IndexDialogInterface";
+import { reactive, ref } from "vue";
+import type { IndexDataInterface, IndexDialogInterface } from "@/typescripts/PaymentAccount/IndexDialogInterface";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
 import PaymentAccountRequest from "@/requests/PaymentAccountRequest";
-import type {AxiosError, AxiosResponse} from "axios";
+import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
-import {ElMessage, ElMessageBox} from "element-plus";
+import { ElMessage, ElMessageBox } from "element-plus";
 
 export default class IndexClass extends BaseClass {
     public data = reactive<IndexDataInterface>({

@@ -34,6 +34,9 @@ export default class UpdateClass extends BaseClass {
         }
     };
 
+    /**
+     * 表单校验规则
+     */
     public rule = reactive<FormRules>({
         name: [
             {validator: this.name, trigger: "blur"},

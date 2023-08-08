@@ -6,14 +6,14 @@ export declare const checkboxProps: {
      * @description binding value
      */
     modelValue: {
-        type: (BooleanConstructor | StringConstructor | NumberConstructor)[];
+        type: (NumberConstructor | BooleanConstructor | StringConstructor)[];
         default: undefined;
     };
     /**
      * @description value of the Checkbox when used inside a `checkbox-group`
      */
     label: {
-        type: (BooleanConstructor | ObjectConstructor | StringConstructor | NumberConstructor)[];
+        type: (ObjectConstructor | NumberConstructor | BooleanConstructor | StringConstructor)[];
     };
     /**
      * @description Set indeterminate state, only responsible for style control
@@ -38,14 +38,14 @@ export declare const checkboxProps: {
      * @description value of the Checkbox if it's checked
      */
     trueLabel: {
-        type: (StringConstructor | NumberConstructor)[];
+        type: (NumberConstructor | StringConstructor)[];
         default: undefined;
     };
     /**
      * @description value of the Checkbox if it's not checked
      */
     falseLabel: {
-        type: (StringConstructor | NumberConstructor)[];
+        type: (NumberConstructor | StringConstructor)[];
         default: undefined;
     };
     /**
@@ -78,7 +78,7 @@ export declare const checkboxProps: {
     /**
      * @description input tabindex
      */
-    tabindex: (StringConstructor | NumberConstructor)[];
+    tabindex: (NumberConstructor | StringConstructor)[];
     /**
      * @description whether to trigger form validation
      */

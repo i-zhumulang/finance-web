@@ -1,25 +1,6 @@
 import type OptsInterface from "@/typescripts/Common/Common/Interfaces/OptsInterface";
 import type {Category} from "@/typescripts/Category/CommonInterface";
-
-interface PaymentMethod {
-    id: number,
-    data: {
-        name: string,
-    },
-    payment_account: {
-        id: number,
-        data: {
-            name: string,
-        }
-    }
-}
-
-interface PaymentAccount {
-    id: number,
-    data: {
-        name: string,
-    }
-}
+import type { PaymentAccount, PaymentMethod } from "@/typescripts/FinancialStatement/CommonInterface";
 
 export interface IndexDataInterface {
     query: {

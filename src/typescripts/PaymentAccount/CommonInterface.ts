@@ -1,4 +1,4 @@
-import type {PaymentMethodTableInterface} from "@/typescripts/PaymentMethod/CommonInterface";
+import type { PaymentMethodTableInterface } from "@/typescripts/PaymentMethod/CommonInterface";
 
 export interface PaymentAccountTableInterface {
     id?: number,

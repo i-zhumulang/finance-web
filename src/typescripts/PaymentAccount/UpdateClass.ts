@@ -1,13 +1,13 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/PaymentAccount/IndexClass";
-import {reactive, ref} from "vue";
-import type {FormInstance, FormRules} from "element-plus";
-import type {OptionsInterface, PaymentAccountTableInterface} from "@/typescripts/PaymentAccount/CommonInterface";
-import type {InternalRuleItem} from "async-validator/dist-types/interface";
+import { reactive, ref } from "vue";
+import type { FormInstance, FormRules } from "element-plus";
+import type { OptionsInterface, PaymentAccountTableInterface } from "@/typescripts/PaymentAccount/CommonInterface";
+import type { InternalRuleItem } from "async-validator/dist-types/interface";
 import PaymentAccountRequest from "@/requests/PaymentAccountRequest";
-import type {AxiosError, AxiosResponse} from "axios";
+import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
-import {ElMessage} from "element-plus";
+import { ElMessage } from "element-plus";
 
 export default class UpdateClass extends BaseClass {
     private _indexClass: IndexClass | undefined;
@@ -56,6 +56,9 @@ export default class UpdateClass extends BaseClass {
         }
     };
 
+    /**
+     * 表单校验规则
+     */
     public rule = reactive<FormRules>({
         name: [
             {validator: this.name, trigger: "blur"},
