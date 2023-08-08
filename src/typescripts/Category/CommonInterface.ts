@@ -4,11 +4,11 @@ export interface CategoryTableInterface {
     name: string,
 }
 
-interface category {
+export interface Category {
     id: number,
     data: CategoryTableInterface
 }
 
 export interface OptionsInterface {
-    category: category[]
+    category: Category[]
 }
