@@ -1,12 +1,13 @@
 <script lang="ts">
 import IndexComponent from "@/components/PaymentAccount/IndexComponent.vue";
 import CreateComponent from "@/components/PaymentAccount/CreateComponent.vue";
+import UpdateComponent from "@/components/PaymentAccount/UpdateComponent.vue";
 
 import IndexClass from "@/typescripts/PaymentAccount/IndexClass";
 
 export default {
   name: "IndexView",
-  components: {IndexComponent, CreateComponent},
+  components: {IndexComponent, CreateComponent, UpdateComponent},
   setup() {
     const indexClass = new IndexClass();
     return {indexClass};
@@ -24,6 +25,15 @@ export default {
              :close-on-press-escape="false"
              :close-on-click-modal="false">
     <CreateComponent :indexClass="indexClass"/>
+  </el-dialog>
+  <el-dialog title="编辑"
+             width="40%"
+             v-if="indexClass.getUpdateDialog()"
+             v-model="indexClass.dialog.dialogUpdateVisible"
+             :draggable="true"
+             :close-on-press-escape="false"
+             :close-on-click-modal="false">
+    <UpdateComponent :indexClass="indexClass"/>
   </el-dialog>
 </template>
 

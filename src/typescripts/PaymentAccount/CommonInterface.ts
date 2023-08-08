@@ -3,12 +3,12 @@ import type {PaymentMethodTableInterface} from "@/typescripts/PaymentMethod/Comm
 export interface PaymentAccountTableInterface {
     id?: number,
     payment_method_id?: number,
-    name?: string,
-    account?: string
+    name: string,
+    account: string
 }
 
 interface PaymentMethod {
-    id: string,
+    id: number,
     data: PaymentMethodTableInterface
 }
 
