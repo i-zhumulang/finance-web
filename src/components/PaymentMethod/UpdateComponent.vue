@@ -13,6 +13,7 @@ export default {
     const {ctx} = getCurrentInstance();
     const updateClass = new UpdateClass();
     updateClass.indexClass = ctx.$props.indexClass;
+    updateClass.edit();
     return {updateClass}
   }
 }
@@ -21,7 +22,7 @@ export default {
 <template>
   <el-form v-if="updateClass.indexClass.getUpdateDialog()"
            :ref="updateClass.formRef"
-           @submit.prevent="updateClass.store(updateClass.formRef.value)"
+           @submit.prevent="updateClass.update(updateClass.formRef.value)"
            label-width="120px"
            :rules="updateClass.rule"
            :model="updateClass.data">
