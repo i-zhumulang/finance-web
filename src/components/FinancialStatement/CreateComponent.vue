@@ -53,7 +53,7 @@ export default {
                  style="width: 100%"
                  clearable
                  placeholder="请选择支付账号">
-        <el-option v-for="payment_account in createClass.options.payment_account_id"
+        <el-option v-for="payment_account in createClass.options.payment_account"
                    :key="payment_account.id"
                    :label="payment_account.data.name"
                    :value="payment_account.id"/>
