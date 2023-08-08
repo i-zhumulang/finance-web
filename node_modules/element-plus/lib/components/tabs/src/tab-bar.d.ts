@@ -7,9 +7,9 @@ export declare const tabBarProps: {
             [name: string]: import("vue").Slot | undefined;
         }>;
         props: {
-            readonly closable: boolean;
-            readonly label: string;
             readonly disabled: boolean;
+            readonly label: string;
+            readonly closable: boolean;
             readonly lazy: boolean;
             readonly name?: import("element-plus/es/utils").EpPropMergeType<readonly [StringConstructor, NumberConstructor], unknown, unknown> | undefined;
         };
@@ -23,9 +23,9 @@ export declare const tabBarProps: {
             [name: string]: import("vue").Slot | undefined;
         }>;
         props: {
-            readonly closable: boolean;
-            readonly label: string;
             readonly disabled: boolean;
+            readonly label: string;
+            readonly closable: boolean;
             readonly lazy: boolean;
             readonly name?: import("element-plus/es/utils").EpPropMergeType<readonly [StringConstructor, NumberConstructor], unknown, unknown> | undefined;
         };
@@ -39,9 +39,9 @@ export declare const tabBarProps: {
             [name: string]: import("vue").Slot | undefined;
         }>;
         props: {
-            readonly closable: boolean;
-            readonly label: string;
             readonly disabled: boolean;
+            readonly label: string;
+            readonly closable: boolean;
             readonly lazy: boolean;
             readonly name?: import("element-plus/es/utils").EpPropMergeType<readonly [StringConstructor, NumberConstructor], unknown, unknown> | undefined;
         };
@@ -55,9 +55,9 @@ export declare const tabBarProps: {
             [name: string]: import("vue").Slot | undefined;
         }>;
         props: {
-            readonly closable: boolean;
-            readonly label: string;
             readonly disabled: boolean;
+            readonly label: string;
+            readonly closable: boolean;
             readonly lazy: boolean;
             readonly name?: import("element-plus/es/utils").EpPropMergeType<readonly [StringConstructor, NumberConstructor], unknown, unknown> | undefined;
         };

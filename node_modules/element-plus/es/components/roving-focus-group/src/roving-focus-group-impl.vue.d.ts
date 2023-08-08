@@ -16,7 +16,7 @@ declare const _default: import("vue").DefineComponent<{
     loop: BooleanConstructor;
     dir: import("element-plus/es/utils").EpPropFinalized<StringConstructor, string, unknown, string, boolean>;
     orientation: {
-        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => ("horizontal" | "vertical" | undefined) & {}) | (() => "horizontal" | "vertical" | undefined) | ((new (...args: any[]) => ("horizontal" | "vertical" | undefined) & {}) | (() => "horizontal" | "vertical" | undefined))[], unknown, unknown>>;
+        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => ("vertical" | "horizontal" | undefined) & {}) | (() => "vertical" | "horizontal" | undefined) | ((new (...args: any[]) => ("vertical" | "horizontal" | undefined) & {}) | (() => "vertical" | "horizontal" | undefined))[], unknown, unknown>>;
         readonly required: false;
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
@@ -41,7 +41,7 @@ declare const _default: import("vue").DefineComponent<{
     loop: BooleanConstructor;
     dir: import("element-plus/es/utils").EpPropFinalized<StringConstructor, string, unknown, string, boolean>;
     orientation: {
-        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => ("horizontal" | "vertical" | undefined) & {}) | (() => "horizontal" | "vertical" | undefined) | ((new (...args: any[]) => ("horizontal" | "vertical" | undefined) & {}) | (() => "horizontal" | "vertical" | undefined))[], unknown, unknown>>;
+        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => ("vertical" | "horizontal" | undefined) & {}) | (() => "vertical" | "horizontal" | undefined) | ((new (...args: any[]) => ("vertical" | "horizontal" | undefined) & {}) | (() => "vertical" | "horizontal" | undefined))[], unknown, unknown>>;
         readonly required: false;
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
