@@ -26,6 +26,7 @@ export default class IndexClass extends BaseClass {
             payment_method: [],
             payment_account: [],
         },
+        loading: true
     });
 
     public params: any = ref({});
@@ -92,9 +93,11 @@ export default class IndexClass extends BaseClass {
      */
     public index() {
         const _this = this;
+        _this.data.loading = true;
         new FinancialStatementRequest()
             .index(_this.data.query)
             .then((response: AxiosResponse) => {
+                _this.data.loading = false;
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
                     _this.data.table.index = apiParams.data.list;
@@ -103,6 +106,7 @@ export default class IndexClass extends BaseClass {
                 }
             })
             .catch((error: AxiosError) => {
+                _this.data.loading = false;
                 if (error.code === "ERR_BAD_RESPONSE") {
                     if (error.response) {
                         ElMessage.error(error.response.statusText);
@@ -246,5 +250,26 @@ export default class IndexClass extends BaseClass {
             .catch(() => {
                 ElMessage.info("取消操作")
             });
+    }
+
+    /**
+     *
+     * @param paymentMethodId
+     */
+    public paymentMethodChangeHandle(paymentMethodId: number): void {
+        const paymentMethod = this.data.options.payment_method.find(e => e.id === paymentMethodId)
+        if (paymentMethod) {
+            this.data.options.payment_account = paymentMethod.payment_account;
+        }
+        this.data.query.payment_account_id = undefined;
+    }
+
+    /**
+     * 清空
+     */
+    public paymentMethodClearHandle(): void {
+        this.data.options.payment_account = [];
+        this.data.query.payment_method_id = undefined;
+        this.data.query.payment_account_id = undefined;
     }
 }

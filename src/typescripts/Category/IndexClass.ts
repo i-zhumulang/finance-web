@@ -20,7 +20,8 @@ export default class IndexClass extends BaseClass {
         },
         options: {
             operate: []
-        }
+        },
+        loading: true
     });
 
     public params: any = ref({});
@@ -87,9 +88,11 @@ export default class IndexClass extends BaseClass {
      */
     public index() {
         const _this = this;
+        _this.data.loading = true;
         new CategoryRequest()
             .index(_this.data.query)
             .then((response: AxiosResponse) => {
+                _this.data.loading = false;
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
                     _this.data.table.index = apiParams.data.list;
@@ -98,6 +101,7 @@ export default class IndexClass extends BaseClass {
                 }
             })
             .catch((error: AxiosError) => {
+                _this.data.loading = false;
                 if (error.code === "ERR_BAD_RESPONSE") {
                     if (error.response) {
                         ElMessage.error(error.response.statusText);

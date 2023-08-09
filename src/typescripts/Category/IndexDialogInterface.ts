@@ -12,7 +12,8 @@ export interface IndexDataInterface {
     },
     options: {
         operate: OptsInterface[]
-    }
+    },
+    loading: boolean
 }
 
 export interface IndexDialogInterface {

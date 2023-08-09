@@ -1,6 +1,6 @@
 import type OptsInterface from "@/typescripts/Common/Common/Interfaces/OptsInterface";
 import type {Category} from "@/typescripts/Category/CommonInterface";
-import type { PaymentAccount, PaymentMethod } from "@/typescripts/FinancialStatement/CommonInterface";
+import type {PaymentAccount, PaymentMethod} from "@/typescripts/FinancialStatement/CommonInterface";
 
 export interface IndexDataInterface {
     query: {
@@ -19,7 +19,8 @@ export interface IndexDataInterface {
         category: Category[],
         payment_method: PaymentMethod[],
         payment_account: PaymentAccount[]
-    }
+    },
+    loading: boolean
 }
 
 export interface IndexDialogInterface {

@@ -9,24 +9,19 @@ export interface FinancialStatementTableInterface {
     description: string,
 }
 
-export interface PaymentMethod {
-    id: number,
-    data: {
-        name: string,
-    },
-    payment_account: {
-        id: number,
-        data: {
-            name: string,
-        }
-    }
-}
-
 export interface PaymentAccount {
     id: number,
     data: {
         name: string,
     }
+}
+
+export interface PaymentMethod {
+    id: number,
+    data: {
+        name: string,
+    },
+    payment_account: PaymentAccount[]
 }
 
 export interface OptionsInterface {

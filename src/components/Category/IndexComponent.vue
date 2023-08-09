@@ -56,6 +56,7 @@ export default {
             <el-col :span="24">
               <el-table
                   :data="currentClass.data.table.index"
+                  v-loading="currentClass.data.loading"
                   default-expand-all
                   row-key="id"
                   stripe

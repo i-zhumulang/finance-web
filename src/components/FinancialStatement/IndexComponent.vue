@@ -29,25 +29,53 @@ export default {
               <el-select v-model="currentClass.data.query.category_id"
                          style="width: 100%"
                          clearable
+                         filterable
                          placeholder="支出分类">
+                <el-option-group
+                    v-for="category in currentClass.data.options.category"
+                    :key="category.id"
+                    :label="category.data.name">
+                  <el-option
+                      v-for="item in category.children"
+                      :key="item.id"
+                      :label="item.data.name"
+                      :value="item.id"
+                  />
+                </el-option-group>
               </el-select>
             </el-form-item>
             <el-form-item>
               <el-select v-model="currentClass.data.query.payment_method_id"
                          style="width: 100%"
+                         @change="currentClass.paymentMethodChangeHandle($event)"
+                         @clear="currentClass.paymentMethodClearHandle($event)"
                          clearable
+                         filterable
                          placeholder="支付方式">
+                <el-option
+                    v-for="payment_method in currentClass.data.options.payment_method"
+                    :key="payment_method.id"
+                    :label="payment_method.data.name"
+                    :value="payment_method.id"
+                />
               </el-select>
             </el-form-item>
             <el-form-item>
               <el-select v-model="currentClass.data.query.payment_account_id"
                          style="width: 100%"
                          clearable
+                         filterable
                          placeholder="支付账号">
+                <el-option
+                    v-for="payment_account in currentClass.data.options.payment_account"
+                    :key="payment_account.id"
+                    :label="payment_account.data.name"
+                    :value="payment_account.id"
+                />
               </el-select>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="currentClass.search">查询</el-button>
+              <el-button type="primary" @click="currentClass.search()">查询</el-button>
             </el-form-item>
           </el-form>
         </el-card>
@@ -70,6 +98,7 @@ export default {
             <el-col :span="24">
               <el-table
                   :data="currentClass.data.table.index"
+                  v-loading="currentClass.data.loading"
                   row-key="id"
                   style="width: 100%">
                 <el-table-column prop="data.consumption_date_format" label="消费日期"/>
