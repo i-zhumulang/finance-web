@@ -27,36 +27,41 @@ export default {
            :rules="updateClass.rule"
            :model="updateClass.data">
     <el-form-item prop="category_id" label="支出分类">
-      <el-select v-model="updateClass.data.category_id"
-                 style="width: 100%"
-                 clearable
-                 placeholder="请选择支出分类">
-        <el-option v-for="category in updateClass.options.category"
-                   :key="category.id"
-                   :label="category.data.name"
-                   :value="category.id"/>
+      <el-select
+          v-model="updateClass.data.category_id"
+          style="width: 100%"
+          clearable
+          placeholder="请选择支出分类">
+        <el-option-group
+            v-for="category in updateClass.options.category"
+            :key="category.id"
+            :label="category.data.name">
+          <el-option
+              v-for="item in category.children"
+              :key="item.id"
+              :label="item.data.name"
+              :value="item.id"
+          />
+        </el-option-group>
       </el-select>
     </el-form-item>
-    <el-form-item prop="payment_method_id" label="支付方式">
-      <el-select v-model="updateClass.data.payment_method_id"
-                 style="width: 100%"
-                 clearable
-                 placeholder="请选择支付方式">
-        <el-option v-for="payment_method in updateClass.options.payment_method"
-                   :key="payment_method.id"
-                   :label="payment_method.data.name"
-                   :value="payment_method.id"/>
-      </el-select>
-    </el-form-item>
-    <el-form-item prop="category_id" label="支付账号">
-      <el-select v-model="updateClass.data.payment_account_id"
-                 style="width: 100%"
-                 clearable
-                 placeholder="请选择支付账号">
-        <el-option v-for="payment_account in updateClass.options.payment_account"
-                   :key="payment_account.id"
-                   :label="payment_account.data.name"
-                   :value="payment_account.id"/>
+    <el-form-item prop="payment_account_id" label="支付账号">
+      <el-select
+          v-model="updateClass.data.payment_account_id"
+          style="width: 100%"
+          clearable
+          placeholder="请选择支付账号">
+        <el-option-group
+            v-for="payment_method in updateClass.options.payment_method"
+            :key="payment_method.id"
+            :label="payment_method.data.name">
+          <el-option
+              v-for="payment_account in payment_method.payment_account"
+              :key="payment_account.id"
+              :label="payment_account.data.name"
+              :value="payment_account.id"
+          />
+        </el-option-group>
       </el-select>
     </el-form-item>
     <el-form-item prop="consumption_date" label="消费日期">
@@ -65,6 +70,7 @@ export default {
           style="width: 100%"
           type="date"
           placeholder="请选择消费日期"
+          value-format="YYYY-MM-DD"
           size="default"
       />
     </el-form-item>

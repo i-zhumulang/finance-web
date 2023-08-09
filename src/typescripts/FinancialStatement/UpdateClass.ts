@@ -1,16 +1,16 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/FinancialStatement/IndexClass";
-import { reactive, ref } from "vue";
-import type { FormInstance, FormRules } from "element-plus";
+import {reactive, ref} from "vue";
+import type {FormInstance, FormRules} from "element-plus";
 import type {
     FinancialStatementTableInterface,
     OptionsInterface
 } from "@/typescripts/FinancialStatement/CommonInterface";
-import type { InternalRuleItem } from "async-validator/dist-types/interface";
+import type {InternalRuleItem} from "async-validator/dist-types/interface";
 import FinancialStatementRequest from "@/requests/FinancialStatementRequest";
-import type { AxiosError, AxiosResponse } from "axios";
+import type {AxiosError, AxiosResponse} from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
-import { ElMessage } from "element-plus";
+import {ElMessage} from "element-plus";
 
 export default class UpdateClass extends BaseClass {
     private _indexClass: IndexClass | undefined;
@@ -25,7 +25,6 @@ export default class UpdateClass extends BaseClass {
 
     public data = reactive<FinancialStatementTableInterface>({
         category_id: undefined,
-        payment_method_id: undefined,
         payment_account_id: undefined,
         amount: 0,
         consumption_date: '',
@@ -53,14 +52,11 @@ export default class UpdateClass extends BaseClass {
         category_id: [
             {required: true, message: "请选择支出分类", trigger: "change"}
         ],
-        payment_method_id: [
-            {required: true, message: "请选择支付方式", trigger: "change"}
-        ],
         payment_account_id: [
             {required: true, message: "请选择支付账号", trigger: "change"}
         ],
         amount: [
-            {required: true, min: 0.01, max: 99999, message: "请输入消费金额", trigger: "blur"}
+            {required: true, min: 0.01, max: 99999, type: "number", message: "请输入消费金额", trigger: "blur"}
         ],
         consumption_date: [
             {required: true, message: "请选择消费日期", trigger: "change"}
@@ -92,9 +88,6 @@ export default class UpdateClass extends BaseClass {
                     if (apiParams.data.formData.category_id) {
                         _this.data.category_id = apiParams.data.formData.category_id;
                     }
-                    if (apiParams.data.formData.payment_method_id) {
-                        _this.data.payment_method_id = apiParams.data.formData.payment_method_id
-                    }
                     if (apiParams.data.formData.payment_account_id) {
                         _this.data.payment_account_id = apiParams.data.formData.payment_account_id
                     }
@@ -102,8 +95,8 @@ export default class UpdateClass extends BaseClass {
                     _this.data.amount = apiParams.data.formData.amount
                     _this.data.description = apiParams.data.formData.description
 
-                    _this.options.category = apiParams.data.category
-                    _this.options.payment_method = apiParams.data.paymentMethod
+                    _this.options.category = apiParams.data.formOptions.category
+                    _this.options.payment_method = apiParams.data.formOptions.paymentMethod
                 } else {
                     ElMessage.error(apiParams.message);
                 }

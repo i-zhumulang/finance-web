@@ -14,21 +14,9 @@ export default class ContainerClass extends BaseClass {
     });
 
     /**
-     * 当前模块
-     */
-    public appKey: string = '';
-
-    /**
-     * 权限类型
-     */
-    public appType: string = '';
-
-    /**
      * 初始化
      */
     public init(): void {
-        this.appKey = <string>this.router.currentRoute.value.query.app;
-        this.appType = <string>this.router.currentRoute.value.query.type;
         const currentPath = this.router.currentRoute.value.path;
         this.setAsideActivePath(currentPath);
         this.initAside();
@@ -75,7 +63,7 @@ export default class ContainerClass extends BaseClass {
                 children: [
                     {
                         id: '1-1',
-                        component: 'index',
+                        component: '/index',
                         name_zh: "首页",
                     }
                 ]
@@ -86,17 +74,17 @@ export default class ContainerClass extends BaseClass {
                 children: [
                     {
                         id: '2-1',
-                        component: 'category',
+                        component: '/category',
                         name_zh: "支出分类",
                     },
                     {
                         id: '2-2',
-                        component: 'payment-method',
+                        component: '/payment-method',
                         name_zh: "支付方式",
                     },
                     {
                         id: '2-3',
-                        component: 'payment-account',
+                        component: '/payment-account',
                         name_zh: "支付账号",
                     },
                 ]
@@ -107,7 +95,7 @@ export default class ContainerClass extends BaseClass {
                 children: [
                     {
                         id: '3-1',
-                        component: 'financial-statement',
+                        component: '/financial-statement',
                         name_zh: "财务流水",
                     },
                 ]
