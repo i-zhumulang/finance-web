@@ -8,10 +8,8 @@ export default {
   props: {
     indexClass: IndexClass
   },
-  setup: function () {
-    // @ts-ignore
-    const {ctx} = getCurrentInstance();
-    const currentClass: IndexClass = ctx.$props.indexClass;
+  setup: function (props: any) {
+    const currentClass: IndexClass = props.indexClass;
     currentClass.search()
     currentClass.options()
     return {currentClass, PaginationClass};

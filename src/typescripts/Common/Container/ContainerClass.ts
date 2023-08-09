@@ -64,7 +64,7 @@ export default class ContainerClass extends BaseClass {
                     {
                         id: '1-1',
                         component: '/index',
-                        name_zh: "首页",
+                        name_zh: "控制台",
                     }
                 ]
             },

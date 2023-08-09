@@ -1,5 +1,4 @@
 <script lang="ts">
-import { getCurrentInstance } from "vue";
 import IndexClass from "@/typescripts/PaymentMethod/IndexClass";
 import UpdateClass from "@/typescripts/PaymentMethod/UpdateClass";
 
@@ -8,11 +7,9 @@ export default {
   props: {
     indexClass: IndexClass
   },
-  setup() {
-    // @ts-ignore
-    const {ctx} = getCurrentInstance();
+  setup: function (props: any) {
     const updateClass = new UpdateClass();
-    updateClass.indexClass = ctx.$props.indexClass;
+    updateClass.indexClass = props.indexClass;
     updateClass.edit();
     return {updateClass}
   }

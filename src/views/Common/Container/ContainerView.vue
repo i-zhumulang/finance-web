@@ -1,7 +1,7 @@
 <script lang="ts">
-import { getCurrentInstance } from "vue";
+import {getCurrentInstance} from "vue";
 import ContainerClass from "@/typescripts/Common/Container/ContainerClass";
-import { useRouter } from "vue-router";
+import {useRouter} from "vue-router";
 
 export default {
   name: "ContainerView",

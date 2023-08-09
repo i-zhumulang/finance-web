@@ -1,5 +1,4 @@
 <script lang="ts">
-import {getCurrentInstance} from "vue";
 import IndexClass from "@/typescripts/FinancialStatement/IndexClass";
 import CreateClass from "@/typescripts/FinancialStatement/CreateClass";
 
@@ -8,11 +7,9 @@ export default {
   props: {
     indexClass: IndexClass
   },
-  setup() {
-    // @ts-ignore
-    const {ctx} = getCurrentInstance();
+  setup: function (props: any) {
     const createClass = new CreateClass();
-    createClass.indexClass = ctx.$props.indexClass;
+    createClass.indexClass = props.indexClass;
     createClass.create();
     return {createClass}
   }
