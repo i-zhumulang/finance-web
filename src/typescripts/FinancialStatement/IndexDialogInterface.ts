@@ -1,5 +1,5 @@
 import type OptsInterface from "@/typescripts/Common/Common/Interfaces/OptsInterface";
-import type {Category} from "@/typescripts/Category/CommonInterface";
+import type {Category} from "@/typescripts/FinancialStatement/CommonInterface";
 import type {PaymentAccount, PaymentMethod} from "@/typescripts/FinancialStatement/CommonInterface";
 
 export interface IndexDataInterface {

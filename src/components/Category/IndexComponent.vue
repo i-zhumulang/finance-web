@@ -26,14 +26,21 @@ export default {
         <el-card class="box-card">
           <el-form :inline="true" :model="currentClass.data.query">
             <el-form-item>
-              <el-select v-model="currentClass.data.query.parent_id"
+              <el-select v-model="currentClass.data.query.id"
                          style="width: 100%"
                          clearable
+                         filterable
                          placeholder="上级分类">
+                <el-option
+                    v-for="category in currentClass.data.options.category"
+                    :key="category.id"
+                    :label="category.data.name"
+                    :value="category.id"
+                />
               </el-select>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="currentClass.search">查询</el-button>
+              <el-button type="primary" @click="currentClass.search()">查询</el-button>
             </el-form-item>
           </el-form>
         </el-card>

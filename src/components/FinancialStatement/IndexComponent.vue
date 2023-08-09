@@ -48,7 +48,7 @@ export default {
               <el-select v-model="currentClass.data.query.payment_method_id"
                          style="width: 100%"
                          @change="currentClass.paymentMethodChangeHandle($event)"
-                         @clear="currentClass.paymentMethodClearHandle($event)"
+                         @clear="currentClass.paymentMethodClearHandle()"
                          clearable
                          filterable
                          placeholder="支付方式">

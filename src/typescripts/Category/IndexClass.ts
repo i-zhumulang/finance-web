@@ -12,14 +12,15 @@ export default class IndexClass extends BaseClass {
         query: {
             offset: 1,
             limit: PaginationClass.indexPageSize,
-            parent_id: undefined,
+            id: undefined,
         },
         table: {
             index: [],
             count: 0
         },
         options: {
-            operate: []
+            operate: [],
+            category: []
         },
         loading: true
     });
@@ -149,6 +150,7 @@ export default class IndexClass extends BaseClass {
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
                     _this.data.options.operate = apiParams.data.operate;
+                    _this.data.options.category = apiParams.data.category;
                 } else {
                     ElMessage.error(apiParams.message);
                 }

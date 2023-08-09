@@ -1,4 +1,3 @@
-import type { Category } from "@/typescripts/Category/CommonInterface";
 
 export interface FinancialStatementTableInterface {
     id?: number,
@@ -7,6 +6,14 @@ export interface FinancialStatementTableInterface {
     amount: number,
     consumption_date: string,
     description: string,
+}
+
+export interface Category {
+    id: number,
+    data: {
+        name: string
+    },
+    children: { id: number, data: { name: string } }[]
 }
 
 export interface PaymentAccount {
