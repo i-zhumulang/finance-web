@@ -85,24 +85,25 @@ export default {
     <el-form-item prop="description" label="备注">
       <el-input
           v-model="createClass.data.description"
-          :rows="2"
+          :rows="3"
           type="textarea"
+          resize="none"
           placeholder="请输入0~255个字符的备注"
       />
     </el-form-item>
-    <el-form-item>
+    <el-form-item prop="file" label="付款截图">
       <el-upload
-          v-model:file-list="createClass.fileList"
+          v-model:file-list="createClass.fileList.value"
           class="upload-demo"
-          action="http://192.168.11.246:9501/financial-statement/upload"
+          action="http://192.168.0.104:9501/financial-statement/upload"
           :on-preview="createClass.handlePreview"
           :on-remove="createClass.handleRemove"
           list-type="picture"
       >
         <el-button type="primary">选择图片</el-button>
         <template #tip>
-          <div class="el-upload__tip">
-            jpg/png files with a size less than 500kb
+          <div class="el-upload__tip" type="danger">
+            请上传 jpg, jpeg, png 类型图片
           </div>
         </template>
       </el-upload>
@@ -117,5 +118,7 @@ export default {
 </template>
 
 <style scoped>
-
+.upload-demo {
+  width: 100%;
+}
 </style>

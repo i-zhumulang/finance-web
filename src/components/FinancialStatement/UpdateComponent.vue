@@ -89,6 +89,23 @@ export default {
           placeholder="请输入0~255个字符的备注"
       />
     </el-form-item>
+    <el-form-item prop="file" label="付款截图">
+      <el-upload
+          v-model:file-list="updateClass.fileList"
+          class="upload-demo"
+          action="http://192.168.0.104:9501/financial-statement/upload"
+          :on-preview="updateClass.handlePreview"
+          :on-remove="updateClass.handleRemove"
+          list-type="picture"
+      >
+        <el-button type="primary">选择图片</el-button>
+        <template #tip>
+          <div class="el-upload__tip" type="danger">
+            请上传 jpg, jpeg, png 类型图片
+          </div>
+        </template>
+      </el-upload>
+    </el-form-item>
     <el-form-item>
       <el-button type="primary"
                  native-type="submit">确定
@@ -99,5 +116,7 @@ export default {
 </template>
 
 <style scoped>
-
+.upload-demo {
+  width: 100%;
+}
 </style>

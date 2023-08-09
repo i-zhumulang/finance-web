@@ -1,16 +1,16 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/FinancialStatement/IndexClass";
-import {reactive, ref} from "vue";
-import type {FormInstance, FormRules} from "element-plus";
+import { reactive, ref } from "vue";
+import type { FormInstance, FormRules, UploadProps, UploadUserFile } from "element-plus";
 import type {
     FinancialStatementTableInterface,
     OptionsInterface
 } from "@/typescripts/FinancialStatement/CommonInterface";
-import type {InternalRuleItem} from "async-validator/dist-types/interface";
+import type { InternalRuleItem } from "async-validator/dist-types/interface";
 import FinancialStatementRequest from "@/requests/FinancialStatementRequest";
-import type {AxiosError, AxiosResponse} from "axios";
+import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
-import {ElMessage} from "element-plus";
+import { ElMessage } from "element-plus";
 
 export default class UpdateClass extends BaseClass {
     private _indexClass: IndexClass | undefined;
@@ -22,6 +22,16 @@ export default class UpdateClass extends BaseClass {
         payment_method: [],
         payment_account: []
     });
+
+    public fileList = ref<UploadUserFile[]>([]);
+
+    public handleRemove: UploadProps['onRemove'] = (uploadFile, uploadFiles) => {
+        console.log(uploadFile, uploadFiles)
+    }
+
+    public handlePreview: UploadProps['onPreview'] = (file) => {
+        console.log(file)
+    }
 
     public data = reactive<FinancialStatementTableInterface>({
         category_id: undefined,
