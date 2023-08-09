@@ -1,7 +1,7 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/FinancialStatement/IndexClass";
 import {reactive, ref} from "vue";
-import type {FormInstance, FormRules} from "element-plus";
+import type {FormInstance, FormRules, UploadProps, UploadUserFile} from "element-plus";
 import type {
     FinancialStatementTableInterface,
     OptionsInterface
@@ -22,6 +22,16 @@ export default class CreateClass extends BaseClass {
         payment_method: [],
         payment_account: []
     });
+
+    public fileList = ref<UploadUserFile[]>([]);
+
+    public handleRemove: UploadProps['onRemove'] = (uploadFile, uploadFiles) => {
+        console.log(uploadFile, uploadFiles)
+    }
+
+    public handlePreview: UploadProps['onPreview'] = (file) => {
+        console.log(file)
+    }
 
     public data = reactive<FinancialStatementTableInterface>({
         category_id: undefined,

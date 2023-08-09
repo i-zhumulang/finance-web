@@ -91,6 +91,23 @@ export default {
       />
     </el-form-item>
     <el-form-item>
+      <el-upload
+          v-model:file-list="createClass.fileList"
+          class="upload-demo"
+          action="http://192.168.11.246:9501/financial-statement/upload"
+          :on-preview="createClass.handlePreview"
+          :on-remove="createClass.handleRemove"
+          list-type="picture"
+      >
+        <el-button type="primary">选择图片</el-button>
+        <template #tip>
+          <div class="el-upload__tip">
+            jpg/png files with a size less than 500kb
+          </div>
+        </template>
+      </el-upload>
+    </el-form-item>
+    <el-form-item>
       <el-button type="primary"
                  native-type="submit">确定
       </el-button>
