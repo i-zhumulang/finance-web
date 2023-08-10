@@ -1,15 +1,17 @@
 <script lang="ts">
+import {toRefs} from "vue";
 import IndexClass from "@/typescripts/Category/IndexClass";
 import UpdateClass from "@/typescripts/Category/UpdateClass";
 
 export default {
   name: "UpdateComponent",
   props: {
-    indexClass: IndexClass
+    indexClass: {type: IndexClass}
   },
-  setup: function (props: any) {
+  setup(props: any) {
+    const {indexClass} = toRefs(props);
     const updateClass = new UpdateClass();
-    updateClass.indexClass = props.indexClass;
+    updateClass.indexClass = indexClass.value;
     updateClass.edit();
     return {updateClass};
   }

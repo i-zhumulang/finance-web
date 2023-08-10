@@ -1,15 +1,17 @@
 <script lang="ts">
+import {toRefs} from "vue";
 import IndexClass from "@/typescripts/Category/IndexClass";
 import CreateClass from "@/typescripts/Category/CreateClass";
 
 export default {
   name: "CreateComponent",
   props: {
-    indexClass: IndexClass
+    indexClass: {type: IndexClass, required: true}
   },
-  setup: function (props: any) {
+  setup(props: any) {
+    const {indexClass} = toRefs(props);
     const createClass = new CreateClass();
-    createClass.indexClass = props.indexClass;
+    createClass.indexClass = indexClass.value;
     createClass.create();
     return {createClass}
   }

@@ -1,18 +1,17 @@
 <script lang="ts">
-import {getCurrentInstance} from "vue";
+import {toRefs} from "vue";
 import IndexClass from "@/typescripts/PaymentAccount/IndexClass";
 import UpdateClass from "@/typescripts/PaymentAccount/UpdateClass";
 
 export default {
   name: "UpdateComponent",
   props: {
-    indexClass: IndexClass
+    indexClass: {type: IndexClass}
   },
-  setup() {
-    // @ts-ignore
-    const {ctx} = getCurrentInstance();
+  setup(props: any) {
+    const {indexClass} = toRefs(props);
     const updateClass = new UpdateClass();
-    updateClass.indexClass = ctx.$props.indexClass;
+    updateClass.indexClass = indexClass.value;
     updateClass.edit();
     return {updateClass}
   }

@@ -8,5 +8,5 @@ export default abstract class BaseRequest {
     /**
      * finance 项目
      */
-    static readonly FINANCE = 'http://192.168.0.104:9501';
+    static readonly FINANCE = 'http://finance.api.com';
 }

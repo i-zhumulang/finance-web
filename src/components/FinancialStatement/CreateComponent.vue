@@ -1,15 +1,17 @@
 <script lang="ts">
+import {toRefs} from "vue";
 import IndexClass from "@/typescripts/FinancialStatement/IndexClass";
 import CreateClass from "@/typescripts/FinancialStatement/CreateClass";
 
 export default {
   name: "CreateComponent",
   props: {
-    indexClass: IndexClass
+    indexClass: {type: IndexClass}
   },
-  setup: function (props: any) {
+  setup(props: any) {
+    const {indexClass} = toRefs(props);
     const createClass = new CreateClass();
-    createClass.indexClass = props.indexClass;
+    createClass.indexClass = indexClass.value;
     createClass.create();
     return {createClass}
   }
@@ -95,7 +97,7 @@ export default {
       <el-upload
           v-model:file-list="createClass.fileList.value"
           class="upload-demo"
-          action="http://192.168.0.104:9501/financial-statement/upload"
+          action="http://finance.api.com/financial-statement/upload"
           :on-preview="createClass.handlePreview"
           :on-remove="createClass.handleRemove"
           list-type="picture"

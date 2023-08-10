@@ -1,14 +1,16 @@
 <script lang="ts">
+import {toRefs} from "vue";
 import IndexClass from "@/typescripts/Category/IndexClass";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
 
 export default {
   name: "IndexComponent",
   props: {
-    indexClass: IndexClass
+    indexClass: {type: IndexClass}
   },
-  setup: function (props: any) {
-    const currentClass: IndexClass = props.indexClass;
+  setup(props: any) {
+    const {indexClass} = toRefs(props);
+    const currentClass: IndexClass = indexClass.value;
     currentClass.search()
     currentClass.options()
     return {currentClass, PaginationClass};
