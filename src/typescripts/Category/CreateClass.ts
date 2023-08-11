@@ -95,6 +95,9 @@ export default class CreateClass extends BaseClass {
             if (!valid) {
                 return false;
             }
+            if (_this.data.parent_id === undefined) {
+                _this.data.parent_id = 0;
+            }
             new CategoryRequest()
                 .store(_this.data)
                 .then((response: AxiosResponse) => {
