@@ -19,12 +19,14 @@ export default {
 </script>
 
 <template>
-  <el-form v-if="updateClass.indexClass.getUpdateDialog()"
-           :ref="updateClass.formRef"
-           @submit.prevent="updateClass.update(updateClass.formRef.value)"
-           label-width="120px"
-           :rules="updateClass.rule"
-           :model="updateClass.data">
+  <el-form
+      v-loading="updateClass.options.loading"
+      v-if="updateClass.indexClass.getUpdateDialog()"
+      :ref="updateClass.formRef"
+      @submit.prevent="updateClass.update(updateClass.formRef.value)"
+      label-width="120px"
+      :rules="updateClass.rule"
+      :model="updateClass.data">
     <el-form-item prop="category_id" label="支出分类">
       <el-select
           v-model="updateClass.data.category_id"

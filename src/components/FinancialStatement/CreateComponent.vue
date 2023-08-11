@@ -20,6 +20,7 @@ export default {
 
 <template>
   <el-form
+      v-loading="createClass.options.loading"
       v-if="createClass.indexClass.getCreateDialog()"
       :ref="createClass.formRef"
       @submit.prevent="createClass.store(createClass.formRef.value)"

@@ -20,7 +20,8 @@ export default class UpdateClass extends BaseClass {
     public options = reactive<OptionsInterface>({
         category: [],
         payment_method: [],
-        payment_account: []
+        payment_account: [],
+        loading: true
     });
 
     public fileList = ref<UploadUserFile[]>([]);
@@ -84,15 +85,25 @@ export default class UpdateClass extends BaseClass {
         return <IndexClass>this._indexClass;
     }
 
+    public setLoadingTrue(): void {
+        this.options.loading = true;
+    }
+
+    public setLoadingFalse(): void {
+        this.options.loading = false;
+    }
+
     /**
      * 编辑
      */
     public edit(): void {
         const _this = this;
         const params = _this.indexClass.params.value;
+        _this.setLoadingTrue();
         new FinancialStatementRequest()
             .edit(params.id)
             .then((response: AxiosResponse) => {
+                _this.setLoadingFalse();
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
                     if (apiParams.data.formData.category_id) {
@@ -112,6 +123,7 @@ export default class UpdateClass extends BaseClass {
                 }
             })
             .catch((error: AxiosError) => {
+                _this.setLoadingFalse();
                 if (error.code === "ERR_BAD_RESPONSE") {
                     if (error.response) {
                         ElMessage.error(error.response.statusText);
@@ -136,9 +148,11 @@ export default class UpdateClass extends BaseClass {
             if (!valid) {
                 return false;
             }
+            _this.setLoadingTrue();
             new FinancialStatementRequest()
                 .update(params.id, _this.data)
                 .then((response: AxiosResponse) => {
+                    _this.setLoadingFalse();
                     const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                     if (apiParams.flag === "Success") {
                         ElMessage({
@@ -154,6 +168,7 @@ export default class UpdateClass extends BaseClass {
                     }
                 })
                 .catch((error: AxiosError) => {
+                    _this.setLoadingFalse();
                     if (error.code === "ERR_BAD_RESPONSE") {
                         if (error.response) {
                             ElMessage.error(error.response.statusText);
