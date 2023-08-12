@@ -34,5 +34,6 @@ export interface PaymentMethod {
 export interface OptionsInterface {
     category: Category[],
     payment_method: PaymentMethod[],
-    payment_account: PaymentAccount[]
+    payment_account: PaymentAccount[],
+    loading: boolean
 }
