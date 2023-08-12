@@ -1,19 +1,21 @@
 <script lang="ts">
 import { getCurrentInstance } from "vue";
 import { useRouter } from "vue-router";
-import LoginClass from "@/typescripts/Auth/LoginClass";
+import RegisterClass from "@/typescripts/Register/RegisterClass";
 
 export default {
-  name: "LoginComponent",
+  name: "RegisterComponent",
   setup() {
     // @ts-ignore
     const {ctx, proxy} = getCurrentInstance();
-    const loginClass = new LoginClass();
-    loginClass.ctx = ctx;
-    loginClass.proxy = proxy;
-    loginClass.router = useRouter();
-    return {loginClass};
-  },
+    const registerClass = new RegisterClass();
+    registerClass.ctx = ctx;
+    registerClass.proxy = proxy;
+    registerClass.router = useRouter();
+    return {
+      registerClass
+    };
+  }
 }
 </script>
 
@@ -21,41 +23,46 @@ export default {
   <div class="container">
     <!-- form表单容器 -->
     <div class="forms-container">
-      <div class="login">
-        <!-- 登录 -->
-        <el-row class="login-form">
+      <div class="register">
+        <!-- 注册 -->
+        <el-row class="register-form">
           <el-col :span="24">
             <el-row>
-              <el-col :span="24" class="login-form-header">
-                <h1>登录</h1>
+              <el-col :span="24" class="register-form-header">
+                <h1>注册</h1>
               </el-col>
             </el-row>
             <el-row>
               <el-col :span="24">
                 <el-form
-                    v-loading.fullscreen.lock="loginClass.options.loading"
-                    :ref="loginClass.formRef"
-                    :model="loginClass.data"
-                    :rules="loginClass.rule"
-                    @submit.prevent="loginClass.login(loginClass.formRef.value)"
+                    v-loading.fullscreen.lock="registerClass.options.loading"
+                    :ref="registerClass.formRef"
+                    :model="registerClass.data"
+                    :rules="registerClass.rule"
+                    @submit.prevent="registerClass.register(registerClass.formRef.value)"
                 >
                   <el-form-item prop="account">
                     <el-input
-                        v-model.trim="loginClass.data.account"
                         size="large"
-                        placeholder="手机号码"
+                        v-model="registerClass.data.account"
+                        placeholder="请输入手机号码"
                     />
                   </el-form-item>
                   <el-form-item prop="password">
                     <el-input
-                        v-model="loginClass.data.password"
                         size="large"
+                        v-model="registerClass.data.password"
                         type="password"
-                        placeholder="密码"
+                        placeholder="请输入密码"
                     />
                   </el-form-item>
-                  <el-form-item class="forget">
-                    <el-link type="primary" :underline="false">忘记密码?</el-link>
+                  <el-form-item prop="passwordConfirm">
+                    <el-input
+                        size="large"
+                        v-model="registerClass.data.passwordConfirm"
+                        type="password"
+                        placeholder="请再次输入密码"
+                    />
                   </el-form-item>
                   <el-form-item>
                     <el-button
@@ -63,7 +70,7 @@ export default {
                         type="primary"
                         native-type="submit"
                         class="submit-btn"
-                    >登录
+                    >注册
                     </el-button>
                   </el-form-item>
                 </el-form>
@@ -71,7 +78,7 @@ export default {
             </el-row>
             <el-row>
               <el-col :span="24" class="tip-area">
-                <p>没有帐号? <a @click="loginClass.toRegister()">去注册</a></p>
+                <p>已有帐号？ <a @click="registerClass.toLogin()">去登录</a></p>
               </el-col>
             </el-row>
           </el-col>
@@ -86,9 +93,9 @@ export default {
           <p>学习编程,让你的生活更有趣</p>
         </div>
         <img
-            src="@/assets/img/auth/login.png"
+            src="@/assets/img/register/register.png"
             class="image"
-            alt="登录"
+            alt="注册"
         />
       </div>
     </div>
@@ -112,7 +119,7 @@ export default {
   left: 0;
 }
 
-.login {
+.register {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -180,26 +187,16 @@ export default {
   padding: 0.7rem 0;
 }
 
-/* form */
-.login-form {
+/* register */
+.register-form {
   background-color: #fff;
   padding: 20px 20px 20px 20px;
   border-radius: 5px;
   box-shadow: 0 5px 10px #cccc;
 }
 
-.login-form-header {
+.register-form-header {
   text-align: center;
-}
-
-.forget {
-  height: 40px;
-  line-height: 40px;
-}
-
-::v-deep(.forget .el-form-item__content) {
-  display: inline;
-  text-align: right;
 }
 
 .submit-btn {

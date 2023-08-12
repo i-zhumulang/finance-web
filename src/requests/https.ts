@@ -1,6 +1,9 @@
 import axios from "axios";
 import type { AxiosError, AxiosResponse, RawAxiosRequestHeaders, InternalAxiosRequestConfig } from "axios";
 import HmacSha256Encrypt from "@/typescripts/Common/Encrypt/Aes/HmacSha256Encrypt";
+import { useUser } from "@/stores/Auth/User";
+
+const userStore = useUser();
 
 const headers: RawAxiosRequestHeaders = {
     'Content-Type': 'application/json; charset=utf-8',
@@ -13,7 +16,7 @@ const instance = axios.create({
 });
 // 请求拦截
 instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-    const authorization = 'Bearer ';
+    const authorization = 'Bearer ' + userStore.token;
     config.headers['Timestamp'] = new Date().getTime();
     config.headers['Authorization'] = authorization;
     const tokenObj = {

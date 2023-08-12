@@ -12,6 +12,10 @@ import { useUser } from "@/stores/Auth/User";
 export default class LoginClass extends BaseClass {
     public formRef = ref<FormInstance>();
 
+    public options = reactive({
+        loading: false
+    });
+
     public data = reactive({
         account: "18120827456",
         password: "18120827456",
@@ -59,9 +63,11 @@ export default class LoginClass extends BaseClass {
             if (!valid) {
                 return false;
             }
+            _this.options.loading = true;
             new AuthRequest<loginFormData>()
                 .login(_this.getFormData())
                 .then((response: AxiosResponse) => {
+                    _this.options.loading = false;
                     const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data;
                     if (apiParams.flag === "Success") {
                         ElMessage({
@@ -70,7 +76,7 @@ export default class LoginClass extends BaseClass {
                             onClose: function () {
                                 const userStore = useUser();
                                 userStore.setUser(apiParams.data);
-                                _this.router.push({name: "Module"});
+                                _this.router.push({name: "Index"});
                             }
                         });
                     } else {
@@ -78,6 +84,7 @@ export default class LoginClass extends BaseClass {
                     }
                 })
                 .catch((error: AxiosError) => {
+                    _this.options.loading = false;
                     if (error.code === "ERR_BAD_RESPONSE") {
                         if (error.response) {
                             ElMessage.error(error.response.statusText);
