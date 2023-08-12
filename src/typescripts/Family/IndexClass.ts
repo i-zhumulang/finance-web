@@ -1,8 +1,9 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import { reactive, ref } from "vue";
-import type { IndexDataInterface, IndexDialogInterface } from "@/typescripts/Category/IndexDialogInterface";
+import type { IndexDataInterface } from "@/typescripts/Family/IndexDialogInterface";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
-import CategoryRequest from "@/requests/CategoryRequest";
+import type { IndexDialogInterface } from "@/typescripts/Category/IndexDialogInterface";
+import FamilyRequest from "@/requests/FamilyRequest";
 import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
 import { ElMessage, ElMessageBox } from "element-plus";
@@ -11,16 +12,14 @@ export default class IndexClass extends BaseClass {
     public data = reactive<IndexDataInterface>({
         query: {
             offset: 1,
-            limit: PaginationClass.indexPageSize,
-            id: undefined,
+            limit: PaginationClass.indexPageSize
         },
         table: {
             index: [],
             count: 0
         },
         options: {
-            operate: [],
-            category: []
+            operate: []
         },
         loading: true
     });
@@ -98,7 +97,7 @@ export default class IndexClass extends BaseClass {
     public index() {
         const _this = this;
         _this.setLoadingTrue();
-        new CategoryRequest()
+        new FamilyRequest()
             .index(_this.data.query)
             .then((response: AxiosResponse) => {
                 _this.setLoadingFalse();
@@ -126,7 +125,7 @@ export default class IndexClass extends BaseClass {
      */
     public count() {
         const _this = this;
-        new CategoryRequest()
+        new FamilyRequest()
             .count(_this.data.query)
             .then((response: AxiosResponse) => {
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
@@ -152,13 +151,12 @@ export default class IndexClass extends BaseClass {
      */
     public options() {
         const _this = this;
-        new CategoryRequest()
+        new FamilyRequest()
             .options({})
             .then((response: AxiosResponse) => {
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
                     _this.data.options.operate = apiParams.data.operate;
-                    _this.data.options.category = apiParams.data.category;
                 } else {
                     ElMessage.error(apiParams.message);
                 }
@@ -224,7 +222,7 @@ export default class IndexClass extends BaseClass {
         })
             .then(() => {
                 _this.setLoadingTrue();
-                new CategoryRequest()
+                new FamilyRequest()
                     .destroy(params.id)
                     .then((response: AxiosResponse) => {
                         _this.setLoadingFalse();
@@ -234,7 +232,7 @@ export default class IndexClass extends BaseClass {
                                 type: "success",
                                 message: apiParams.message,
                                 onClose: function () {
-                                    _this.search();
+                                    _this.search()
                                 }
                             });
                         } else {
