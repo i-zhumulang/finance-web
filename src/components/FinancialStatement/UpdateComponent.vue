@@ -111,8 +111,9 @@ export default {
       </el-upload>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary"
-                 native-type="submit">确定
+      <el-button
+          type="primary"
+          native-type="submit">确定
       </el-button>
       <el-button @click="updateClass.close()">取消</el-button>
     </el-form-item>
