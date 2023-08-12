@@ -37,8 +37,8 @@ export default {
           <el-row>
             <el-col :span="24">
               <el-table
-                  :data="currentClass.data.table.index"
                   v-loading="currentClass.data.loading"
+                  :data="currentClass.data.table.index"
                   row-key="id"
                   style="width: 100%">
                 <el-table-column prop="payment_method.name" label="支付方式"/>

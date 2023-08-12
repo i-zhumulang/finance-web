@@ -18,6 +18,7 @@ export default class CreateClass extends BaseClass {
 
     public options = reactive<OptionsInterface>({
         payment_method: [],
+        loading: true
     });
 
     public data = reactive<PaymentAccountTableInterface>({
@@ -78,14 +79,24 @@ export default class CreateClass extends BaseClass {
         return <IndexClass>this._indexClass;
     }
 
+    public setLoadingTrue(): void {
+        this.options.loading = true;
+    }
+
+    public setLoadingFalse(): void {
+        this.options.loading = false;
+    }
+
     /**
      * 新增
      */
     public create() {
         const _this = this;
+        _this.setLoadingTrue();
         new PaymentAccountRequest()
             .create({})
             .then((response: AxiosResponse) => {
+                _this.setLoadingFalse();
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
                     _this.options.payment_method = apiParams.data.paymentMethod
@@ -94,6 +105,7 @@ export default class CreateClass extends BaseClass {
                 }
             })
             .catch((error: AxiosError) => {
+                _this.setLoadingFalse();
                 if (error.code === "ERR_BAD_RESPONSE") {
                     if (error.response) {
                         ElMessage.error(error.response.statusText);
@@ -117,9 +129,11 @@ export default class CreateClass extends BaseClass {
             if (!valid) {
                 return false;
             }
+            _this.setLoadingTrue();
             new PaymentAccountRequest()
                 .store(_this.data)
                 .then((response: AxiosResponse) => {
+                    _this.setLoadingFalse();
                     const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                     if (apiParams.flag === "Success") {
                         ElMessage({
@@ -135,6 +149,7 @@ export default class CreateClass extends BaseClass {
                     }
                 })
                 .catch((error: AxiosError) => {
+                    _this.setLoadingFalse();
                     if (error.code === "ERR_BAD_RESPONSE") {
                         if (error.response) {
                             ElMessage.error(error.response.statusText);

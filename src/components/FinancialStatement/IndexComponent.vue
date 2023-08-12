@@ -25,11 +25,12 @@ export default {
         <el-card class="box-card">
           <el-form :inline="true" :model="currentClass.data.query">
             <el-form-item>
-              <el-select v-model="currentClass.data.query.category_id"
-                         style="width: 100%"
-                         clearable
-                         filterable
-                         placeholder="支出分类">
+              <el-select
+                  v-model="currentClass.data.query.category_id"
+                  style="width: 100%"
+                  clearable
+                  filterable
+                  placeholder="支出分类">
                 <el-option-group
                     v-for="category in currentClass.data.options.category"
                     :key="category.id"
@@ -44,13 +45,14 @@ export default {
               </el-select>
             </el-form-item>
             <el-form-item>
-              <el-select v-model="currentClass.data.query.payment_method_id"
-                         style="width: 100%"
-                         @change="currentClass.paymentMethodChangeHandle($event)"
-                         @clear="currentClass.paymentMethodClearHandle()"
-                         clearable
-                         filterable
-                         placeholder="支付方式">
+              <el-select
+                  v-model="currentClass.data.query.payment_method_id"
+                  style="width: 100%"
+                  @change="currentClass.paymentMethodChangeHandle($event)"
+                  @clear="currentClass.paymentMethodClearHandle()"
+                  clearable
+                  filterable
+                  placeholder="支付方式">
                 <el-option
                     v-for="payment_method in currentClass.data.options.payment_method"
                     :key="payment_method.id"
@@ -60,11 +62,12 @@ export default {
               </el-select>
             </el-form-item>
             <el-form-item>
-              <el-select v-model="currentClass.data.query.payment_account_id"
-                         style="width: 100%"
-                         clearable
-                         filterable
-                         placeholder="支付账号">
+              <el-select
+                  v-model="currentClass.data.query.payment_account_id"
+                  style="width: 100%"
+                  clearable
+                  filterable
+                  placeholder="支付账号">
                 <el-option
                     v-for="payment_account in currentClass.data.options.payment_account"
                     :key="payment_account.id"

@@ -13,5 +13,6 @@ interface PaymentMethod {
 }
 
 export interface OptionsInterface {
-    payment_method: PaymentMethod[]
+    payment_method: PaymentMethod[],
+    loading: boolean
 }

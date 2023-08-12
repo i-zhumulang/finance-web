@@ -20,6 +20,7 @@ export default {
 
 <template>
   <el-form
+      v-loading="updateClass.options.loading"
       v-if="updateClass.indexClass.getUpdateDialog()"
       :ref="updateClass.formRef"
       @submit.prevent="updateClass.update(updateClass.formRef.value)"
