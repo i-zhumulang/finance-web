@@ -10,5 +10,6 @@ export interface Category {
 }
 
 export interface OptionsInterface {
-    category: Category[]
+    category: Category[],
+    loading: boolean
 }

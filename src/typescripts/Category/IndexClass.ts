@@ -78,6 +78,14 @@ export default class IndexClass extends BaseClass {
         this.dialog.dialogLogsVisible = false;
     }
 
+    public setLoadingTrue(): void {
+        this.data.loading = true;
+    }
+
+    public setLoadingFalse(): void {
+        this.data.loading = false;
+    }
+
     public search(): void {
         const _this = this;
         _this.index();
@@ -89,11 +97,11 @@ export default class IndexClass extends BaseClass {
      */
     public index() {
         const _this = this;
-        _this.data.loading = true;
+        _this.setLoadingTrue();
         new CategoryRequest()
             .index(_this.data.query)
             .then((response: AxiosResponse) => {
-                _this.data.loading = false;
+                _this.setLoadingFalse();
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
                     _this.data.table.index = apiParams.data.list;
@@ -102,7 +110,7 @@ export default class IndexClass extends BaseClass {
                 }
             })
             .catch((error: AxiosError) => {
-                _this.data.loading = false;
+                _this.setLoadingFalse();
                 if (error.code === "ERR_BAD_RESPONSE") {
                     if (error.response) {
                         ElMessage.error(error.response.statusText);
@@ -215,9 +223,11 @@ export default class IndexClass extends BaseClass {
             draggable: true,
         })
             .then(() => {
+                _this.setLoadingTrue();
                 new CategoryRequest()
                     .destroy(params.id)
                     .then((response: AxiosResponse) => {
+                        _this.setLoadingFalse();
                         const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                         if (apiParams.flag === "Success") {
                             ElMessage({
@@ -233,6 +243,7 @@ export default class IndexClass extends BaseClass {
                         }
                     })
                     .catch((error: AxiosError) => {
+                        _this.setLoadingFalse();
                         if (error.code === "ERR_BAD_RESPONSE") {
                             if (error.response) {
                                 ElMessage.error(error.response.statusText);
