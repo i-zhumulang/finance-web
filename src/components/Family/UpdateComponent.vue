@@ -1,7 +1,7 @@
 <script lang="ts">
 import {toRefs} from "vue";
-import IndexClass from "@/typescripts/PaymentMethod/IndexClass";
-import UpdateClass from "@/typescripts/PaymentMethod/UpdateClass";
+import IndexClass from "@/typescripts/Family/IndexClass";
+import UpdateClass from "@/typescripts/Family/UpdateClass";
 
 export default {
   name: "UpdateComponent",

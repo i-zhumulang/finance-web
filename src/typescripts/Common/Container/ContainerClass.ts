@@ -75,7 +75,7 @@ export default class ContainerClass extends BaseClass {
                     {
                         id: '2-1',
                         component: '/family',
-                        name_zh: "家庭",
+                        name_zh: "家庭组",
                     },
                     {
                         id: '2-2',
