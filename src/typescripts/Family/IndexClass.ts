@@ -233,6 +233,7 @@ export default class IndexClass extends BaseClass {
                                 message: apiParams.message,
                                 onClose: function () {
                                     _this.search()
+                                    _this.options()
                                 }
                             });
                         } else {
