@@ -121,7 +121,7 @@ export default class UpdateClass extends BaseClass {
                     _this.data.consumption_date = apiParams.data.formData.consumption_date
                     _this.data.amount = apiParams.data.formData.amount
                     _this.data.description = apiParams.data.formData.description
-
+                    _this.fileList.value = apiParams.data.formData.files
                     _this.options.category = apiParams.data.formOptions.category
                     _this.options.payment_method = apiParams.data.formOptions.paymentMethod
                 } else {
