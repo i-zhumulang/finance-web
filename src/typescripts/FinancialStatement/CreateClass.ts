@@ -1,23 +1,24 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/FinancialStatement/IndexClass";
-import {reactive, ref} from "vue";
+import { reactive, ref } from "vue";
 import type {
     FormInstance,
     FormRules,
-    UploadFile, UploadFiles,
+    UploadFile,
+    UploadFiles,
     UploadProps,
     UploadRequestOptions
 } from "element-plus";
-import {ElMessage} from "element-plus";
+import { ElMessage } from "element-plus";
 import type {
     FinancialStatementTableInterface,
     OptionsInterface,
     Files
 } from "@/typescripts/FinancialStatement/CommonInterface";
 import FinancialStatementRequest from "@/requests/FinancialStatementRequest";
-import type {AxiosError, AxiosResponse} from "axios";
+import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
-import type {InternalRuleItem} from "async-validator/dist-types/interface";
+import type { InternalRuleItem } from "async-validator/dist-types/interface";
 
 export default class CreateClass extends BaseClass {
     private _indexClass: IndexClass | undefined;
@@ -134,7 +135,7 @@ export default class CreateClass extends BaseClass {
     public handleHttpRequest() {
         const _this = this;
         return (options: UploadRequestOptions) => {
-            let formData: FormData = new FormData();
+            const formData: FormData = new FormData();
             formData.append("file", options.file);
             _this.setLoadingTrue();
             return new FinancialStatementRequest()
@@ -149,7 +150,6 @@ export default class CreateClass extends BaseClass {
         const _this = this;
         const handleSuccess: UploadProps['onSuccess'] = (response: AxiosResponse, uploadFile: UploadFile, uploadFiles: UploadFiles) => {
             _this.setLoadingFalse();
-            console.log(response);
             _this.fileList.value.push(response.data.data);
         }
         return handleSuccess;
@@ -174,8 +174,12 @@ export default class CreateClass extends BaseClass {
      */
     public handlePreview() {
         const _this = this;
-        const handlePreview: UploadProps['onPreview'] = (file) => {
-            console.log(file)
+        const handlePreview: UploadProps['onPreview'] = (uploadFile:UploadFile) => {
+            console.log(uploadFile)
+            const response: AxiosResponse = <AxiosResponse>uploadFile.response;
+            const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data;
+            _this.dialog.dialogVisible = true;
+            _this.dialog.dialogImageUrl = apiParams.data.url
         }
         return handlePreview;
     }

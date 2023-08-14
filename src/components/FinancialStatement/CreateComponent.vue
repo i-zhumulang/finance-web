@@ -1,5 +1,5 @@
 <script lang="ts">
-import {toRefs} from "vue";
+import { toRefs } from "vue";
 import IndexClass from "@/typescripts/FinancialStatement/IndexClass";
 import CreateClass from "@/typescripts/FinancialStatement/CreateClass";
 
@@ -114,8 +114,15 @@ export default {
           </div>
         </template>
       </el-upload>
-      <el-dialog v-model="createClass.dialog.dialogVisible">
-        <img w-full :src="createClass.dialog.dialogImageUrl" alt="图片预览" />
+      <el-dialog append-to-body v-model="createClass.dialog.dialogVisible">
+        <el-row>
+          <el-col :span="24" align="center">
+            <el-image
+                style="width: 500px; height: 500px"
+                :src="createClass.dialog.dialogImageUrl"
+                fit="contain"/>
+          </el-col>
+        </el-row>
       </el-dialog>
     </el-form-item>
     <el-form-item>

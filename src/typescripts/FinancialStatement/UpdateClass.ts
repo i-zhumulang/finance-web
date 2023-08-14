@@ -1,16 +1,24 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/FinancialStatement/IndexClass";
 import { reactive, ref } from "vue";
-import type { FormInstance, FormRules, UploadProps, UploadUserFile } from "element-plus";
+import type {
+    FormInstance,
+    FormRules,
+    UploadFile,
+    UploadFiles,
+    UploadProps,
+    UploadRequestOptions
+} from "element-plus";
+import { ElMessage } from "element-plus";
 import type {
     FinancialStatementTableInterface,
-    OptionsInterface
+    OptionsInterface,
+    Files
 } from "@/typescripts/FinancialStatement/CommonInterface";
 import type { InternalRuleItem } from "async-validator/dist-types/interface";
 import FinancialStatementRequest from "@/requests/FinancialStatementRequest";
 import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
-import { ElMessage } from "element-plus";
 
 export default class UpdateClass extends BaseClass {
     private _indexClass: IndexClass | undefined;
@@ -24,7 +32,12 @@ export default class UpdateClass extends BaseClass {
         loading: true
     });
 
-    public fileList = ref<UploadUserFile[]>([]);
+    public dialog = reactive({
+        dialogVisible: false,
+        dialogImageUrl: ""
+    });
+
+    public fileList = ref<Files[]>([]);
 
     public data = reactive<FinancialStatementTableInterface>({
         category_id: undefined,
@@ -128,11 +141,56 @@ export default class UpdateClass extends BaseClass {
     }
 
     /**
+     * 自定义上传文件覆盖原生 xhr
+     */
+    public handleHttpRequest() {
+        const _this = this;
+        return (options: UploadRequestOptions) => {
+            const formData: FormData = new FormData();
+            formData.append("file", options.file);
+            _this.setLoadingTrue();
+            return new FinancialStatementRequest()
+                .upload(formData);
+        };
+    }
+
+    /**
+     * 上传文件成功钩子
+     */
+    public handleSuccess() {
+        const _this = this;
+        const handleSuccess: UploadProps['onSuccess'] = (response: AxiosResponse, uploadFile: UploadFile, uploadFiles: UploadFiles) => {
+            _this.setLoadingFalse();
+            _this.fileList.value.push(response.data.data);
+        }
+        return handleSuccess;
+    }
+
+    /**
+     * 上传文件失败钩子
+     */
+    public handleError() {
+        const _this = this;
+        const handleError: UploadProps['onError'] = (error: Error, uploadFile: UploadFile, uploadFiles: UploadFiles) => {
+            _this.setLoadingFalse();
+            console.log(error);
+            console.log(uploadFile);
+            console.log(uploadFiles);
+        }
+        return handleError;
+    }
+
+    /**
      * 预览
      */
     public handlePreview() {
-        const handlePreview: UploadProps['onPreview'] = (file) => {
-            console.log(file)
+        const _this = this;
+        const handlePreview: UploadProps['onPreview'] = (uploadFile:UploadFile) => {
+            console.log(uploadFile)
+            const response: AxiosResponse = <AxiosResponse>uploadFile.response;
+            const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data;
+            _this.dialog.dialogVisible = true;
+            _this.dialog.dialogImageUrl = apiParams.data.url
         }
         return handlePreview;
     }
@@ -141,8 +199,19 @@ export default class UpdateClass extends BaseClass {
      * 删除图片
      */
     public handleRemove() {
-        const handleRemove: UploadProps['onRemove'] = (uploadFile, uploadFiles) => {
-            console.log(uploadFile, uploadFiles)
+        const _this = this;
+        const handleRemove: UploadProps['onRemove'] = (uploadFile: UploadFile, uploadFiles: UploadFiles) => {
+            const response: AxiosResponse = <AxiosResponse>uploadFile.response;
+            const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data;
+            const fileId = apiParams.data.id;
+            let index: any;
+            for (index in _this.fileList.value) {
+                if (_this.fileList.value[index]) {
+                    if (_this.fileList.value[index].id === fileId) {
+                        _this.fileList.value.splice(index, 1);
+                    }
+                }
+            }
         }
         return handleRemove;
     }
