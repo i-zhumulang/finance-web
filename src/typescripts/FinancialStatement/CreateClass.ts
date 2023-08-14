@@ -1,15 +1,22 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/FinancialStatement/IndexClass";
 import {reactive, ref} from "vue";
-import type {FormInstance, FormRules, UploadProps, UploadUserFile} from "element-plus";
+import type {
+    FormInstance,
+    FormRules,
+    UploadFile, UploadFiles,
+    UploadProps,
+    UploadRequestOptions
+} from "element-plus";
+import {ElMessage} from "element-plus";
 import type {
     FinancialStatementTableInterface,
-    OptionsInterface
+    OptionsInterface,
+    Files
 } from "@/typescripts/FinancialStatement/CommonInterface";
 import FinancialStatementRequest from "@/requests/FinancialStatementRequest";
 import type {AxiosError, AxiosResponse} from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
-import {ElMessage} from "element-plus";
 import type {InternalRuleItem} from "async-validator/dist-types/interface";
 
 export default class CreateClass extends BaseClass {
@@ -24,15 +31,12 @@ export default class CreateClass extends BaseClass {
         loading: true
     });
 
-    public fileList = ref<UploadUserFile[]>([]);
+    public dialog = reactive({
+        dialogVisible: false,
+        dialogImageUrl: ""
+    });
 
-    public handleRemove: UploadProps['onRemove'] = (uploadFile, uploadFiles) => {
-        console.log(uploadFile, uploadFiles)
-    }
-
-    public handlePreview: UploadProps['onPreview'] = (file) => {
-        console.log(file)
-    }
+    public fileList = ref<Files[]>([]);
 
     public data = reactive<FinancialStatementTableInterface>({
         category_id: undefined,
@@ -40,6 +44,7 @@ export default class CreateClass extends BaseClass {
         amount: 0,
         consumption_date: '',
         description: '',
+        file_id: []
     });
 
     private description = (rule: InternalRuleItem, value: string, callback: any) => {
@@ -124,6 +129,79 @@ export default class CreateClass extends BaseClass {
     }
 
     /**
+     * 自定义上传文件覆盖原生 xhr
+     */
+    public handleHttpRequest() {
+        const _this = this;
+        return (options: UploadRequestOptions) => {
+            let formData: FormData = new FormData();
+            formData.append("file", options.file);
+            _this.setLoadingTrue();
+            return new FinancialStatementRequest()
+                .upload(formData);
+        };
+    }
+
+    /**
+     * 上传文件成功钩子
+     */
+    public handleSuccess() {
+        const _this = this;
+        const handleSuccess: UploadProps['onSuccess'] = (response: AxiosResponse, uploadFile: UploadFile, uploadFiles: UploadFiles) => {
+            _this.setLoadingFalse();
+            console.log(response);
+            _this.fileList.value.push(response.data.data);
+        }
+        return handleSuccess;
+    }
+
+    /**
+     * 上传文件失败钩子
+     */
+    public handleError() {
+        const _this = this;
+        const handleError: UploadProps['onError'] = (error: Error, uploadFile: UploadFile, uploadFiles: UploadFiles) => {
+            _this.setLoadingFalse();
+            console.log(error);
+            console.log(uploadFile);
+            console.log(uploadFiles);
+        }
+        return handleError;
+    }
+
+    /**
+     * 预览
+     */
+    public handlePreview() {
+        const _this = this;
+        const handlePreview: UploadProps['onPreview'] = (file) => {
+            console.log(file)
+        }
+        return handlePreview;
+    }
+
+    /**
+     * 删除图片
+     */
+    public handleRemove() {
+        const _this = this;
+        const handleRemove: UploadProps['onRemove'] = (uploadFile: UploadFile, uploadFiles: UploadFiles) => {
+            const response: AxiosResponse = <AxiosResponse>uploadFile.response;
+            const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data;
+            const fileId = apiParams.data.id;
+            let index: any;
+            for (index in _this.fileList.value) {
+                if (_this.fileList.value[index]) {
+                    if (_this.fileList.value[index].id === fileId) {
+                        _this.fileList.value.splice(index, 1);
+                    }
+                }
+            }
+        }
+        return handleRemove;
+    }
+
+    /**
      * 新增-保存
      * @param formRef
      */
@@ -132,11 +210,13 @@ export default class CreateClass extends BaseClass {
             return false;
         }
         const _this = this;
+        console.log(_this.fileList);
         formRef.validate((valid: boolean) => {
             if (!valid) {
                 return false;
             }
             _this.setLoadingTrue();
+            _this.data.file_id = _this.fileList.value.map((e: Files) => e.id);
             new FinancialStatementRequest()
                 .store(_this.data)
                 .then((response: AxiosResponse) => {

@@ -67,4 +67,13 @@ export default class FinancialStatementRequest<T extends BaseParamsInterface> ex
     public destroy(id: string) {
         return BaseRequest.axios.delete<ApiParamsInterface>(BaseRequest.FINANCE + `/financial-statement/${id}`);
     }
+
+    /**
+     * 上传
+     * @param formData
+     */
+    public upload(formData: T) {
+        return BaseRequest.axios.post<ApiParamsInterface>(BaseRequest.FINANCE + "/financial-statement/upload", formData, {"headers": {"Content-Type": "multipart/form-data"}});
+    }
+
 }

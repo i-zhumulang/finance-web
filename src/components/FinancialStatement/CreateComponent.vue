@@ -96,11 +96,15 @@ export default {
     </el-form-item>
     <el-form-item prop="file" label="付款截图">
       <el-upload
-          v-model:file-list="createClass.fileList.value"
+          :file-list="createClass.fileList.value"
           class="upload-demo"
-          action="http://finance.api.com/financial-statement/upload"
-          :on-preview="createClass.handlePreview"
-          :on-remove="createClass.handleRemove"
+          action="#"
+          :on-preview="createClass.handlePreview()"
+          :on-remove="createClass.handleRemove()"
+          :http-request="createClass.handleHttpRequest()"
+          :on-success="createClass.handleSuccess()"
+          :on-error="createClass.handleError()"
+          :show-file-list="true"
           list-type="picture"
       >
         <el-button type="primary">选择图片</el-button>
@@ -110,6 +114,9 @@ export default {
           </div>
         </template>
       </el-upload>
+      <el-dialog v-model="createClass.dialog.dialogVisible">
+        <img w-full :src="createClass.dialog.dialogImageUrl" alt="图片预览" />
+      </el-dialog>
     </el-form-item>
     <el-form-item>
       <el-button

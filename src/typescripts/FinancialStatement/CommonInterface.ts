@@ -1,4 +1,3 @@
-
 export interface FinancialStatementTableInterface {
     id?: number,
     category_id?: number,
@@ -6,6 +5,7 @@ export interface FinancialStatementTableInterface {
     amount: number,
     consumption_date: string,
     description: string,
+    file_id?: number[]
 }
 
 export interface Category {
@@ -36,4 +36,10 @@ export interface OptionsInterface {
     payment_method: PaymentMethod[],
     payment_account: PaymentAccount[],
     loading: boolean
+}
+
+export interface Files {
+    id: number,
+    name: string,
+    url: string
 }

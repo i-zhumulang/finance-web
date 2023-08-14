@@ -26,20 +26,13 @@ export default class UpdateClass extends BaseClass {
 
     public fileList = ref<UploadUserFile[]>([]);
 
-    public handleRemove: UploadProps['onRemove'] = (uploadFile, uploadFiles) => {
-        console.log(uploadFile, uploadFiles)
-    }
-
-    public handlePreview: UploadProps['onPreview'] = (file) => {
-        console.log(file)
-    }
-
     public data = reactive<FinancialStatementTableInterface>({
         category_id: undefined,
         payment_account_id: undefined,
         amount: 0,
         consumption_date: '',
         description: '',
+        file_id: []
     });
 
     private description = (rule: InternalRuleItem, value: string, callback: any) => {
@@ -132,6 +125,26 @@ export default class UpdateClass extends BaseClass {
                     ElMessage.error(error.message);
                 }
             });
+    }
+
+    /**
+     * 预览
+     */
+    public handlePreview() {
+        const handlePreview: UploadProps['onPreview'] = (file) => {
+            console.log(file)
+        }
+        return handlePreview;
+    }
+
+    /**
+     * 删除图片
+     */
+    public handleRemove() {
+        const handleRemove: UploadProps['onRemove'] = (uploadFile, uploadFiles) => {
+            console.log(uploadFile, uploadFiles)
+        }
+        return handleRemove;
     }
 
     /**
