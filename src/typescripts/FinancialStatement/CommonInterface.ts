@@ -5,7 +5,7 @@ export interface FinancialStatementTableInterface {
     amount: number,
     consumption_date: string,
     description: string,
-    file_id?: number[]
+    files_id?: number[]
 }
 
 export interface Category {

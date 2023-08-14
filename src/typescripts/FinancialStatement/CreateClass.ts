@@ -45,7 +45,7 @@ export default class CreateClass extends BaseClass {
         amount: 0,
         consumption_date: '',
         description: '',
-        file_id: []
+        files_id: []
     });
 
     private description = (rule: InternalRuleItem, value: string, callback: any) => {
@@ -220,7 +220,7 @@ export default class CreateClass extends BaseClass {
                 return false;
             }
             _this.setLoadingTrue();
-            _this.data.file_id = _this.fileList.value.map((e: Files) => e.id);
+            _this.data.files_id = _this.fileList.value.map((e: Files) => e.id);
             new FinancialStatementRequest()
                 .store(_this.data)
                 .then((response: AxiosResponse) => {
