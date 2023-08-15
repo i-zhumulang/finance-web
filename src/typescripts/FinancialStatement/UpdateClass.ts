@@ -185,12 +185,9 @@ export default class UpdateClass extends BaseClass {
      */
     public handlePreview() {
         const _this = this;
-        const handlePreview: UploadProps['onPreview'] = (uploadFile:UploadFile) => {
-            console.log(uploadFile)
-            const response: AxiosResponse = <AxiosResponse>uploadFile.response;
-            const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data;
+        const handlePreview: UploadProps['onPreview'] = (uploadFile:any) => {
             _this.dialog.dialogVisible = true;
-            _this.dialog.dialogImageUrl = apiParams.data.url
+            _this.dialog.dialogImageUrl = uploadFile.url
         }
         return handlePreview;
     }
@@ -200,10 +197,8 @@ export default class UpdateClass extends BaseClass {
      */
     public handleRemove() {
         const _this = this;
-        const handleRemove: UploadProps['onRemove'] = (uploadFile: UploadFile, uploadFiles: UploadFiles) => {
-            const response: AxiosResponse = <AxiosResponse>uploadFile.response;
-            const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data;
-            const fileId = apiParams.data.id;
+        const handleRemove: UploadProps['onRemove'] = (uploadFile: any, uploadFiles: UploadFiles) => {
+            const fileId = uploadFile.id;
             let index: any;
             for (index in _this.fileList.value) {
                 if (_this.fileList.value[index]) {
