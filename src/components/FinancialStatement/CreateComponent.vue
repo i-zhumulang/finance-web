@@ -79,8 +79,8 @@ export default {
       <el-input-number
           v-model="createClass.data.amount"
           :precision="2"
-          :step="0.1"
-          :min="0.1"
+          :step="0.01"
+          :min="0.01"
           :max="99999.99"
           autocomplete="off"
           placeholder="请输入消费金额"/>

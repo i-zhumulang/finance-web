@@ -111,8 +111,10 @@ export default class CreateClass extends BaseClass {
                 _this.setLoadingFalse();
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
-                    _this.options.category = apiParams.data.category
-                    _this.options.payment_method = apiParams.data.paymentMethod
+                    _this.options.category = apiParams.data.formOptions.category
+                    _this.options.payment_method = apiParams.data.formOptions.paymentMethod
+
+                    _this.data.consumption_date = apiParams.data.formData.consumption_date;
                 } else {
                     ElMessage.error(apiParams.message);
                 }

@@ -110,6 +110,7 @@ export default {
                 <el-table-column prop="payment_method.name" label="支付方式"/>
                 <el-table-column prop="payment_account.name" label="支付账号"/>
                 <el-table-column prop="data.description" label="备注"/>
+                <el-table-column prop="data.created_by_name" label="创建人"/>
                 <el-table-column prop="data.created_at_format" label="创建时间"/>
                 <el-table-column label="操作" width="120">
                   <template #default="scope">
