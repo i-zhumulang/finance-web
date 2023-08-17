@@ -12,9 +12,7 @@ export default {
     registerClass.ctx = ctx;
     registerClass.proxy = proxy;
     registerClass.router = useRouter();
-    return {
-      registerClass
-    };
+    return {registerClass};
   }
 }
 </script>
@@ -35,7 +33,6 @@ export default {
             <el-row>
               <el-col :span="24">
                 <el-form
-                    v-loading.fullscreen.lock="registerClass.options.loading"
                     :ref="registerClass.formRef"
                     :model="registerClass.data"
                     :rules="registerClass.rule"

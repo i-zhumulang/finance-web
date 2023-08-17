@@ -4,17 +4,14 @@ import { reactive, ref } from "vue";
 import AuthRequest from "@/requests/AuthRequest";
 import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
-import {ElMessage} from "element-plus";
+import { ElLoading, ElMessage } from "element-plus";
 import RsaEncrypt from "@/typescripts/Common/Encrypt/Rsa/RsaEncrypt";
 import type { loginFormData } from "@/typescripts/Auth/LoginClassInterface";
 import { useUser } from "@/stores/Auth/User";
 
 export default class LoginClass extends BaseClass {
-    public formRef = ref<FormInstance>();
 
-    public options = reactive({
-        loading: false
-    });
+    public formRef = ref<FormInstance>();
 
     public data = reactive({
         account: "18120827456",
@@ -63,11 +60,11 @@ export default class LoginClass extends BaseClass {
             if (!valid) {
                 return false;
             }
-            _this.options.loading = true;
+            const loadingInstance = ElLoading.service({fullscreen: true});
             new AuthRequest<loginFormData>()
                 .login(_this.getFormData())
                 .then((response: AxiosResponse) => {
-                    _this.options.loading = false;
+                    loadingInstance.close();
                     const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data;
                     if (apiParams.flag === "Success") {
                         ElMessage({
@@ -84,7 +81,7 @@ export default class LoginClass extends BaseClass {
                     }
                 })
                 .catch((error: AxiosError) => {
-                    _this.options.loading = false;
+                    loadingInstance.close();
                     if (error.code === "ERR_BAD_RESPONSE") {
                         if (error.response) {
                             ElMessage.error(error.response.statusText);

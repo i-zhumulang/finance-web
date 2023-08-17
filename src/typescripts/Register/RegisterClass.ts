@@ -5,14 +5,11 @@ import type { FormInstance, FormRules } from "element-plus";
 import RegisterRequest from "@/requests/RegisterRequest";
 import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
-import { ElMessage } from "element-plus";
+import { ElLoading, ElMessage } from "element-plus";
 import RsaEncrypt from "@/typescripts/Common/Encrypt/Rsa/RsaEncrypt";
 import type { registerFormData } from "@/typescripts/Register/RegisterInterface";
 
 export default class RegisterClass extends BaseClass {
-    public options = reactive({
-        loading: false
-    });
 
     /**
      * 验证密码
@@ -120,11 +117,11 @@ export default class RegisterClass extends BaseClass {
             if (!valid) {
                 return false;
             }
-            _this.options.loading = true;
+            const loadingInstance = ElLoading.service({fullscreen: true});
             new RegisterRequest()
                 .register(_this.getFormData())
                 .then(function (response: AxiosResponse) {
-                    _this.options.loading = false;
+                    loadingInstance.close();
                     const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                     if (apiParams.flag === "Success") {
                         ElMessage({
@@ -139,7 +136,7 @@ export default class RegisterClass extends BaseClass {
                     }
                 })
                 .catch((error: AxiosError) => {
-                    _this.options.loading = false;
+                    loadingInstance.close();
                     if (error.code === "ERR_BAD_RESPONSE") {
                         if (error.response) {
                             ElMessage.error(error.response.statusText);

@@ -33,7 +33,6 @@ export default {
             <el-row>
               <el-col :span="24">
                 <el-form
-                    v-loading.fullscreen.lock="loginClass.options.loading"
                     :ref="loginClass.formRef"
                     :model="loginClass.data"
                     :rules="loginClass.rule"
