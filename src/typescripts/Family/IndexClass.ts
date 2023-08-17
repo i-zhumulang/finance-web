@@ -6,7 +6,7 @@ import type { IndexDialogInterface } from "@/typescripts/Category/IndexDialogInt
 import FamilyRequest from "@/requests/FamilyRequest";
 import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
-import { ElMessage, ElMessageBox } from "element-plus";
+import { ElLoading, ElMessage, ElMessageBox } from "element-plus";
 
 export default class IndexClass extends BaseClass {
     public data = reactive<IndexDataInterface>({
@@ -221,11 +221,11 @@ export default class IndexClass extends BaseClass {
             draggable: true,
         })
             .then(() => {
-                _this.setLoadingTrue();
+                const loadingInstance = ElLoading.service({fullscreen: true});
                 new FamilyRequest()
                     .destroy(params.id)
                     .then((response: AxiosResponse) => {
-                        _this.setLoadingFalse();
+                        loadingInstance.close();
                         const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                         if (apiParams.flag === "Success") {
                             ElMessage({
@@ -241,7 +241,7 @@ export default class IndexClass extends BaseClass {
                         }
                     })
                     .catch((error: AxiosError) => {
-                        _this.setLoadingFalse();
+                        loadingInstance.close();
                         if (error.code === "ERR_BAD_RESPONSE") {
                             if (error.response) {
                                 ElMessage.error(error.response.statusText);
