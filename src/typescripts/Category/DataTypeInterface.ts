@@ -1,14 +1,26 @@
 import type OptsInterface from "@/typescripts/Common/Common/Interfaces/OptsInterface";
-import type {Category} from "@/typescripts/FinancialStatement/CommonInterface";
-import type {PaymentAccount, PaymentMethod} from "@/typescripts/FinancialStatement/CommonInterface";
+
+export interface CategoryTableInterface {
+    id?: number,
+    parent_id?: number,
+    name: string,
+}
+
+export interface Category {
+    id: number,
+    data: CategoryTableInterface
+}
+
+export interface OptionsInterface {
+    category: Category[],
+    loading: boolean
+}
 
 export interface IndexDataInterface {
     query: {
         offset: number,
         limit: number,
-        category_id?: number,
-        payment_method_id?: number,
-        payment_account_id?: number,
+        id?: number,
     },
     table: {
         index: [],
@@ -16,9 +28,7 @@ export interface IndexDataInterface {
     },
     options: {
         operate: OptsInterface[],
-        category: Category[],
-        payment_method: PaymentMethod[],
-        payment_account: PaymentAccount[]
+        category: Category[]
     },
     loading: boolean
 }

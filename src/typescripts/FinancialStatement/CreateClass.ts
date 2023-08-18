@@ -14,7 +14,7 @@ import type {
     FinancialStatementTableInterface,
     OptionsInterface,
     Files
-} from "@/typescripts/FinancialStatement/CommonInterface";
+} from "@/typescripts/FinancialStatement/DataTypeInterface";
 import FinancialStatementRequest from "@/requests/FinancialStatementRequest";
 import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
@@ -176,7 +176,7 @@ export default class CreateClass extends BaseClass {
      */
     public handlePreview() {
         const _this = this;
-        const handlePreview: UploadProps['onPreview'] = (uploadFile:any) => {
+        const handlePreview: UploadProps['onPreview'] = (uploadFile: any) => {
             _this.dialog.dialogVisible = true;
             _this.dialog.dialogImageUrl = uploadFile.url
         }

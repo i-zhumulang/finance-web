@@ -14,7 +14,7 @@ import type {
     FinancialStatementTableInterface,
     OptionsInterface,
     Files
-} from "@/typescripts/FinancialStatement/CommonInterface";
+} from "@/typescripts/FinancialStatement/DataTypeInterface";
 import type { InternalRuleItem } from "async-validator/dist-types/interface";
 import FinancialStatementRequest from "@/requests/FinancialStatementRequest";
 import type { AxiosError, AxiosResponse } from "axios";
@@ -185,7 +185,7 @@ export default class UpdateClass extends BaseClass {
      */
     public handlePreview() {
         const _this = this;
-        const handlePreview: UploadProps['onPreview'] = (uploadFile:any) => {
+        const handlePreview: UploadProps['onPreview'] = (uploadFile: any) => {
             _this.dialog.dialogVisible = true;
             _this.dialog.dialogImageUrl = uploadFile.url
         }

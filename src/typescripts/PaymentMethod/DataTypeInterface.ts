@@ -1,5 +1,14 @@
 import type OptsInterface from "@/typescripts/Common/Common/Interfaces/OptsInterface";
 
+export interface PaymentMethodTableInterface {
+    id?: number,
+    name: string,
+}
+
+export interface OptionsInterface {
+    loading: boolean
+}
+
 export interface IndexDataInterface {
     query: {
         offset: number,
@@ -10,7 +19,7 @@ export interface IndexDataInterface {
         count: number
     },
     options: {
-        operate: OptsInterface[],
+        operate: OptsInterface[]
     },
     loading: boolean
 }

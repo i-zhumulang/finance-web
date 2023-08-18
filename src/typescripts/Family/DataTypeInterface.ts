@@ -1,11 +1,18 @@
 import type OptsInterface from "@/typescripts/Common/Common/Interfaces/OptsInterface";
-import type {Category} from "@/typescripts/Category/CommonInterface";
+
+export interface FamilyTableInterface {
+    id?: number,
+    name: string,
+}
+
+export interface OptionsInterface {
+    loading: boolean
+}
 
 export interface IndexDataInterface {
     query: {
         offset: number,
         limit: number,
-        id?: number,
     },
     table: {
         index: [],
@@ -13,7 +20,6 @@ export interface IndexDataInterface {
     },
     options: {
         operate: OptsInterface[],
-        category: Category[]
     },
     loading: boolean
 }

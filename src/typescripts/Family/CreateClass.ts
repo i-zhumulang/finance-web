@@ -2,7 +2,7 @@ import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/Family/IndexClass";
 import { reactive, ref } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
-import type { OptionsInterface, FamilyTableInterface } from "@/typescripts/Family/CommonInterface";
+import type { OptionsInterface, FamilyTableInterface } from "@/typescripts/Family/DataTypeInterface";
 import type { InternalRuleItem } from "async-validator/dist-types/interface";
 import FamilyRequest from "@/requests/FamilyRequest";
 import type { AxiosError, AxiosResponse } from "axios";

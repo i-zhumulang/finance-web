@@ -1,8 +1,7 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import { reactive, ref } from "vue";
-import type { IndexDataInterface } from "@/typescripts/Family/IndexDialogInterface";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
-import type { IndexDialogInterface } from "@/typescripts/Category/IndexDialogInterface";
+import type { IndexDialogInterface, IndexDataInterface } from "@/typescripts/Family/DataTypeInterface";
 import FamilyRequest from "@/requests/FamilyRequest";
 import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";

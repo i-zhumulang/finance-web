@@ -2,7 +2,7 @@ import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/PaymentAccount/IndexClass";
 import { reactive, ref } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
-import type { OptionsInterface, PaymentAccountTableInterface } from "@/typescripts/PaymentAccount/CommonInterface";
+import type { OptionsInterface, PaymentAccountTableInterface } from "@/typescripts/PaymentAccount/DataTypeInterface";
 import type { InternalRuleItem } from "async-validator/dist-types/interface";
 import PaymentAccountRequest from "@/requests/PaymentAccountRequest";
 import type { AxiosError, AxiosResponse } from "axios";

@@ -1,6 +1,6 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import { reactive, ref } from "vue";
-import type { IndexDataInterface, IndexDialogInterface } from "@/typescripts/Category/IndexDialogInterface";
+import type { IndexDataInterface, IndexDialogInterface } from "@/typescripts/Category/DataTypeInterface";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
 import CategoryRequest from "@/requests/CategoryRequest";
 import type { AxiosError, AxiosResponse } from "axios";

@@ -2,7 +2,7 @@ import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/Category/IndexClass";
 import { reactive, ref } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
-import type { CategoryTableInterface, OptionsInterface } from "@/typescripts/Category/CommonInterface";
+import type { CategoryTableInterface, OptionsInterface } from "@/typescripts/Category/DataTypeInterface";
 import type { InternalRuleItem } from "async-validator/dist-types/interface";
 import CategoryRequest from "@/requests/CategoryRequest";
 import type { AxiosError, AxiosResponse } from "axios";

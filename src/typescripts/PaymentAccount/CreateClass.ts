@@ -2,14 +2,13 @@ import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/PaymentMethod/IndexClass";
 import { reactive, ref } from "vue";
 import type { FormInstance } from "element-plus";
-import type { PaymentAccountTableInterface } from "@/typescripts/PaymentAccount/CommonInterface";
+import type { PaymentAccountTableInterface, OptionsInterface } from "@/typescripts/PaymentAccount/DataTypeInterface";
 import type { InternalRuleItem } from "async-validator/dist-types/interface";
 import type { FormRules } from "element-plus";
 import PaymentAccountRequest from "@/requests/PaymentAccountRequest";
 import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
 import { ElMessage } from "element-plus";
-import type { OptionsInterface } from "@/typescripts/PaymentAccount/CommonInterface";
 
 export default class CreateClass extends BaseClass {
     private _indexClass: IndexClass | undefined;

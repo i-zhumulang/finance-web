@@ -1,6 +1,6 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import { reactive, ref } from "vue";
-import type { IndexDataInterface, IndexDialogInterface } from "@/typescripts/PaymentAccount/IndexDialogInterface";
+import type { IndexDataInterface, IndexDialogInterface } from "@/typescripts/PaymentAccount/DataTypeInterface";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
 import PaymentAccountRequest from "@/requests/PaymentAccountRequest";
 import type { AxiosError, AxiosResponse } from "axios";
