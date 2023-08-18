@@ -1,26 +1,17 @@
 import type { Router } from "vue-router";
+import type { ComponentPublicInstance } from "vue";
 
 export default class BaseClass {
 
-    private _ctx: any
-
-    private _proxy: any
+    private _proxy: ComponentPublicInstance | undefined
 
     private _router!: Router
 
-    public set ctx(ctx: any) {
-        this._ctx = ctx;
-    }
-
-    public get ctx(): any {
-        return this._ctx;
-    }
-
-    public set proxy(proxy: any) {
+    public set proxy(proxy: ComponentPublicInstance | undefined) {
         this._proxy = proxy;
     }
 
-    public get proxy(): any {
+    public get proxy(): ComponentPublicInstance | undefined {
         return this._proxy;
     }
 

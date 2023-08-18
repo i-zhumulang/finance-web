@@ -1,18 +1,18 @@
 <script lang="ts">
 import { getCurrentInstance } from "vue";
-import { useRouter } from "vue-router";
+import type { ComponentInternalInstance, ComponentPublicInstance } from "vue";
 import RegisterClass from "@/typescripts/Register/RegisterClass";
+import { useRouter } from "vue-router";
 
 export default {
   name: "RegisterComponent",
   setup() {
-    // @ts-ignore
-    const {ctx, proxy} = getCurrentInstance();
-    const registerClass = new RegisterClass();
-    registerClass.ctx = ctx;
-    registerClass.proxy = proxy;
-    registerClass.router = useRouter();
-    return {registerClass};
+    const instance = getCurrentInstance() as ComponentInternalInstance;
+    const currentClass = new RegisterClass();
+    currentClass.proxy = instance.proxy as ComponentPublicInstance;
+    currentClass.router = useRouter();
+
+    return {currentClass};
   }
 }
 </script>
@@ -33,22 +33,22 @@ export default {
             <el-row>
               <el-col :span="24">
                 <el-form
-                    :ref="registerClass.formRef"
-                    :model="registerClass.data"
-                    :rules="registerClass.rule"
-                    @submit.prevent="registerClass.register(registerClass.formRef.value)"
+                    :ref="currentClass.formRef"
+                    :model="currentClass.data"
+                    :rules="currentClass.rule"
+                    @submit.prevent="currentClass.register(currentClass.formRef.value)"
                 >
                   <el-form-item prop="account">
                     <el-input
                         size="large"
-                        v-model="registerClass.data.account"
+                        v-model="currentClass.data.account"
                         placeholder="请输入手机号码"
                     />
                   </el-form-item>
                   <el-form-item prop="password">
                     <el-input
                         size="large"
-                        v-model="registerClass.data.password"
+                        v-model="currentClass.data.password"
                         type="password"
                         placeholder="请输入密码"
                     />
@@ -56,7 +56,7 @@ export default {
                   <el-form-item prop="passwordConfirm">
                     <el-input
                         size="large"
-                        v-model="registerClass.data.passwordConfirm"
+                        v-model="currentClass.data.passwordConfirm"
                         type="password"
                         placeholder="请再次输入密码"
                     />
@@ -75,7 +75,7 @@ export default {
             </el-row>
             <el-row>
               <el-col :span="24" class="tip-area">
-                <p>已有帐号？ <a @click="registerClass.toLogin()">去登录</a></p>
+                <p>已有帐号？ <a @click="currentClass.toLogin()">去登录</a></p>
               </el-col>
             </el-row>
           </el-col>

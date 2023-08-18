@@ -1,18 +1,18 @@
 <script lang="ts">
 import { getCurrentInstance } from "vue";
-import { useRouter } from "vue-router";
+import type { ComponentInternalInstance, ComponentPublicInstance } from "vue";
 import LoginClass from "@/typescripts/Auth/LoginClass";
+import { useRouter } from "vue-router";
 
 export default {
   name: "LoginComponent",
   setup() {
-    // @ts-ignore
-    const {ctx, proxy} = getCurrentInstance();
-    const loginClass = new LoginClass();
-    loginClass.ctx = ctx;
-    loginClass.proxy = proxy;
-    loginClass.router = useRouter();
-    return {loginClass};
+    const instance = getCurrentInstance() as ComponentInternalInstance;
+    const currentClass = new LoginClass();
+    currentClass.proxy = instance.proxy as ComponentPublicInstance;
+    currentClass.router = useRouter();
+
+    return {currentClass};
   },
 }
 </script>
@@ -33,21 +33,21 @@ export default {
             <el-row>
               <el-col :span="24">
                 <el-form
-                    :ref="loginClass.formRef"
-                    :model="loginClass.data"
-                    :rules="loginClass.rule"
-                    @submit.prevent="loginClass.login(loginClass.formRef.value)"
+                    :ref="currentClass.formRef"
+                    :model="currentClass.data"
+                    :rules="currentClass.rule"
+                    @submit.prevent="currentClass.login(currentClass.formRef.value)"
                 >
                   <el-form-item prop="account">
                     <el-input
-                        v-model.trim="loginClass.data.account"
+                        v-model.trim="currentClass.data.account"
                         size="large"
                         placeholder="手机号码"
                     />
                   </el-form-item>
                   <el-form-item prop="password">
                     <el-input
-                        v-model="loginClass.data.password"
+                        v-model="currentClass.data.password"
                         size="large"
                         type="password"
                         placeholder="密码"
@@ -70,7 +70,7 @@ export default {
             </el-row>
             <el-row>
               <el-col :span="24" class="tip-area">
-                <p>没有帐号? <a @click="loginClass.toRegister()">去注册</a></p>
+                <p>没有帐号? <a @click="currentClass.toRegister()">去注册</a></p>
               </el-col>
             </el-row>
           </el-col>

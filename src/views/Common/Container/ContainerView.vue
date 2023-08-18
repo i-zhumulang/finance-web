@@ -1,18 +1,16 @@
 <script lang="ts">
-import {getCurrentInstance} from "vue";
+import { getCurrentInstance } from "vue";
+import type { ComponentInternalInstance, ComponentPublicInstance } from "vue";
 import ContainerClass from "@/typescripts/Common/Container/ContainerClass";
-import {useRouter} from "vue-router";
+import { useRouter } from "vue-router";
 
 export default {
   name: "ContainerView",
   setup() {
-    // @ts-ignore
-    const {ctx, proxy} = getCurrentInstance();
-    const router = useRouter();
+    const instance = getCurrentInstance() as ComponentInternalInstance;
     const containerClass = new ContainerClass();
-    containerClass.ctx = ctx;
-    containerClass.proxy = proxy;
-    containerClass.router = router;
+    containerClass.proxy = instance.proxy as ComponentPublicInstance;
+    containerClass.router = useRouter();
     containerClass.init();
 
     return {containerClass};
