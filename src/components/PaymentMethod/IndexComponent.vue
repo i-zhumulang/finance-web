@@ -1,5 +1,5 @@
 <script lang="ts">
-import {toRefs} from "vue";
+import { toRefs } from "vue";
 import IndexClass from "@/typescripts/PaymentMethod/IndexClass";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
 
@@ -37,8 +37,8 @@ export default {
           <el-row>
             <el-col :span="24">
               <el-table
+                  v-loading="currentClass.loadingClass.loading"
                   :data="currentClass.data.table.index"
-                  v-loading="currentClass.data.loading"
                   row-key="id"
                   style="width: 100%">
                 <el-table-column prop="data.name" label="支付方式"/>

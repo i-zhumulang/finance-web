@@ -1,5 +1,5 @@
 <script lang="ts">
-import {toRefs} from "vue";
+import { toRefs } from "vue";
 import IndexClass from "@/typescripts/PaymentAccount/IndexClass";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
 
