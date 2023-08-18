@@ -20,8 +20,8 @@ export default {
   <el-dialog
       title="新增"
       width="40%"
-      v-if="indexClass.getCreateDialog()"
-      v-model="indexClass.dialog.dialogCreateVisible"
+      v-if="indexClass.createDialogClass.dialog"
+      v-model="indexClass.createDialogClass.dialog"
       :draggable="true"
       :close-on-press-escape="false"
       :close-on-click-modal="false">
@@ -30,8 +30,8 @@ export default {
   <el-dialog
       title="编辑"
       width="40%"
-      v-if="indexClass.getUpdateDialog()"
-      v-model="indexClass.dialog.dialogUpdateVisible"
+      v-if="indexClass.updateDialogClass.dialog"
+      v-model="indexClass.updateDialogClass.dialog"
       :draggable="true"
       :close-on-press-escape="false"
       :close-on-click-modal="false">
