@@ -1,25 +1,26 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/Category/IndexClass";
 import { reactive, ref } from "vue";
+import type { UnwrapNestedRefs } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
-import type { CategoryTableInterface, OptionsInterface } from "@/typescripts/Category/DataTypeInterface";
+import type { UpdateDataInterface, OptionsInterface } from "@/typescripts/Category/DataTypeInterface";
 import type { InternalRuleItem } from "async-validator/dist-types/interface";
 import CategoryRequest from "@/requests/CategoryRequest";
 import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
 import { ElMessage } from "element-plus";
+import LoadingClass from "@/typescripts/Common/Common/Objects/LoadingClass";
 
 export default class UpdateClass extends BaseClass {
-    private _indexClass: IndexClass | undefined;
+    private indexClass: IndexClass;
 
     public formRef = ref<FormInstance>();
 
     public options = reactive<OptionsInterface>({
         category: [],
-        loading: true
     });
 
-    public data = reactive<CategoryTableInterface>({
+    public data = reactive<UpdateDataInterface>({
         parent_id: undefined,
         name: '',
     });
@@ -49,20 +50,11 @@ export default class UpdateClass extends BaseClass {
         ],
     });
 
-    public set indexClass(indexClass: IndexClass) {
-        this._indexClass = indexClass;
-    }
+    public loadingClass: UnwrapNestedRefs<LoadingClass> = reactive<LoadingClass>(new LoadingClass());
 
-    public get indexClass(): IndexClass {
-        return <IndexClass>this._indexClass;
-    }
-
-    public setLoadingTrue(): void {
-        this.options.loading = true;
-    }
-
-    public setLoadingFalse(): void {
-        this.options.loading = false;
+    public constructor(indexClass: IndexClass) {
+        super();
+        this.indexClass = indexClass;
     }
 
     /**
@@ -71,11 +63,11 @@ export default class UpdateClass extends BaseClass {
     public edit(): void {
         const _this = this;
         const params = _this.indexClass.params.value;
-        _this.setLoadingTrue();
+        _this.loadingClass.show();
         new CategoryRequest()
             .edit(params.id)
             .then((response: AxiosResponse) => {
-                _this.setLoadingFalse();
+                _this.loadingClass.close();
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
                     if (apiParams.data.formData.parent_id) {
@@ -88,7 +80,7 @@ export default class UpdateClass extends BaseClass {
                 }
             })
             .catch((error: AxiosError) => {
-                _this.setLoadingFalse();
+                _this.loadingClass.close();
                 if (error.code === "ERR_BAD_RESPONSE") {
                     if (error.response) {
                         ElMessage.error(error.response.statusText);
@@ -113,11 +105,11 @@ export default class UpdateClass extends BaseClass {
             if (!valid) {
                 return false;
             }
-            _this.setLoadingTrue();
+            _this.loadingClass.show();
             new CategoryRequest()
                 .update(params.id, _this.data)
                 .then((response: AxiosResponse) => {
-                    _this.setLoadingFalse();
+                    _this.loadingClass.close();
                     const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                     if (apiParams.flag === "Success") {
                         ElMessage({
@@ -133,7 +125,7 @@ export default class UpdateClass extends BaseClass {
                     }
                 })
                 .catch((error: AxiosError) => {
-                    _this.setLoadingFalse();
+                    _this.loadingClass.close();
                     if (error.code === "ERR_BAD_RESPONSE") {
                         if (error.response) {
                             ElMessage.error(error.response.statusText);
@@ -149,6 +141,6 @@ export default class UpdateClass extends BaseClass {
      * 关闭页面
      */
     public close() {
-        this.indexClass.setUpdateDialogFalse()
+        this.indexClass.updateDialogClass.close();
     }
 }

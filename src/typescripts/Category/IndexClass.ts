@@ -1,11 +1,14 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import { reactive, ref } from "vue";
-import type { IndexDataInterface, IndexDialogInterface } from "@/typescripts/Category/DataTypeInterface";
+import type { UnwrapNestedRefs } from "vue";
+import type { IndexDataInterface } from "@/typescripts/Category/DataTypeInterface";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
 import CategoryRequest from "@/requests/CategoryRequest";
 import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
 import { ElLoading, ElMessage, ElMessageBox } from "element-plus";
+import DialogClass from "@/typescripts/Common/Common/Objects/DialogClass";
+import LoadingClass from "@/typescripts/Common/Common/Objects/LoadingClass";
 
 export default class IndexClass extends BaseClass {
     public data = reactive<IndexDataInterface>({
@@ -22,69 +25,15 @@ export default class IndexClass extends BaseClass {
             operate: [],
             category: []
         },
-        loading: true
     });
 
     public params: any = ref({});
 
-    public dialog = reactive<IndexDialogInterface>({
-        /**
-         * 添加页面弹出层
-         */
-        dialogCreateVisible: false,
-        /**
-         * 编辑页面弹出层
-         */
-        dialogUpdateVisible: false,
-        /**
-         * 日志页面弹出层
-         */
-        dialogLogsVisible: false,
-    });
+    public createDialogClass: UnwrapNestedRefs<DialogClass> = reactive<DialogClass>(new DialogClass());
 
-    public setCreateDialogTrue() {
-        this.dialog.dialogCreateVisible = true;
-    }
+    public updateDialogClass: UnwrapNestedRefs<DialogClass> = reactive<DialogClass>(new DialogClass());
 
-    public getCreateDialog(): boolean {
-        return this.dialog.dialogCreateVisible;
-    }
-
-    public setCreateDialogFalse() {
-        this.dialog.dialogCreateVisible = false;
-    }
-
-    public setUpdateDialogTrue() {
-        this.dialog.dialogUpdateVisible = true;
-    }
-
-    public getUpdateDialog(): boolean {
-        return this.dialog.dialogUpdateVisible;
-    }
-
-    public setUpdateDialogFalse() {
-        this.dialog.dialogUpdateVisible = false;
-    }
-
-    public setLogsDialogTrue() {
-        this.dialog.dialogLogsVisible = true;
-    }
-
-    public getLogsDialog(): boolean {
-        return this.dialog.dialogLogsVisible;
-    }
-
-    public setLogsDialogFalse() {
-        this.dialog.dialogLogsVisible = false;
-    }
-
-    public setLoadingTrue(): void {
-        this.data.loading = true;
-    }
-
-    public setLoadingFalse(): void {
-        this.data.loading = false;
-    }
+    public loadingClass: UnwrapNestedRefs<LoadingClass> = reactive<LoadingClass>(new LoadingClass());
 
     public search(): void {
         const _this = this;
@@ -97,11 +46,11 @@ export default class IndexClass extends BaseClass {
      */
     public index() {
         const _this = this;
-        _this.setLoadingTrue();
+        _this.loadingClass.show()
         new CategoryRequest()
             .index(_this.data.query)
             .then((response: AxiosResponse) => {
-                _this.setLoadingFalse();
+                _this.loadingClass.close();
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
                     _this.data.table.index = apiParams.data.list;
@@ -110,7 +59,7 @@ export default class IndexClass extends BaseClass {
                 }
             })
             .catch((error: AxiosError) => {
-                _this.setLoadingFalse();
+                _this.loadingClass.close();
                 if (error.code === "ERR_BAD_RESPONSE") {
                     if (error.response) {
                         ElMessage.error(error.response.statusText);
@@ -192,16 +141,13 @@ export default class IndexClass extends BaseClass {
         this.params.value = params;
         switch (e) {
             case 'create':
-                this.setCreateDialogTrue()
+                this.createDialogClass.show()
                 break;
             case 'update':
-                this.setUpdateDialogTrue()
+                this.updateDialogClass.show()
                 break;
             case 'destroy':
                 this.destroy()
-                break;
-            case 'logs':
-                this.setLogsDialogTrue();
                 break;
             default:
                 ElMessage.error('功能暂未开放[' + e + ']');

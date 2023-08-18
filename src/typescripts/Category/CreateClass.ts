@@ -1,25 +1,26 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/Category/IndexClass";
 import { reactive, ref } from "vue";
+import type { UnwrapNestedRefs } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
-import type { CategoryTableInterface, OptionsInterface } from "@/typescripts/Category/DataTypeInterface";
+import type { CreateDataInterface, OptionsInterface } from "@/typescripts/Category/DataTypeInterface";
 import CategoryRequest from "@/requests/CategoryRequest";
 import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
 import { ElMessage } from "element-plus";
 import type { InternalRuleItem } from "async-validator/dist-types/interface";
+import LoadingClass from "@/typescripts/Common/Common/Objects/LoadingClass";
 
 export default class CreateClass extends BaseClass {
-    private _indexClass: IndexClass | undefined;
+    private indexClass: IndexClass;
 
     public formRef = ref<FormInstance>();
 
     public options = reactive<OptionsInterface>({
         category: [],
-        loading: true
     });
 
-    public data = reactive<CategoryTableInterface>({
+    public data = reactive<CreateDataInterface>({
         parent_id: undefined,
         name: '',
     });
@@ -49,20 +50,11 @@ export default class CreateClass extends BaseClass {
         ],
     });
 
-    public set indexClass(indexClass: IndexClass) {
-        this._indexClass = indexClass;
-    }
+    public loadingClass: UnwrapNestedRefs<LoadingClass> = reactive<LoadingClass>(new LoadingClass());
 
-    public get indexClass(): IndexClass {
-        return <IndexClass>this._indexClass;
-    }
-
-    public setLoadingTrue(): void {
-        this.options.loading = true;
-    }
-
-    public setLoadingFalse(): void {
-        this.options.loading = false;
+    public constructor(indexClass: IndexClass) {
+        super();
+        this.indexClass = indexClass;
     }
 
     /**
@@ -70,11 +62,11 @@ export default class CreateClass extends BaseClass {
      */
     public create() {
         const _this = this;
-        _this.setLoadingTrue();
+        _this.loadingClass.show();
         new CategoryRequest()
             .create({})
             .then((response: AxiosResponse) => {
-                _this.setLoadingFalse();
+                _this.loadingClass.close();
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
                     _this.options.category = apiParams.data.category
@@ -83,7 +75,7 @@ export default class CreateClass extends BaseClass {
                 }
             })
             .catch((error: AxiosError) => {
-                _this.setLoadingFalse();
+                _this.loadingClass.close();
                 if (error.code === "ERR_BAD_RESPONSE") {
                     if (error.response) {
                         ElMessage.error(error.response.statusText);
@@ -110,11 +102,11 @@ export default class CreateClass extends BaseClass {
             if (_this.data.parent_id === undefined) {
                 _this.data.parent_id = 0;
             }
-            _this.setLoadingTrue();
+            _this.loadingClass.show();
             new CategoryRequest()
                 .store(_this.data)
                 .then((response: AxiosResponse) => {
-                    _this.setLoadingFalse();
+                    _this.loadingClass.close();
                     const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                     if (apiParams.flag === "Success") {
                         ElMessage({
@@ -130,7 +122,7 @@ export default class CreateClass extends BaseClass {
                     }
                 })
                 .catch((error: AxiosError) => {
-                    _this.setLoadingFalse();
+                    _this.loadingClass.close();
                     if (error.code === "ERR_BAD_RESPONSE") {
                         if (error.response) {
                             ElMessage.error(error.response.statusText);
@@ -146,6 +138,6 @@ export default class CreateClass extends BaseClass {
      * 关闭新增页面
      */
     public close() {
-        this.indexClass.setCreateDialogFalse();
+        this.indexClass.createDialogClass.close();
     }
 }

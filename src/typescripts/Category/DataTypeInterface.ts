@@ -6,14 +6,13 @@ export interface CategoryTableInterface {
     name: string,
 }
 
-export interface Category {
+export interface CategoryInterface {
     id: number,
     data: CategoryTableInterface
 }
 
 export interface OptionsInterface {
-    category: Category[],
-    loading: boolean
+    category: CategoryInterface[],
 }
 
 export interface IndexDataInterface {
@@ -28,13 +27,16 @@ export interface IndexDataInterface {
     },
     options: {
         operate: OptsInterface[],
-        category: Category[]
+        category: CategoryInterface[]
     },
-    loading: boolean
 }
 
-export interface IndexDialogInterface {
-    dialogCreateVisible: boolean,
-    dialogUpdateVisible: boolean,
-    dialogLogsVisible: boolean,
+export interface CreateDataInterface {
+    parent_id?: number,
+    name: string
+}
+
+export interface UpdateDataInterface extends CreateDataInterface {
+    parent_id?: number,
+    name: string
 }

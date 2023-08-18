@@ -1,5 +1,5 @@
 <script lang="ts">
-import {toRefs} from "vue";
+import { toRefs } from "vue";
 import IndexClass from "@/typescripts/Category/IndexClass";
 import UpdateClass from "@/typescripts/Category/UpdateClass";
 
@@ -10,31 +10,30 @@ export default {
   },
   setup(props: any) {
     const {indexClass} = toRefs(props);
-    const updateClass = new UpdateClass();
-    updateClass.indexClass = indexClass.value;
-    updateClass.edit();
-    return {updateClass};
+    const currentClass = new UpdateClass(indexClass.value);
+    currentClass.edit();
+    return {currentClass};
   }
 }
 </script>
 
 <template>
   <el-form
-      v-loading="updateClass.options.loading"
-      v-if="updateClass.indexClass.getUpdateDialog()"
-      :ref="updateClass.formRef"
-      @submit.prevent="updateClass.update(updateClass.formRef.value)"
+      v-loading="currentClass.loadingClass.loading"
+      v-if="currentClass.indexClass.updateDialogClass.dialog"
+      :ref="currentClass.formRef"
+      @submit.prevent="currentClass.update(currentClass.formRef.value)"
       label-width="120px"
-      :rules="updateClass.rule"
-      :model="updateClass.data">
+      :rules="currentClass.rule"
+      :model="currentClass.data">
     <el-form-item prop="parent_id" label="上级分类">
       <el-select
-          v-model="updateClass.data.parent_id"
+          v-model="currentClass.data.parent_id"
           style="width: 100%"
           clearable
           placeholder="上级分类">
         <el-option
-            v-for="category in updateClass.options.category"
+            v-for="category in currentClass.options.category"
             :key="category.id"
             :label="category.data.name"
             :value="category.id"/>
@@ -42,7 +41,7 @@ export default {
     </el-form-item>
     <el-form-item prop="name" label="分类名称">
       <el-input
-          v-model="updateClass.data.name"
+          v-model="currentClass.data.name"
           autocomplete="off"
           placeholder="请输入2~30字符的分类名称"/>
     </el-form-item>
@@ -51,7 +50,7 @@ export default {
           type="primary"
           native-type="submit">确定
       </el-button>
-      <el-button @click="updateClass.close()">取消</el-button>
+      <el-button @click="currentClass.close()">取消</el-button>
     </el-form-item>
   </el-form>
 </template>
