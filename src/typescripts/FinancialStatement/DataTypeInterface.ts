@@ -1,16 +1,6 @@
 import type OptsInterface from "@/typescripts/Common/Common/Interfaces/OptsInterface";
 
-export interface FinancialStatementTableInterface {
-    id?: number,
-    category_id?: number,
-    payment_account_id?: number,
-    amount: number,
-    consumption_date: string,
-    description: string,
-    files_id?: number[]
-}
-
-export interface Category {
+export interface CategoryInterface {
     id: number,
     data: {
         name: string
@@ -18,25 +8,25 @@ export interface Category {
     children: { id: number, data: { name: string } }[]
 }
 
-export interface PaymentAccount {
+export interface PaymentAccountInterface {
     id: number,
     data: {
         name: string,
     }
 }
 
-export interface PaymentMethod {
+export interface PaymentMethodInterface {
     id: number,
     data: {
         name: string,
     },
-    payment_account: PaymentAccount[]
+    payment_account: PaymentAccountInterface[]
 }
 
 export interface OptionsInterface {
-    category: Category[],
-    payment_method: PaymentMethod[],
-    payment_account: PaymentAccount[],
+    category: CategoryInterface[],
+    payment_method: PaymentMethodInterface[],
+    payment_account: PaymentAccountInterface[],
     loading: boolean
 }
 
@@ -60,15 +50,21 @@ export interface IndexDataInterface {
     },
     options: {
         operate: OptsInterface[],
-        category: Category[],
-        payment_method: PaymentMethod[],
-        payment_account: PaymentAccount[]
+        category: CategoryInterface[],
+        payment_method: PaymentMethodInterface[],
+        payment_account: PaymentAccountInterface[]
     },
-    loading: boolean
 }
 
-export interface IndexDialogInterface {
-    dialogCreateVisible: boolean,
-    dialogUpdateVisible: boolean,
-    dialogLogsVisible: boolean,
+export interface CreateDataInterface {
+    category_id?: number,
+    payment_account_id?: number,
+    amount: number,
+    consumption_date: string,
+    description: string,
+    files_id: number[]
+}
+
+export interface UpdateDataInterface extends CreateDataInterface {
+
 }

@@ -12,7 +12,7 @@ import { ElMessage } from "element-plus";
 import LoadingClass from "@/typescripts/Common/Common/Objects/LoadingClass";
 
 export default class CreateClass extends BaseClass {
-    private indexClass: IndexClass;
+    public indexClass: IndexClass;
 
     public formRef = ref<FormInstance>();
 

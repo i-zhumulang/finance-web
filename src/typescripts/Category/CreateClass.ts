@@ -12,7 +12,7 @@ import type { InternalRuleItem } from "async-validator/dist-types/interface";
 import LoadingClass from "@/typescripts/Common/Common/Objects/LoadingClass";
 
 export default class CreateClass extends BaseClass {
-    private indexClass: IndexClass;
+    public indexClass: IndexClass;
 
     public formRef = ref<FormInstance>();
 

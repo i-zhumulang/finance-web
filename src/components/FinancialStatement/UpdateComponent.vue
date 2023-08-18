@@ -1,5 +1,5 @@
 <script lang="ts">
-import {toRefs} from "vue";
+import { toRefs } from "vue";
 import IndexClass from "@/typescripts/FinancialStatement/IndexClass";
 import UpdateClass from "@/typescripts/FinancialStatement/UpdateClass";
 
@@ -10,31 +10,30 @@ export default {
   },
   setup(props: any) {
     const {indexClass} = toRefs(props);
-    const updateClass = new UpdateClass();
-    updateClass.indexClass = indexClass.value;
-    updateClass.edit();
-    return {updateClass}
+    const currentClass = new UpdateClass(indexClass.value);
+    currentClass.edit();
+    return {currentClass}
   }
 }
 </script>
 
 <template>
   <el-form
-      v-loading="updateClass.options.loading"
-      v-if="updateClass.indexClass.getUpdateDialog()"
-      :ref="updateClass.formRef"
-      @submit.prevent="updateClass.update(updateClass.formRef.value)"
+      v-loading="currentClass.loadingClass.loading"
+      v-if="currentClass.indexClass.updateDialogClass.dialog"
+      :ref="currentClass.formRef"
+      @submit.prevent="currentClass.update(currentClass.formRef.value)"
       label-width="120px"
-      :rules="updateClass.rule"
-      :model="updateClass.data">
+      :rules="currentClass.rule"
+      :model="currentClass.data">
     <el-form-item prop="category_id" label="支出分类">
       <el-select
-          v-model="updateClass.data.category_id"
+          v-model="currentClass.data.category_id"
           style="width: 100%"
           clearable
           placeholder="请选择支出分类">
         <el-option-group
-            v-for="category in updateClass.options.category"
+            v-for="category in currentClass.options.category"
             :key="category.id"
             :label="category.data.name">
           <el-option
@@ -48,12 +47,12 @@ export default {
     </el-form-item>
     <el-form-item prop="payment_account_id" label="支付账号">
       <el-select
-          v-model="updateClass.data.payment_account_id"
+          v-model="currentClass.data.payment_account_id"
           style="width: 100%"
           clearable
           placeholder="请选择支付账号">
         <el-option-group
-            v-for="payment_method in updateClass.options.payment_method"
+            v-for="payment_method in currentClass.options.payment_method"
             :key="payment_method.id"
             :label="payment_method.data.name">
           <el-option
@@ -67,7 +66,7 @@ export default {
     </el-form-item>
     <el-form-item prop="consumption_date" label="消费日期">
       <el-date-picker
-          v-model="updateClass.data.consumption_date"
+          v-model="currentClass.data.consumption_date"
           style="width: 100%"
           type="date"
           placeholder="请选择消费日期"
@@ -77,7 +76,7 @@ export default {
     </el-form-item>
     <el-form-item prop="amount" label="消费金额">
       <el-input-number
-          v-model="updateClass.data.amount"
+          v-model="currentClass.data.amount"
           :precision="2"
           :step="0.1"
           :min="1"
@@ -87,7 +86,7 @@ export default {
     </el-form-item>
     <el-form-item prop="description" label="备注">
       <el-input
-          v-model="updateClass.data.description"
+          v-model="currentClass.data.description"
           :rows="2"
           type="textarea"
           placeholder="请输入0~255个字符的备注"
@@ -95,14 +94,14 @@ export default {
     </el-form-item>
     <el-form-item prop="file" label="付款截图">
       <el-upload
-          :file-list="updateClass.fileList.value"
+          :file-list="currentClass.fileList.value"
           class="upload-demo"
           action="#"
-          :on-preview="updateClass.handlePreview()"
-          :on-remove="updateClass.handleRemove()"
-          :http-request="updateClass.handleHttpRequest()"
-          :on-success="updateClass.handleSuccess()"
-          :on-error="updateClass.handleError()"
+          :on-preview="currentClass.handlePreview()"
+          :on-remove="currentClass.handleRemove()"
+          :http-request="currentClass.handleHttpRequest()"
+          :on-success="currentClass.handleSuccess()"
+          :on-error="currentClass.handleError()"
           :show-file-list="true"
           list-type="picture"
       >
@@ -113,12 +112,12 @@ export default {
           </div>
         </template>
       </el-upload>
-      <el-dialog append-to-body v-model="updateClass.dialog.dialogVisible">
+      <el-dialog append-to-body v-model="currentClass.dialog.dialogVisible">
         <el-row>
           <el-col :span="24" align="center">
             <el-image
                 style="width: 500px; height: 500px"
-                :src="updateClass.dialog.dialogImageUrl"
+                :src="currentClass.dialog.dialogImageUrl"
                 fit="contain"/>
           </el-col>
         </el-row>
@@ -129,7 +128,7 @@ export default {
           type="primary"
           native-type="submit">确定
       </el-button>
-      <el-button @click="updateClass.close()">取消</el-button>
+      <el-button @click="currentClass.close()">取消</el-button>
     </el-form-item>
   </el-form>
 </template>

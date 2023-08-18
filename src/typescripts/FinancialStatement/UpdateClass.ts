@@ -1,6 +1,7 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/FinancialStatement/IndexClass";
 import { reactive, ref } from "vue";
+import type { UnwrapNestedRefs } from "vue";
 import type {
     FormInstance,
     FormRules,
@@ -11,7 +12,7 @@ import type {
 } from "element-plus";
 import { ElMessage } from "element-plus";
 import type {
-    FinancialStatementTableInterface,
+    UpdateDataInterface,
     OptionsInterface,
     Files
 } from "@/typescripts/FinancialStatement/DataTypeInterface";
@@ -19,9 +20,10 @@ import type { InternalRuleItem } from "async-validator/dist-types/interface";
 import FinancialStatementRequest from "@/requests/FinancialStatementRequest";
 import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
+import LoadingClass from "@/typescripts/Common/Common/Objects/LoadingClass";
 
 export default class UpdateClass extends BaseClass {
-    private _indexClass: IndexClass | undefined;
+    public indexClass: IndexClass;
 
     public formRef = ref<FormInstance>();
 
@@ -39,7 +41,7 @@ export default class UpdateClass extends BaseClass {
 
     public fileList = ref<Files[]>([]);
 
-    public data = reactive<FinancialStatementTableInterface>({
+    public data = reactive<UpdateDataInterface>({
         category_id: undefined,
         payment_account_id: undefined,
         amount: 0,
@@ -83,20 +85,11 @@ export default class UpdateClass extends BaseClass {
         ],
     });
 
-    public set indexClass(indexClass: IndexClass) {
-        this._indexClass = indexClass;
-    }
+    public loadingClass: UnwrapNestedRefs<LoadingClass> = reactive<LoadingClass>(new LoadingClass());
 
-    public get indexClass(): IndexClass {
-        return <IndexClass>this._indexClass;
-    }
-
-    public setLoadingTrue(): void {
-        this.options.loading = true;
-    }
-
-    public setLoadingFalse(): void {
-        this.options.loading = false;
+    public constructor(indexClass: IndexClass) {
+        super();
+        this.indexClass = indexClass;
     }
 
     /**
@@ -105,11 +98,11 @@ export default class UpdateClass extends BaseClass {
     public edit(): void {
         const _this = this;
         const params = _this.indexClass.params.value;
-        _this.setLoadingTrue();
+        _this.loadingClass.show();
         new FinancialStatementRequest()
             .edit(params.id)
             .then((response: AxiosResponse) => {
-                _this.setLoadingFalse();
+                _this.loadingClass.close();
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
                     if (apiParams.data.formData.category_id) {
@@ -129,7 +122,7 @@ export default class UpdateClass extends BaseClass {
                 }
             })
             .catch((error: AxiosError) => {
-                _this.setLoadingFalse();
+                _this.loadingClass.close();
                 if (error.code === "ERR_BAD_RESPONSE") {
                     if (error.response) {
                         ElMessage.error(error.response.statusText);
@@ -148,7 +141,7 @@ export default class UpdateClass extends BaseClass {
         return (options: UploadRequestOptions) => {
             const formData: FormData = new FormData();
             formData.append("file", options.file);
-            _this.setLoadingTrue();
+            _this.loadingClass.show();
             return new FinancialStatementRequest()
                 .upload(formData);
         };
@@ -160,7 +153,7 @@ export default class UpdateClass extends BaseClass {
     public handleSuccess() {
         const _this = this;
         const handleSuccess: UploadProps['onSuccess'] = (response: AxiosResponse, uploadFile: UploadFile, uploadFiles: UploadFiles) => {
-            _this.setLoadingFalse();
+            _this.loadingClass.close();
             _this.fileList.value.push(response.data.data);
         }
         return handleSuccess;
@@ -172,7 +165,7 @@ export default class UpdateClass extends BaseClass {
     public handleError() {
         const _this = this;
         const handleError: UploadProps['onError'] = (error: Error, uploadFile: UploadFile, uploadFiles: UploadFiles) => {
-            _this.setLoadingFalse();
+            _this.loadingClass.close();
             console.log(error);
             console.log(uploadFile);
             console.log(uploadFiles);
@@ -225,12 +218,12 @@ export default class UpdateClass extends BaseClass {
             if (!valid) {
                 return false;
             }
-            _this.setLoadingTrue();
+            _this.loadingClass.show();
             _this.data.files_id = _this.fileList.value.map((e: Files) => e.id);
             new FinancialStatementRequest()
                 .update(params.id, _this.data)
                 .then((response: AxiosResponse) => {
-                    _this.setLoadingFalse();
+                    _this.loadingClass.close();
                     const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                     if (apiParams.flag === "Success") {
                         ElMessage({
@@ -246,7 +239,7 @@ export default class UpdateClass extends BaseClass {
                     }
                 })
                 .catch((error: AxiosError) => {
-                    _this.setLoadingFalse();
+                    _this.loadingClass.close();
                     if (error.code === "ERR_BAD_RESPONSE") {
                         if (error.response) {
                             ElMessage.error(error.response.statusText);
@@ -262,6 +255,6 @@ export default class UpdateClass extends BaseClass {
      * 关闭页面
      */
     public close() {
-        this.indexClass.setUpdateDialogFalse()
+        this.indexClass.updateDialogClass.close()
     }
 }

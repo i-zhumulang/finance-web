@@ -10,31 +10,30 @@ export default {
   },
   setup(props: any) {
     const {indexClass} = toRefs(props);
-    const createClass = new CreateClass();
-    createClass.indexClass = indexClass.value;
-    createClass.create();
-    return {createClass}
+    const currentClass = new CreateClass(indexClass.value);
+    currentClass.create();
+    return {currentClass}
   }
 }
 </script>
 
 <template>
   <el-form
-      v-loading="createClass.options.loading"
-      v-if="createClass.indexClass.getCreateDialog()"
-      :ref="createClass.formRef"
-      @submit.prevent="createClass.store(createClass.formRef.value)"
+      v-loading="currentClass.loadingClass.loading"
+      v-if="currentClass.indexClass.createDialogClass.dialog"
+      :ref="currentClass.formRef"
+      @submit.prevent="currentClass.store(currentClass.formRef.value)"
       label-width="120px"
-      :rules="createClass.rule"
-      :model="createClass.data">
+      :rules="currentClass.rule"
+      :model="currentClass.data">
     <el-form-item prop="category_id" label="支出分类">
       <el-select
-          v-model="createClass.data.category_id"
+          v-model="currentClass.data.category_id"
           style="width: 100%"
           clearable
           placeholder="请选择支出分类">
         <el-option-group
-            v-for="category in createClass.options.category"
+            v-for="category in currentClass.options.category"
             :key="category.id"
             :label="category.data.name">
           <el-option
@@ -48,12 +47,12 @@ export default {
     </el-form-item>
     <el-form-item prop="payment_account_id" label="支付账号">
       <el-select
-          v-model="createClass.data.payment_account_id"
+          v-model="currentClass.data.payment_account_id"
           style="width: 100%"
           clearable
           placeholder="请选择支付账号">
         <el-option-group
-            v-for="payment_method in createClass.options.payment_method"
+            v-for="payment_method in currentClass.options.payment_method"
             :key="payment_method.id"
             :label="payment_method.data.name">
           <el-option
@@ -67,7 +66,7 @@ export default {
     </el-form-item>
     <el-form-item prop="consumption_date" label="消费日期">
       <el-date-picker
-          v-model="createClass.data.consumption_date"
+          v-model="currentClass.data.consumption_date"
           style="width: 100%"
           type="date"
           placeholder="请选择消费日期"
@@ -77,7 +76,7 @@ export default {
     </el-form-item>
     <el-form-item prop="amount" label="消费金额">
       <el-input-number
-          v-model="createClass.data.amount"
+          v-model="currentClass.data.amount"
           :precision="2"
           :step="0.01"
           :min="0.01"
@@ -87,7 +86,7 @@ export default {
     </el-form-item>
     <el-form-item prop="description" label="备注">
       <el-input
-          v-model="createClass.data.description"
+          v-model="currentClass.data.description"
           :rows="3"
           type="textarea"
           resize="none"
@@ -96,14 +95,14 @@ export default {
     </el-form-item>
     <el-form-item prop="file" label="付款截图">
       <el-upload
-          :file-list="createClass.fileList.value"
+          :file-list="currentClass.fileList.value"
           class="upload-demo"
           action="#"
-          :on-preview="createClass.handlePreview()"
-          :on-remove="createClass.handleRemove()"
-          :http-request="createClass.handleHttpRequest()"
-          :on-success="createClass.handleSuccess()"
-          :on-error="createClass.handleError()"
+          :on-preview="currentClass.handlePreview()"
+          :on-remove="currentClass.handleRemove()"
+          :http-request="currentClass.handleHttpRequest()"
+          :on-success="currentClass.handleSuccess()"
+          :on-error="currentClass.handleError()"
           :show-file-list="true"
           list-type="picture"
       >
@@ -114,12 +113,12 @@ export default {
           </div>
         </template>
       </el-upload>
-      <el-dialog append-to-body v-model="createClass.dialog.dialogVisible">
+      <el-dialog append-to-body v-model="currentClass.dialog.dialogVisible">
         <el-row>
           <el-col :span="24" align="center">
             <el-image
                 style="width: 500px; height: 500px"
-                :src="createClass.dialog.dialogImageUrl"
+                :src="currentClass.dialog.dialogImageUrl"
                 fit="contain"/>
           </el-col>
         </el-row>
@@ -130,7 +129,7 @@ export default {
           type="primary"
           native-type="submit">确定
       </el-button>
-      <el-button @click="createClass.close()">取消</el-button>
+      <el-button @click="currentClass.close()">取消</el-button>
     </el-form-item>
   </el-form>
 </template>
