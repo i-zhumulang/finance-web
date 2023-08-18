@@ -37,7 +37,7 @@ export default {
           <el-row>
             <el-col :span="24">
               <el-table
-                  v-loading="currentClass.data.loading"
+                  v-loading="currentClass.loadingClass.loading"
                   :data="currentClass.data.table.index"
                   row-key="id"
                   style="width: 100%">

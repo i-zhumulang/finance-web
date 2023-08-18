@@ -1,21 +1,13 @@
 import type { PaymentMethodTableInterface } from "@/typescripts/PaymentMethod/DataTypeInterface";
 import type OptsInterface from "@/typescripts/Common/Common/Interfaces/OptsInterface";
 
-export interface PaymentAccountTableInterface {
-    id?: number,
-    payment_method_id?: number,
-    name: string,
-    account: string
-}
-
-interface PaymentMethod {
+interface PaymentMethodInterface {
     id: number,
     data: PaymentMethodTableInterface
 }
 
 export interface OptionsInterface {
-    payment_method: PaymentMethod[],
-    loading: boolean
+    payment_method: PaymentMethodInterface[],
 }
 
 export interface IndexDataInterface {
@@ -30,11 +22,14 @@ export interface IndexDataInterface {
     options: {
         operate: OptsInterface[]
     },
-    loading: boolean
 }
 
-export interface IndexDialogInterface {
-    dialogCreateVisible: boolean,
-    dialogUpdateVisible: boolean,
-    dialogLogsVisible: boolean,
+export interface CreateDataInterface {
+    payment_method_id?: number,
+    name: string,
+    account: string
+}
+
+export interface UpdateDataInterface extends CreateDataInterface {
+
 }

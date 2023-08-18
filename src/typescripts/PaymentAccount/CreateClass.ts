@@ -1,26 +1,27 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
-import type IndexClass from "@/typescripts/PaymentMethod/IndexClass";
+import type IndexClass from "@/typescripts/PaymentAccount/IndexClass";
 import { reactive, ref } from "vue";
+import type { UnwrapNestedRefs } from "vue";
 import type { FormInstance } from "element-plus";
-import type { PaymentAccountTableInterface, OptionsInterface } from "@/typescripts/PaymentAccount/DataTypeInterface";
+import type { CreateDataInterface, OptionsInterface } from "@/typescripts/PaymentAccount/DataTypeInterface";
 import type { InternalRuleItem } from "async-validator/dist-types/interface";
 import type { FormRules } from "element-plus";
 import PaymentAccountRequest from "@/requests/PaymentAccountRequest";
 import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
 import { ElMessage } from "element-plus";
+import LoadingClass from "@/typescripts/Common/Common/Objects/LoadingClass";
 
 export default class CreateClass extends BaseClass {
-    private _indexClass: IndexClass | undefined;
+    public indexClass: IndexClass;
 
     public formRef = ref<FormInstance>();
 
     public options = reactive<OptionsInterface>({
         payment_method: [],
-        loading: true
     });
 
-    public data = reactive<PaymentAccountTableInterface>({
+    public data = reactive<CreateDataInterface>({
         payment_method_id: undefined,
         name: '',
         account: '',
@@ -70,20 +71,11 @@ export default class CreateClass extends BaseClass {
         ]
     });
 
-    public set indexClass(indexClass: IndexClass) {
-        this._indexClass = indexClass;
-    }
+    public loadingClass: UnwrapNestedRefs<LoadingClass> = reactive<LoadingClass>(new LoadingClass());
 
-    public get indexClass(): IndexClass {
-        return <IndexClass>this._indexClass;
-    }
-
-    public setLoadingTrue(): void {
-        this.options.loading = true;
-    }
-
-    public setLoadingFalse(): void {
-        this.options.loading = false;
+    public constructor(indexClass: IndexClass) {
+        super();
+        this.indexClass = indexClass;
     }
 
     /**
@@ -91,11 +83,11 @@ export default class CreateClass extends BaseClass {
      */
     public create() {
         const _this = this;
-        _this.setLoadingTrue();
+        _this.loadingClass.show();
         new PaymentAccountRequest()
             .create({})
             .then((response: AxiosResponse) => {
-                _this.setLoadingFalse();
+                _this.loadingClass.close();
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
                     _this.options.payment_method = apiParams.data.paymentMethod
@@ -104,7 +96,7 @@ export default class CreateClass extends BaseClass {
                 }
             })
             .catch((error: AxiosError) => {
-                _this.setLoadingFalse();
+                _this.loadingClass.close();
                 if (error.code === "ERR_BAD_RESPONSE") {
                     if (error.response) {
                         ElMessage.error(error.response.statusText);
@@ -128,11 +120,11 @@ export default class CreateClass extends BaseClass {
             if (!valid) {
                 return false;
             }
-            _this.setLoadingTrue();
+            _this.loadingClass.show();
             new PaymentAccountRequest()
                 .store(_this.data)
                 .then((response: AxiosResponse) => {
-                    _this.setLoadingFalse();
+                    _this.loadingClass.close();
                     const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                     if (apiParams.flag === "Success") {
                         ElMessage({
@@ -148,7 +140,7 @@ export default class CreateClass extends BaseClass {
                     }
                 })
                 .catch((error: AxiosError) => {
-                    _this.setLoadingFalse();
+                    _this.loadingClass.close();
                     if (error.code === "ERR_BAD_RESPONSE") {
                         if (error.response) {
                             ElMessage.error(error.response.statusText);
@@ -164,6 +156,6 @@ export default class CreateClass extends BaseClass {
      * 关闭新增页面
      */
     public close() {
-        this.indexClass.setCreateDialogFalse();
+        this.indexClass.createDialogClass.close();
     }
 }
