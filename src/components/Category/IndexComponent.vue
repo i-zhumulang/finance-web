@@ -1,10 +1,12 @@
 <script lang="ts">
 import { toRefs } from "vue";
+import { ArrowDown } from '@element-plus/icons-vue';
 import IndexClass from "@/typescripts/Category/IndexClass";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
 
 export default {
   name: "IndexComponent",
+  components: {ArrowDown},
   props: {
     indexClass: {type: IndexClass}
   },
@@ -73,9 +75,13 @@ export default {
                 <el-table-column prop="data.created_at_format" label="创建时间"/>
                 <el-table-column label="操作" width="120">
                   <template #default="scope">
-                    <el-dropdown
-                        split-button
-                        type="primary">操作
+                    <el-dropdown>
+                      <span class="el-dropdown-link">
+                        操作
+                        <el-icon class="el-icon--right">
+                          <arrow-down/>
+                        </el-icon>
+                      </span>
                       <template #dropdown>
                         <el-dropdown-menu>
                           <el-dropdown-item

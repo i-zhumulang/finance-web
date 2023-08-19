@@ -18,7 +18,6 @@ export default {
 
 <template>
   <el-form
-      v-loading="currentClass.loadingClass.loading"
       v-if="currentClass.indexClass.createDialogClass.dialog"
       :ref="currentClass.formRef"
       @submit.prevent="currentClass.store(currentClass.formRef.value)"

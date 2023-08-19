@@ -7,8 +7,8 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import App from './App.vue'
 import router from './router'
 
-import 'element-plus/dist/index.css'
 import 'normalize.css/normalize.css'
+import 'element-plus/dist/index.css'
 import './assets/css/index.css'
 
 const app = createApp(App)
