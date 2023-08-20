@@ -79,16 +79,21 @@ export default class ContainerClass extends BaseClass {
                     },
                     {
                         id: '2-2',
+                        component: '/family-invite',
+                        name_zh: "家庭邀请",
+                    },
+                    {
+                        id: '2-3',
                         component: '/category',
                         name_zh: "支出分类",
                     },
                     {
-                        id: '2-3',
+                        id: '2-4',
                         component: '/payment-method',
                         name_zh: "支付方式",
                     },
                     {
-                        id: '2-4',
+                        id: '2-5',
                         component: '/payment-account',
                         name_zh: "支付账号",
                     },

@@ -39,6 +39,11 @@ const routes: RouteRecordRaw[] = <RouteRecordRaw[]>[
         component: () => import('@/views/Family/IndexView.vue')
       },
       {
+        path: "family-invite",
+        name: 'FamilyInvite',
+        component: () => import('@/views/FamilyInvite/IndexView.vue')
+      },
+      {
         path: "category",
         name: 'Category',
         component: () => import('@/views/Category/IndexView.vue')
