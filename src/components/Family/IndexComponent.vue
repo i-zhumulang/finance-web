@@ -44,7 +44,6 @@ export default {
                   row-key="id"
                   style="width: 100%">
                 <el-table-column prop="data.name" label="名称"/>
-                <el-table-column prop="data.invitation_code" label="邀请码"/>
                 <el-table-column prop="data.created_by_name" label="创建人"/>
                 <el-table-column prop="data.created_at_format" label="创建时间"/>
                 <el-table-column label="操作" width="120">
