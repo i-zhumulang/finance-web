@@ -44,6 +44,11 @@ export default {
                   row-key="id"
                   style="width: 100%">
                 <el-table-column prop="data.name" label="名称"/>
+                <el-table-column prop="user" label="家庭成员">
+                  <template #default="scope">
+                    <el-text class="mx-1" type="primary">{{ scope.row.user.length }}</el-text>
+                  </template>
+                </el-table-column>
                 <el-table-column prop="data.created_by_name" label="创建人"/>
                 <el-table-column prop="data.created_at_format" label="创建时间"/>
                 <el-table-column label="操作" width="120">
