@@ -47,7 +47,7 @@ export default class CategoryRequest<T extends BaseParamsInterface> extends Base
      * 编辑
      * @param id
      */
-    public edit(id: string) {
+    public edit(id: number) {
         return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + `/category/${id}/edit`);
     }
 
@@ -56,7 +56,7 @@ export default class CategoryRequest<T extends BaseParamsInterface> extends Base
      * @param id
      * @param formData
      */
-    public update(id: string, formData: T) {
+    public update(id: number, formData: T) {
         return BaseRequest.axios.put<ApiParamsInterface>(BaseRequest.FINANCE + `/category/${id}`, formData);
     }
 
@@ -64,7 +64,7 @@ export default class CategoryRequest<T extends BaseParamsInterface> extends Base
      * 删除
      * @param id
      */
-    public destroy(id: string) {
+    public destroy(id: number) {
         return BaseRequest.axios.delete<ApiParamsInterface>(BaseRequest.FINANCE + `/category/${id}`);
     }
 }

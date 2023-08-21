@@ -31,6 +31,8 @@ export default class IndexClass extends BaseClass {
 
     public updateDialogClass: UnwrapNestedRefs<DialogClass> = reactive<DialogClass>(new DialogClass());
 
+    public userDialogClass: UnwrapNestedRefs<DialogClass> = reactive<DialogClass>(new DialogClass());
+
     public loadingClass: UnwrapNestedRefs<LoadingClass> = reactive<LoadingClass>(new LoadingClass());
 
     public search(): void {
@@ -138,13 +140,16 @@ export default class IndexClass extends BaseClass {
         this.params.value = params;
         switch (e) {
             case 'create':
-                this.createDialogClass.show()
+                this.createDialogClass.show();
                 break;
             case 'update':
-                this.updateDialogClass.show()
+                this.updateDialogClass.show();
+                break;
+            case 'user':
+                this.userDialogClass.show();
                 break;
             case 'destroy':
-                this.destroy()
+                this.destroy();
                 break;
             default:
                 ElMessage.error('功能暂未开放[' + e + ']');

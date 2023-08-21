@@ -2,12 +2,13 @@
 import IndexComponent from "@/components/Family/IndexComponent.vue";
 import CreateComponent from "@/components/Family/CreateComponent.vue";
 import UpdateComponent from "@/components/Family/UpdateComponent.vue";
+import UserComponent from "@/components/Family/UserComponent.vue";
 
 import IndexClass from "@/typescripts/Family/IndexClass";
 
 export default {
   name: "IndexView",
-  components: {IndexComponent, CreateComponent, UpdateComponent},
+  components: {IndexComponent, CreateComponent, UpdateComponent, UserComponent},
   setup() {
     const indexClass = new IndexClass();
     return {indexClass};
@@ -36,6 +37,16 @@ export default {
       :close-on-press-escape="false"
       :close-on-click-modal="false">
     <UpdateComponent :indexClass="indexClass"/>
+  </el-dialog>
+  <el-dialog
+      title="家庭成员"
+      width="40%"
+      v-if="indexClass.userDialogClass.dialog"
+      v-model="indexClass.userDialogClass.dialog"
+      :draggable="true"
+      :close-on-press-escape="false"
+      :close-on-click-modal="false">
+    <UserComponent :indexClass="indexClass"/>
   </el-dialog>
 </template>
 

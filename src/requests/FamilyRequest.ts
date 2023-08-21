@@ -47,7 +47,7 @@ export default class FamilyRequest<T extends BaseParamsInterface> extends BaseRe
      * 编辑
      * @param id
      */
-    public edit(id: string) {
+    public edit(id: number) {
         return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + `/family/${id}/edit`);
     }
 
@@ -56,7 +56,7 @@ export default class FamilyRequest<T extends BaseParamsInterface> extends BaseRe
      * @param id
      * @param formData
      */
-    public update(id: string, formData: T) {
+    public update(id: number, formData: T) {
         return BaseRequest.axios.put<ApiParamsInterface>(BaseRequest.FINANCE + `/family/${id}`, formData);
     }
 
@@ -64,7 +64,15 @@ export default class FamilyRequest<T extends BaseParamsInterface> extends BaseRe
      * 删除
      * @param id
      */
-    public destroy(id: string) {
+    public destroy(id: number) {
         return BaseRequest.axios.delete<ApiParamsInterface>(BaseRequest.FINANCE + `/family/${id}`);
+    }
+
+    /**
+     * 家庭成员
+     * @param id
+     */
+    public user(id: number) {
+        return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + `/family/${id}/user`);
     }
 }

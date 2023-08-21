@@ -1,5 +1,5 @@
 interface query {
-    object_id: string
+    object_id: number
 }
 
 interface index {
