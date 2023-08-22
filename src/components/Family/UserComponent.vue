@@ -1,16 +1,18 @@
 <script lang="ts">
-import { toRefs } from "vue";
+import { getCurrentInstance } from "vue";
+import type { ComponentInternalInstance } from "vue";
 import IndexClass from "@/typescripts/Family/IndexClass";
 import UserClass from "@/typescripts/Family/UserClass";
 
 export default {
   name: "UserComponent",
   props: {
-    indexClass: {type: IndexClass}
+    indexClass: {type: IndexClass, required: true}
   },
-  setup(props: any) {
-    const {indexClass} = toRefs(props);
-    const currentClass = new UserClass(indexClass.value);
+  setup() {
+    const instance = getCurrentInstance() as ComponentInternalInstance;
+    const indexClass: IndexClass = instance.props.indexClass as IndexClass;
+    const currentClass = new UserClass(indexClass);
     currentClass.init();
     return {currentClass};
   }

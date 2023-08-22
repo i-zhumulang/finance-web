@@ -1,5 +1,6 @@
 <script lang="ts">
-import { toRefs } from "vue";
+import { getCurrentInstance } from "vue";
+import type { ComponentInternalInstance } from "vue";
 import { ArrowDown } from '@element-plus/icons-vue';
 import IndexClass from "@/typescripts/PaymentMethod/IndexClass";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
@@ -8,11 +9,11 @@ export default {
   name: "IndexComponent",
   components: {ArrowDown},
   props: {
-    indexClass: {type: IndexClass}
+    indexClass: {type: IndexClass, required: true}
   },
-  setup(props: any) {
-    const {indexClass} = toRefs(props);
-    const currentClass: IndexClass = indexClass.value;
+  setup() {
+    const instance = getCurrentInstance() as ComponentInternalInstance;
+    const currentClass: IndexClass = instance.props.indexClass as IndexClass;
     currentClass.search()
     currentClass.options()
     return {currentClass, PaginationClass};
