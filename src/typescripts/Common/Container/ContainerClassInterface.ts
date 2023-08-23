@@ -1,19 +1,17 @@
-interface children {
-    id: string,
+interface ChildrenInterface {
+    id: number,
     component: string,
     name_zh: string
 }
 
-interface aside {
-    id: string,
+interface AsideInterface {
+    id: number,
     name_zh: string,
-    children: children[]
+    children: ChildrenInterface[]
 }
 
-export interface DataType {
+export interface ContainerDataInterface {
     user: { name: string }
-    module: string,
-    moduleId: string,
-    aside: aside[],
+    aside: AsideInterface[],
     asideActivePath: string
 }
