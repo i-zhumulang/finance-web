@@ -23,6 +23,45 @@ export default {
 
 <template>
   <div class="index-component">
+    <el-row style="margin-bottom: 10px;">
+      <el-col :span="24">
+        <el-card class="box-card">
+          <el-form :inline="true" :model="currentClass.data.query">
+            <el-form-item>
+              <el-select
+                  v-model="currentClass.data.query.family_id"
+                  style="width: 100%"
+                  filterable
+                  placeholder="消费组">
+                <el-option
+                    v-for="family in currentClass.data.options.family"
+                    :key="family.id"
+                    :label="family.data.name"
+                    :value="family.id"
+                />
+              </el-select>
+            </el-form-item>
+            <el-form-item>
+              <el-select
+                  v-model="currentClass.data.query.type"
+                  style="width: 100%"
+                  filterable
+                  placeholder="类型">
+                <el-option
+                    v-for="type in currentClass.data.options.type"
+                    :key="type.en"
+                    :label="type.zh"
+                    :value="type.en"
+                />
+              </el-select>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="currentClass.search()">查询</el-button>
+            </el-form-item>
+          </el-form>
+        </el-card>
+      </el-col>
+    </el-row>
     <el-row>
       <el-col :span="24">
         <el-card class="box-card">
@@ -51,7 +90,7 @@ export default {
                 <el-table-column prop="data.state_zh" label="状态"/>
                 <el-table-column prop="data.description" label="备注"/>
                 <el-table-column prop="data.created_at_format" label="创建时间"/>
-                <el-table-column prop="data.expiration_at_format" label="过期"/>
+                <el-table-column prop="data.expiration_at_format" label="过期时间"/>
                 <el-table-column label="操作" width="120">
                   <template #default="scope">
                     <el-dropdown

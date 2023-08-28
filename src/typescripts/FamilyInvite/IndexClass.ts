@@ -14,14 +14,18 @@ export default class IndexClass extends BaseClass {
     public data = reactive<IndexDataInterface>({
         query: {
             offset: 1,
-            limit: PaginationClass.indexPageSize
+            limit: PaginationClass.indexPageSize,
+            family_id: 0,
+            type: 'ALL',
         },
         table: {
             index: [],
             count: 0
         },
         options: {
-            operate: []
+            operate: [],
+            family: [],
+            type: [],
         },
     });
 
@@ -105,6 +109,8 @@ export default class IndexClass extends BaseClass {
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
                     _this.data.options.operate = apiParams.data.operate;
+                    _this.data.options.family = apiParams.data.family;
+                    _this.data.options.type = apiParams.data.type;
                 } else {
                     ElMessage.error(apiParams.message);
                 }
