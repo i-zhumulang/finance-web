@@ -16,6 +16,7 @@ export default class InviteClass extends BaseClass {
     public formRef = ref<FormInstance>();
 
     public data = reactive<InviteDataInterface>({
+        family_id: 0,
         mobile: '',
     });
 
@@ -54,6 +55,7 @@ export default class InviteClass extends BaseClass {
             return false;
         }
         const _this = this;
+        _this.data.family_id = _this.indexClass.params.value.family_id
         formRef.validate((valid: boolean) => {
             if (!valid) {
                 return false;

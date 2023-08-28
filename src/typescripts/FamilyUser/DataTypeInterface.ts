@@ -15,6 +15,7 @@ export interface IndexDataInterface {
 }
 
 export interface InviteDataInterface {
+    family_id: number,
     mobile: string,
 }
 
