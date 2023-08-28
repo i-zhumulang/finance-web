@@ -69,7 +69,7 @@ export default class FamilyRequest<T extends BaseParamsInterface> extends BaseRe
     }
 
     /**
-     * 家庭成员
+     * 消费组成员
      * @param id
      */
     public user(id: number) {

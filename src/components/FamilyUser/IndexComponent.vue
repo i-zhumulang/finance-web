@@ -2,7 +2,7 @@
 import { getCurrentInstance } from "vue";
 import type { ComponentInternalInstance } from "vue";
 import { ArrowDown } from '@element-plus/icons-vue';
-import IndexClass from "@/typescripts/Family/IndexClass";
+import IndexClass from "@/typescripts/FamilyUser/IndexClass";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
 
 export default {
@@ -44,21 +44,15 @@ export default {
                   :data="currentClass.data.table.index"
                   row-key="id"
                   style="width: 100%">
-                <el-table-column prop="data.name" label="名称"/>
-                <el-table-column prop="user.count" label="消费组成员">
-                  <template #default="scope">
-                    <el-link
-                        :underline="false"
-                        type="primary"
-                        @click="currentClass.event('user', scope.row.data)"
-                    >{{ scope.row.user.count }}</el-link>
-                  </template>
-                </el-table-column>
-                <el-table-column prop="data.created_by_name" label="创建人"/>
-                <el-table-column prop="data.created_at_format" label="创建时间"/>
+                <el-table-column prop="family.name" label="组名称"/>
+                <el-table-column prop="data.state_zh" label="状态"/>
+                <el-table-column prop="inviter.name" label="邀请人"/>
+                <el-table-column prop="data.created_at_format" label="加入时间"/>
                 <el-table-column label="操作" width="120">
                   <template #default="scope">
-                    <el-dropdown>
+                    <el-dropdown
+                        v-if="scope.row.opts.length > 0"
+                        @command="currentClass.event($event, scope.row.data)">
                       <span class="el-dropdown-link">
                         操作
                         <el-icon class="el-icon--right">
@@ -70,7 +64,7 @@ export default {
                           <el-dropdown-item
                               v-for="opts in scope.row.opts"
                               :key="opts.name_en"
-                              @click="currentClass.event(opts.name_en, scope.row.data)"
+                              :command="opts.name_en"
                           >{{ opts.name_zh }}
                           </el-dropdown-item>
                         </el-dropdown-menu>

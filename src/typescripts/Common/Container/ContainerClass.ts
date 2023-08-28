@@ -72,13 +72,13 @@ export default class ContainerClass extends BaseClass {
                 children: [
                     {
                         id: 201,
-                        component: '/family',
-                        name_zh: "家庭组",
+                        component: '/family-user',
+                        name_zh: "消费组",
                     },
                     {
                         id: 202,
                         component: '/family-invite',
-                        name_zh: "家庭邀请",
+                        name_zh: "消费组邀请",
                     },
                     {
                         id: 203,

@@ -1,8 +1,8 @@
 <script lang="ts">
 import { getCurrentInstance } from "vue";
 import type { ComponentInternalInstance } from "vue";
-import IndexClass from "@/typescripts/Family/IndexClass";
-import CreateClass from "@/typescripts/Family/CreateClass";
+import IndexClass from "@/typescripts/FamilyUser/IndexClass";
+import CreateClass from "@/typescripts/FamilyUser/CreateClass";
 
 export default {
   name: "CreateComponent",

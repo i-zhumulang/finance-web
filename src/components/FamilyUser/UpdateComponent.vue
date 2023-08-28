@@ -1,18 +1,19 @@
 <script lang="ts">
 import { getCurrentInstance } from "vue";
 import type { ComponentInternalInstance } from "vue";
-import IndexClass from "@/typescripts/Family/IndexClass";
-import CreateClass from "@/typescripts/Family/CreateClass";
+import IndexClass from "@/typescripts/FamilyUser/IndexClass";
+import UpdateClass from "@/typescripts/FamilyUser/UpdateClass";
 
 export default {
-  name: "CreateComponent",
+  name: "UpdateComponent",
   props: {
     indexClass: {type: IndexClass, required: true}
   },
   setup() {
     const instance = getCurrentInstance() as ComponentInternalInstance;
     const indexClass: IndexClass = instance.props.indexClass as IndexClass;
-    const currentClass = new CreateClass(indexClass);
+    const currentClass = new UpdateClass(indexClass);
+    currentClass.edit();
     return {currentClass}
   }
 }
@@ -20,17 +21,18 @@ export default {
 
 <template>
   <el-form
-      v-if="currentClass.indexClass.createDialogClass.dialog"
+      v-loading="currentClass.loadingClass.loading"
+      v-if="currentClass.indexClass.updateDialogClass.dialog"
       :ref="currentClass.formRef"
-      @submit.prevent="currentClass.store(currentClass.formRef.value)"
+      @submit.prevent="currentClass.update(currentClass.formRef.value)"
       label-width="120px"
       :rules="currentClass.rule"
       :model="currentClass.data">
-    <el-form-item prop="name" label="消费组名称">
+    <el-form-item prop="name" label="支付方式">
       <el-input
           v-model="currentClass.data.name"
           autocomplete="off"
-          placeholder="请输入2~30字符的消费组名称"/>
+          placeholder="请输入2~30字符的支付方式名称"/>
     </el-form-item>
     <el-form-item>
       <el-button
