@@ -29,11 +29,3 @@ export interface IndexDataInterface {
         type: TypeInterface[],
     },
 }
-
-export interface CreateDataInterface {
-    mobile: string
-}
-
-export interface UpdateDataInterface extends CreateDataInterface {
-
-}
