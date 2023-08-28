@@ -78,7 +78,7 @@ export default class ContainerClass extends BaseClass {
                     {
                         id: 202,
                         component: '/family-invite',
-                        name_zh: "消费组邀请",
+                        name_zh: "我的邀请",
                     },
                     {
                         id: 203,

@@ -44,6 +44,7 @@ export default {
                   :data="currentClass.data.table.index"
                   row-key="id"
                   style="width: 100%">
+                <el-table-column prop="family.name" label="消费组"/>
                 <el-table-column prop="data.invite_type_zh" label="类型"/>
                 <el-table-column prop="inviter.name" label="邀请人"/>
                 <el-table-column prop="invitee.name" label="受邀人"/>
