@@ -14,6 +14,10 @@ export interface IndexDataInterface {
     },
 }
 
+export interface InviteDataInterface {
+    mobile: string,
+}
+
 export interface CreateDataInterface {
     name: string,
 }

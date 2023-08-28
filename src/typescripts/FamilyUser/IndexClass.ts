@@ -32,6 +32,8 @@ export default class IndexClass extends BaseClass {
 
     public updateDialogClass: UnwrapNestedRefs<DialogClass> = reactive<DialogClass>(new DialogClass());
 
+    public inviteDialogClass: UnwrapNestedRefs<DialogClass> = reactive<DialogClass>(new DialogClass());
+
     public loadingClass: UnwrapNestedRefs<LoadingClass> = reactive<LoadingClass>(new LoadingClass());
 
     public search(): void {
@@ -143,6 +145,9 @@ export default class IndexClass extends BaseClass {
                 break;
             case 'update':
                 this.updateDialogClass.show();
+                break;
+            case 'invite':
+                this.inviteDialogClass.show();
                 break;
             case 'destroy':
                 this.destroy();
