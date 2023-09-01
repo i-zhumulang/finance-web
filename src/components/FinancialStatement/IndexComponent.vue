@@ -107,14 +107,42 @@ export default {
                   :data="currentClass.data.table.index"
                   row-key="id"
                   style="width: 100%">
-                <el-table-column prop="data.consumption_date_format" label="消费日期"/>
-                <el-table-column prop="data.amount" label="消费金额"/>
+                <el-table-column prop="data.consumption_date_format" label="花费日期" align="center"/>
+                <el-table-column prop="data.amount" label="花费金额" align="center">
+                  <template #default="scope">
+                    <el-row>
+                      <el-col :span="15" align="right">
+                        {{ scope.row.data.amount }}
+                      </el-col>
+                    </el-row>
+                  </template>
+                </el-table-column>
                 <el-table-column prop="category.name" label="支出分类"/>
-                <el-table-column prop="payment_method.name" label="支付方式"/>
-                <el-table-column prop="payment_account.name" label="支付账号"/>
+                <el-table-column prop="payment_method.name" label="支付信息">
+                  <template #default="scope">
+                    <el-row>
+                      <el-col :span="24">
+                        方式:{{ scope.row.payment_method.name }}
+                      </el-col>
+                      <el-col :span="24">
+                        账号:{{ scope.row.payment_account.name }}
+                      </el-col>
+                    </el-row>
+                  </template>
+                </el-table-column>
                 <el-table-column prop="data.description" label="备注"/>
-                <el-table-column prop="data.created_by_name" label="创建人"/>
-                <el-table-column prop="data.created_at_format" label="创建时间"/>
+                <el-table-column prop="data.created_by_name" label="创建信息">
+                  <template #default="scope">
+                    <el-row>
+                      <el-col :span="24">
+                        {{ scope.row.data.created_by_name }}
+                      </el-col>
+                      <el-col :span="24">
+                        {{ scope.row.data.created_at_format }}
+                      </el-col>
+                    </el-row>
+                  </template>
+                </el-table-column>
                 <el-table-column label="操作" width="120">
                   <template #default="scope">
                     <el-dropdown>
