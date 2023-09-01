@@ -45,7 +45,7 @@ export default {
       <el-input
           v-model="currentClass.data.name"
           autocomplete="off"
-          placeholder="请输入2~30字符的账号名称"/>
+          placeholder="请输入1~10字符的账号名称"/>
     </el-form-item>
     <el-form-item prop="account" label="账号">
       <el-input

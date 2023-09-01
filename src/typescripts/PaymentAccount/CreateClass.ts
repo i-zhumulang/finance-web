@@ -31,11 +31,11 @@ export default class CreateClass extends BaseClass {
         if (value === "") {
             callback(new Error("请输入账号名称"));
         } else if (value) {
-            const minLength = 2;
-            const maxLength = 30;
+            const minLength = 1;
+            const maxLength = 10;
             const valueLength = value.length;
             if (valueLength < minLength || valueLength > maxLength) {
-                callback(new Error("请输入2~30字符的账号名称"));
+                callback(new Error(`请输入${minLength}~${maxLength}字符的账号名称`));
             }
             callback();
         } else {
@@ -51,7 +51,7 @@ export default class CreateClass extends BaseClass {
             const maxLength = 30;
             const valueLength = value.length;
             if (valueLength < minLength || valueLength > maxLength) {
-                callback(new Error("请输入2~30字符的账号"));
+                callback(new Error(`请输入${minLength}~${maxLength}字符的账号`));
             }
             callback();
         } else {

@@ -29,11 +29,11 @@ export default class UpdateClass extends BaseClass {
         if (value === "") {
             callback(new Error("请输入分类名称"));
         } else if (value) {
-            const minLength = 2;
-            const maxLength = 30;
+            const minLength = 1;
+            const maxLength = 10;
             const valueLength = value.length;
             if (valueLength < minLength || valueLength > maxLength) {
-                callback(new Error("请输入2~30字符的分类名称"));
+                callback(new Error(`请输入${minLength}~${maxLength}字符的分类名称`));
             }
             callback();
         } else {

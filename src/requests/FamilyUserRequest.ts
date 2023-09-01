@@ -26,4 +26,12 @@ export default class FamilyUserRequest<T extends BaseParamsInterface> extends Ba
     public options(formData: T) {
         return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + "/family-user/options", {params: formData});
     }
+
+    /**
+     * 删除
+     * @param id
+     */
+    public default(id: number) {
+        return BaseRequest.axios.put<ApiParamsInterface>(BaseRequest.FINANCE + `/family-user/${id}/default`);
+    }
 }

@@ -45,7 +45,7 @@ export default {
       <el-input
           v-model="currentClass.data.name"
           autocomplete="off"
-          placeholder="请输入2~30字符的分类名称"/>
+          placeholder="请输入1~10字符的分类名称"/>
     </el-form-item>
     <el-form-item>
       <el-button

@@ -45,7 +45,20 @@ export default {
                   row-key="id"
                   style="width: 100%">
                 <el-table-column prop="family.name" label="组名称"/>
-                <el-table-column prop="data.state_zh" label="状态"/>
+                <el-table-column prop="data.default_zh" label="是否默认">
+                  <template #default="scope">
+                    <el-text :type="scope.row.data.default === 'YES' ? 'success' : 'default'">
+                      {{ scope.row.data.default_zh }}
+                    </el-text>
+                  </template>
+                </el-table-column>
+                <el-table-column prop="data.state_zh" label="状态">
+                  <template #default="scope">
+                    <el-text :type="scope.row.data.state_en === 'ENABLED' ? 'success' : 'warning'">
+                      {{ scope.row.data.state_zh }}
+                    </el-text>
+                  </template>
+                </el-table-column>
                 <el-table-column prop="inviter.name" label="邀请人"/>
                 <el-table-column prop="data.created_at_format" label="加入时间"/>
                 <el-table-column label="操作" width="120">
