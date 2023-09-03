@@ -8,6 +8,7 @@ import { ElLoading, ElMessage } from "element-plus";
 import RsaEncrypt from "@/typescripts/Common/Encrypt/Rsa/RsaEncrypt";
 import type { loginFormData } from "@/typescripts/Auth/LoginClassInterface";
 import { useUser } from "@/stores/Auth/User";
+import type { InternalRuleItem } from "async-validator/dist-types/interface";
 
 export default class LoginClass extends BaseClass {
 
@@ -18,19 +19,23 @@ export default class LoginClass extends BaseClass {
         password: "18120827456",
     });
 
+    private mobile = (rule: InternalRuleItem, value: string, callback: any) => {
+        if (value === "") {
+            callback(new Error("请输入账号"));
+        } else if (value) {
+            const accountReg = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
+            if(!accountReg.test(value)){
+                callback(new Error("账号格式有误!"));
+            }
+            callback();
+        } else {
+            callback();
+        }
+    };
+
     public rule = reactive<FormRules>({
         mobile: [
-            {
-                message: "手机号码不能为空",
-                required: true,
-                trigger: "blur",
-            },
-            {
-                min: 11,
-                max: 11,
-                message: "手机号码长度错误",
-                trigger: "blur",
-            },
+            {validator: this.mobile, trigger: "blur"},
         ],
         password: [
             {

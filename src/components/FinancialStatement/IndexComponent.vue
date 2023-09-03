@@ -107,11 +107,11 @@ export default {
                   :data="currentClass.data.table.index"
                   row-key="id"
                   style="width: 100%">
-                <el-table-column prop="data.consumption_date_format" label="花费日期" align="center"/>
-                <el-table-column prop="data.amount" label="花费金额" align="center">
+                <el-table-column prop="data.consumption_date_format" label="花费日期"/>
+                <el-table-column prop="data.amount" label="花费金额">
                   <template #default="scope">
                     <el-row>
-                      <el-col :span="15" align="right">
+                      <el-col :span="24">
                         {{ scope.row.data.amount }}
                       </el-col>
                     </el-row>
