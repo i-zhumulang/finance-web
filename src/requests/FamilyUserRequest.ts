@@ -28,6 +28,30 @@ export default class FamilyUserRequest<T extends BaseParamsInterface> extends Ba
     }
 
     /**
+     * 启用
+     * @param id
+     */
+    public enabled(id: number) {
+        return BaseRequest.axios.put<ApiParamsInterface>(BaseRequest.FINANCE + `/family-user/${id}/enabled`);
+    }
+
+    /**
+     * 禁用
+     * @param id
+     */
+    public disabled(id: number) {
+        return BaseRequest.axios.put<ApiParamsInterface>(BaseRequest.FINANCE + `/family-user/${id}/disabled`);
+    }
+
+    /**
+     * 退出
+     * @param id
+     */
+    public quit(id: number) {
+        return BaseRequest.axios.put<ApiParamsInterface>(BaseRequest.FINANCE + `/family-user/${id}/quit`);
+    }
+
+    /**
      * 删除
      * @param id
      */

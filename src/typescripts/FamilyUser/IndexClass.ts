@@ -152,12 +152,171 @@ export default class IndexClass extends BaseClass {
             case 'default':
                 this.default();
                 break;
+            case 'enabled':
+                this.enabled();
+                break;
+            case 'disabled':
+                this.disabled();
+                break;
+            case 'quit':
+                this.quit();
+                break;
             case 'destroy':
                 this.destroy();
                 break;
             default:
                 ElMessage.error('功能暂未开放[' + e + ']');
         }
+    }
+
+    /**
+     * 启用
+     */
+    public enabled() {
+        const _this = this;
+        const params = _this.params.value;
+        ElMessageBox.confirm('确认启用?', "提示", {
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            closeOnClickModal: false,
+            closeOnPressEscape: false,
+            type: 'warning',
+            draggable: true,
+        })
+            .then(() => {
+                const loadingInstance = ElLoading.service({fullscreen: true});
+                new FamilyUserRequest()
+                    .enabled(params.id)
+                    .then((response: AxiosResponse) => {
+                        loadingInstance.close();
+                        const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
+                        if (apiParams.flag === "Success") {
+                            ElMessage({
+                                type: "success",
+                                message: apiParams.message,
+                                onClose: function () {
+                                    _this.search()
+                                    _this.options()
+                                }
+                            });
+                        } else {
+                            ElMessage.error(apiParams.message);
+                        }
+                    })
+                    .catch((error: AxiosError) => {
+                        loadingInstance.close();
+                        if (error.code === "ERR_BAD_RESPONSE") {
+                            if (error.response) {
+                                ElMessage.error(error.response.statusText);
+                            }
+                        } else {
+                            ElMessage.error(error.message);
+                        }
+                    });
+            })
+            .catch(() => {
+                ElMessage.info("取消操作")
+            });
+    }
+
+    /**
+     * 禁用
+     */
+    public disabled() {
+        const _this = this;
+        const params = _this.params.value;
+        ElMessageBox.confirm('确认禁用?', "提示", {
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            closeOnClickModal: false,
+            closeOnPressEscape: false,
+            type: 'warning',
+            draggable: true,
+        })
+            .then(() => {
+                const loadingInstance = ElLoading.service({fullscreen: true});
+                new FamilyUserRequest()
+                    .disabled(params.id)
+                    .then((response: AxiosResponse) => {
+                        loadingInstance.close();
+                        const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
+                        if (apiParams.flag === "Success") {
+                            ElMessage({
+                                type: "success",
+                                message: apiParams.message,
+                                onClose: function () {
+                                    _this.search()
+                                    _this.options()
+                                }
+                            });
+                        } else {
+                            ElMessage.error(apiParams.message);
+                        }
+                    })
+                    .catch((error: AxiosError) => {
+                        loadingInstance.close();
+                        if (error.code === "ERR_BAD_RESPONSE") {
+                            if (error.response) {
+                                ElMessage.error(error.response.statusText);
+                            }
+                        } else {
+                            ElMessage.error(error.message);
+                        }
+                    });
+            })
+            .catch(() => {
+                ElMessage.info("取消操作")
+            });
+    }
+
+    /**
+     * 退出
+     */
+    public quit() {
+        const _this = this;
+        const params = _this.params.value;
+        ElMessageBox.confirm('确认退出?', "提示", {
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            closeOnClickModal: false,
+            closeOnPressEscape: false,
+            type: 'warning',
+            draggable: true,
+        })
+            .then(() => {
+                const loadingInstance = ElLoading.service({fullscreen: true});
+                new FamilyUserRequest()
+                    .quit(params.id)
+                    .then((response: AxiosResponse) => {
+                        loadingInstance.close();
+                        const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
+                        if (apiParams.flag === "Success") {
+                            ElMessage({
+                                type: "success",
+                                message: apiParams.message,
+                                onClose: function () {
+                                    _this.search()
+                                    _this.options()
+                                }
+                            });
+                        } else {
+                            ElMessage.error(apiParams.message);
+                        }
+                    })
+                    .catch((error: AxiosError) => {
+                        loadingInstance.close();
+                        if (error.code === "ERR_BAD_RESPONSE") {
+                            if (error.response) {
+                                ElMessage.error(error.response.statusText);
+                            }
+                        } else {
+                            ElMessage.error(error.message);
+                        }
+                    });
+            })
+            .catch(() => {
+                ElMessage.info("取消操作")
+            });
     }
 
     /**

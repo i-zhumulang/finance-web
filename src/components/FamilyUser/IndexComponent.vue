@@ -47,14 +47,14 @@ export default {
                 <el-table-column prop="family.name" label="组名称"/>
                 <el-table-column prop="data.default_zh" label="是否默认">
                   <template #default="scope">
-                    <el-text :type="scope.row.data.default === 'YES' ? 'success' : 'default'">
+                    <el-text :type="scope.row.data.default_type">
                       {{ scope.row.data.default_zh }}
                     </el-text>
                   </template>
                 </el-table-column>
                 <el-table-column prop="data.state_zh" label="状态">
                   <template #default="scope">
-                    <el-text :type="scope.row.data.state_en === 'ENABLED' ? 'success' : 'warning'">
+                    <el-text :type="scope.row.data.state_type">
                       {{ scope.row.data.state_zh }}
                     </el-text>
                   </template>
