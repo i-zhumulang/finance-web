@@ -12,13 +12,16 @@ export default {
 </template>
 
 <style scoped>
+
 .not-found {
+  padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  position: absolute;
 }
 
 .not-found img {
+  margin: 0;
   width: 100%;
   height: 100%;
 }

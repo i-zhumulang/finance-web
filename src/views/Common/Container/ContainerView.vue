@@ -25,6 +25,10 @@ export default {
         <div class="header-left">
           <img src="@/assets/logo.png" alt="logo" width="200" height="200"/>
         </div>
+        <div class="header-right">
+          <el-button type="success" link>{{ containerClass.data.user.name }}</el-button>
+          <el-button type="primary" link @click="containerClass.logout()">退出</el-button>
+        </div>
       </el-header>
       <el-container>
         <el-aside>

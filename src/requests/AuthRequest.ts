@@ -10,4 +10,12 @@ export default class AuthRequest<T extends BaseParamsInterface> extends BaseRequ
     public login(formData: T) {
         return BaseRequest.axios.post<ApiParamsInterface>(BaseRequest.FINANCE + "/auth/login", formData);
     }
+
+    /**
+     * 退出
+     * @param formData
+     */
+    public logout(formData: T) {
+        return BaseRequest.axios.post<ApiParamsInterface>(BaseRequest.FINANCE + "/auth/logout", formData);
+    }
 }

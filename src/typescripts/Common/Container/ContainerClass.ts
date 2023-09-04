@@ -1,6 +1,11 @@
-import {reactive} from "vue";
+import { reactive } from "vue";
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
-import type {ContainerDataInterface} from "@/typescripts/Common/Container/ContainerClassInterface";
+import type { ContainerDataInterface } from "@/typescripts/Common/Container/ContainerClassInterface";
+import { useUser } from "@/stores/Auth/User";
+import AuthRequest from "@/requests/AuthRequest";
+import type { AxiosError, AxiosResponse } from "axios";
+import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
+import { ElMessage } from "element-plus";
 
 export default class ContainerClass extends BaseClass {
     public data = reactive<ContainerDataInterface>({
@@ -18,13 +23,42 @@ export default class ContainerClass extends BaseClass {
         const currentPath = this.router.currentRoute.value.path;
         this.setAsideActivePath(currentPath);
         this.initAside();
+        const userStore = useUser();
+        this.data.user = userStore.user;
     }
 
     /**
      * 退出
      */
     public logout() {
-
+        const userStore = useUser();
+        const _this = this;
+        new AuthRequest()
+            .logout({})
+            .then((response: AxiosResponse) => {
+                const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data;
+                if (apiParams.flag === "Success") {
+                    ElMessage({
+                        type: "success",
+                        message: "退出成功",
+                        onClose: function () {
+                            userStore.setUser(apiParams.data)
+                            _this.router.push({name: "Login"});
+                        }
+                    });
+                } else {
+                    ElMessage.error(apiParams.message);
+                }
+            })
+            .catch((error: AxiosError) => {
+                if (error.code === "ERR_BAD_RESPONSE") {
+                    if (error.response) {
+                        ElMessage.error(error.response.statusText);
+                    }
+                } else {
+                    ElMessage.error(error.message);
+                }
+            });
     }
 
     /**
