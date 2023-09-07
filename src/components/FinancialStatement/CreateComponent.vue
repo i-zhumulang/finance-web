@@ -115,11 +115,14 @@ export default {
           </div>
         </template>
       </el-upload>
-      <el-dialog append-to-body v-model="currentClass.dialog.dialogVisible">
+      <el-dialog
+          top="10vh"
+          append-to-body
+          v-model="currentClass.dialog.dialogVisible">
         <el-row>
           <el-col :span="24" align="center">
             <el-image
-                style="width: 500px; height: 500px"
+                style="width: 600px; height: 760px"
                 :src="currentClass.dialog.dialogImageUrl"
                 fit="contain"/>
           </el-col>
