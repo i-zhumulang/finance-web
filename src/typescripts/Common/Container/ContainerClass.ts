@@ -141,6 +141,17 @@ export default class ContainerClass extends BaseClass {
                         name_zh: "财务流水",
                     },
                 ]
+            },
+            {
+                id: 40,
+                name_zh: "报表数据",
+                children: [
+                    {
+                        id: 401,
+                        component: '/statistics-family-day',
+                        name_zh: "消费组(天)",
+                    },
+                ]
             }
         ];
     }

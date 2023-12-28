@@ -15,7 +15,7 @@ const routes: RouteRecordRaw[] = <RouteRecordRaw[]>[
   },
   {
     path: "/",
-    name: "System",
+    name: "Finance",
     meta: {title: '首页', noCache: true},
     component: () => import('@/views/Common/Container/ContainerView.vue'),
     children: [
@@ -53,6 +53,11 @@ const routes: RouteRecordRaw[] = <RouteRecordRaw[]>[
         path: "financial-statement",
         name: 'FinancialStatement',
         component: () => import('@/views/FinancialStatement/IndexView.vue')
+      },
+      {
+        path: "statistics-family-day",
+        name: 'StatisticsFamilyDay',
+        component: () => import('@/views/StatisticsFamilyDay/IndexView.vue')
       },
     ]
   },
