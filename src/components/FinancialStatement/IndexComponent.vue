@@ -108,10 +108,10 @@ export default {
                   row-key="id"
                   style="width: 100%">
                 <el-table-column prop="data.consumption_date_format" label="花费日期"/>
-                <el-table-column prop="data.amount" label="花费金额">
+                <el-table-column prop="data.amount" align="center" label="花费金额">
                   <template #default="scope">
                     <el-row>
-                      <el-col :span="24">
+                      <el-col :span="14" class="custom-class">
                         {{ scope.row.data.amount }}
                       </el-col>
                     </el-row>
@@ -184,5 +184,7 @@ export default {
 </template>
 
 <style scoped>
-
+.custom-class {
+  text-align: right;
+}
 </style>
