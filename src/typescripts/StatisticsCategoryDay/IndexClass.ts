@@ -128,8 +128,10 @@ export default class IndexClass extends BaseClass {
      * @param params
      */
     public event(e: string, params: any = null): void {
-        console.log(e);
-        console.log(params);
         this.params.value = params;
+        switch (e) {
+            default:
+                ElMessage.error('功能暂未开放[' + e + ']');
+        }
     }
 }
