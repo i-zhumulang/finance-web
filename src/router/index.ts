@@ -59,6 +59,11 @@ const routes: RouteRecordRaw[] = <RouteRecordRaw[]>[
         name: 'StatisticsFamilyDay',
         component: () => import('@/views/StatisticsFamilyDay/IndexView.vue')
       },
+      {
+        path: "statistics-category-day",
+        name: 'StatisticsCategoryDay',
+        component: () => import('@/views/StatisticsCategoryDay/IndexView.vue')
+      },
     ]
   },
   {

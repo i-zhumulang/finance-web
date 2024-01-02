@@ -151,6 +151,11 @@ export default class ContainerClass extends BaseClass {
                         component: '/statistics-family-day',
                         name_zh: "消费组(天)",
                     },
+                    {
+                        id: 402,
+                        component: '/statistics-category-day',
+                        name_zh: "支出分类(天)",
+                    },
                 ]
             }
         ];
