@@ -58,7 +58,7 @@ export default {
                   :data="currentClass.data.table.index"
                   row-key="id"
                   style="width: 100%">
-                <el-table-column prop="family.name" label="支出分类"/>
+                <el-table-column prop="category.name" label="支出分类"/>
                 <el-table-column prop="data.day_format" label="日期"/>
                 <el-table-column prop="data.amount" label="消费金额"/>
                 <el-table-column prop="data.updated_at_format" label="最后统计时间"/>
