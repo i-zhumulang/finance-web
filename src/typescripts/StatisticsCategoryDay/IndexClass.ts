@@ -97,7 +97,8 @@ export default class IndexClass extends BaseClass {
             .then((response: AxiosResponse) => {
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
-                    _this.data.options.family = apiParams.data.family;
+                    _this.data.options.family = apiParams.data.options.family;
+                    _this.data.query.family_id = apiParams.data.query.family_id;
                 } else {
                     ElMessage.error(apiParams.message);
                 }

@@ -1,5 +1,5 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
-import type { IndexDataInterface } from "@/typescripts/StatisticsFamilyDay/DataTypeInterface";
+import type { IndexDataInterface } from "@/typescripts/StatisticsUserDay/DataTypeInterface";
 import { reactive, ref } from "vue";
 import type { UnwrapNestedRefs } from "vue";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
@@ -7,7 +7,7 @@ import LoadingClass from "@/typescripts/Common/Common/Objects/LoadingClass";
 import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
 import { ElMessage } from "element-plus";
-import StatisticsFamilyDayRequest from "@/requests/StatisticsFamilyDayRequest";
+import StatisticsUserDayRequest from "@/requests/StatisticsUserDayRequest";
 
 export default class IndexClass extends BaseClass {
     public data = reactive<IndexDataInterface>({
@@ -41,7 +41,7 @@ export default class IndexClass extends BaseClass {
     public index(): void {
         const _this = this;
         _this.loadingClass.show();
-        new StatisticsFamilyDayRequest()
+        new StatisticsUserDayRequest()
             .index(_this.data.query)
             .then((response: AxiosResponse) => {
                 _this.loadingClass.close();
@@ -69,7 +69,7 @@ export default class IndexClass extends BaseClass {
      */
     public count(): void {
         const _this = this;
-        new StatisticsFamilyDayRequest()
+        new StatisticsUserDayRequest()
             .count(_this.data.query)
             .then((response: AxiosResponse) => {
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
@@ -92,7 +92,7 @@ export default class IndexClass extends BaseClass {
 
     public options(): void {
         const _this = this;
-        new StatisticsFamilyDayRequest()
+        new StatisticsUserDayRequest()
             .options({})
             .then((response: AxiosResponse) => {
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data

@@ -144,7 +144,7 @@ export default class ContainerClass extends BaseClass {
             },
             {
                 id: 40,
-                name_zh: "报表数据",
+                name_zh: "数据报表",
                 children: [
                     {
                         id: 401,
@@ -155,6 +155,11 @@ export default class ContainerClass extends BaseClass {
                         id: 402,
                         component: '/statistics-category-day',
                         name_zh: "支出分类(天)",
+                    },
+                    {
+                        id: 403,
+                        component: '/statistics-user-day',
+                        name_zh: "成员(天)",
                     },
                 ]
             }
