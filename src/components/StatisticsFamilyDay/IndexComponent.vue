@@ -60,7 +60,15 @@ export default {
                   style="width: 100%">
                 <el-table-column prop="family.name" label="消费组"/>
                 <el-table-column prop="data.day_format" label="日期"/>
-                <el-table-column prop="data.amount" label="消费金额"/>
+                <el-table-column prop="data.amount" align="center" label="消费金额">
+                  <template #default="scope">
+                    <el-row>
+                      <el-col :span="14" class="custom-class">
+                        {{ scope.row.data.amount }}
+                      </el-col>
+                    </el-row>
+                  </template>
+                </el-table-column>
                 <el-table-column prop="data.updated_at_format" label="最后统计时间"/>
                 <el-table-column label="操作" width="120">
                   <template #default="scope">
@@ -105,5 +113,7 @@ export default {
 </template>
 
 <style scoped>
-
+.custom-class {
+  text-align: right;
+}
 </style>
