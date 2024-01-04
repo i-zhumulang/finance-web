@@ -26,4 +26,12 @@ export default class StatisticsCategoryDayRequest<T extends BaseParamsInterface>
     public options(formData: T) {
         return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + "/statistics-category-day/options", {params: formData});
     }
+
+    /**
+     * 详情
+     * @param id
+     */
+    public financialStatement(id: number) {
+        return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + `/statistics-category-day/${id}/financial-statement`);
+    }
 }

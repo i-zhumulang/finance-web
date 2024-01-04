@@ -1,8 +1,8 @@
 <script lang="ts">
 import { getCurrentInstance } from "vue";
 import type { ComponentInternalInstance } from "vue";
-import IndexClass from "@/typescripts/StatisticsFamilyDay/IndexClass";
-import FinancialStatementClass from "@/typescripts/StatisticsFamilyDay/FinancialStatementClass";
+import IndexClass from "@/typescripts/StatisticsUserDay/IndexClass";
+import FinancialStatementClass from "@/typescripts/StatisticsUserDay/FinancialStatementClass";
 
 export default {
   name: "FinancialStatementComponent",

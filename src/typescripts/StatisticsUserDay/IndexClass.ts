@@ -8,6 +8,7 @@ import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
 import { ElMessage } from "element-plus";
 import StatisticsUserDayRequest from "@/requests/StatisticsUserDayRequest";
+import DialogClass from "@/typescripts/Common/Common/Objects/DialogClass";
 
 export default class IndexClass extends BaseClass {
     public data = reactive<IndexDataInterface>({
@@ -26,6 +27,8 @@ export default class IndexClass extends BaseClass {
     });
 
     public params: any = ref({});
+
+    public financialStatementDialogClass: UnwrapNestedRefs<DialogClass> = reactive<DialogClass>(new DialogClass());
 
     public loadingClass: UnwrapNestedRefs<LoadingClass> = reactive<LoadingClass>(new LoadingClass());
 
@@ -131,6 +134,9 @@ export default class IndexClass extends BaseClass {
     public event(e: string, params: any = null): void {
         this.params.value = params;
         switch (e) {
+            case 'financial-statement':
+                this.financialStatementDialogClass.show()
+                break;
             default:
                 ElMessage.error('功能暂未开放[' + e + ']');
         }

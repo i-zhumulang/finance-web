@@ -1,11 +1,12 @@
 <script lang="ts">
 import IndexComponent from "@/components/StatisticsCategoryDay/IndexComponent.vue";
+import FinancialStatementComponent from "@/components/StatisticsCategoryDay/FinancialStatementComponent.vue";
 
 import IndexClass from "@/typescripts/StatisticsCategoryDay/IndexClass";
 
 export default {
   name: "IndexView",
-  components: {IndexComponent},
+  components: {IndexComponent, FinancialStatementComponent},
   setup() {
     const indexClass = new IndexClass();
     return {indexClass};
@@ -15,6 +16,15 @@ export default {
 
 <template>
   <IndexComponent :indexClass="indexClass"/>
+  <el-dialog title="详情"
+             width="60%"
+             v-if="indexClass.financialStatementDialogClass.dialog"
+             v-model="indexClass.financialStatementDialogClass.dialog"
+             :draggable="true"
+             :close-on-press-escape="false"
+             :close-on-click-modal="false">
+    <FinancialStatementComponent :indexClass="indexClass"/>
+  </el-dialog>
 </template>
 
 <style scoped>
