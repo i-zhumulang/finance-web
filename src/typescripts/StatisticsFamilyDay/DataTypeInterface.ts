@@ -19,3 +19,9 @@ export interface IndexDataInterface {
         family: FamilyInterface[],
     }
 }
+
+export interface FinancialStatementInterface {
+    table: {
+        index: []
+    }
+}

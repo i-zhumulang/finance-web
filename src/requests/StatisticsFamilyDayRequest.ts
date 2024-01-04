@@ -8,7 +8,7 @@ export default class StatisticsFamilyDayRequest<T extends BaseParamsInterface> e
      * @param formData
      */
     public index(formData: T) {
-        return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + "/statistics-family-day", {params: formData});
+        return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + `/statistics-family-day`, {params: formData});
     }
 
     /**
@@ -16,7 +16,7 @@ export default class StatisticsFamilyDayRequest<T extends BaseParamsInterface> e
      * @param formData
      */
     public count(formData: T) {
-        return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + "/statistics-family-day/count", {params: formData});
+        return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + `/statistics-family-day/count`, {params: formData});
     }
 
     /**
@@ -24,6 +24,14 @@ export default class StatisticsFamilyDayRequest<T extends BaseParamsInterface> e
      * @param formData
      */
     public options(formData: T) {
-        return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + "/statistics-family-day/options", {params: formData});
+        return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + `/statistics-family-day/options`, {params: formData});
+    }
+
+    /**
+     * 详情
+     * @param id
+     */
+    public financialStatement(id: number) {
+        return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + `/statistics-family-day/${id}/financial-statement`);
     }
 }

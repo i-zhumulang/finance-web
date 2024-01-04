@@ -63,7 +63,7 @@ export default {
                 <el-table-column prop="data.amount" align="center" label="消费金额">
                   <template #default="scope">
                     <el-row>
-                      <el-col :span="14" class="custom-class">
+                      <el-col :span="14" class="text-right">
                         {{ scope.row.data.amount }}
                       </el-col>
                     </el-row>
@@ -113,7 +113,5 @@ export default {
 </template>
 
 <style scoped>
-.custom-class {
-  text-align: right;
-}
+
 </style>

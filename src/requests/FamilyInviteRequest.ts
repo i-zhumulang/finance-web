@@ -40,7 +40,7 @@ export default class FamilyInviteRequest <T extends BaseParamsInterface> extends
      * @param id
      */
     public accept(id: number) {
-        return BaseRequest.axios.put<ApiParamsInterface>(BaseRequest.FINANCE + `/family-invite/accept/${id}`);
+        return BaseRequest.axios.put<ApiParamsInterface>(BaseRequest.FINANCE + `/family-invite/${id}/accept`);
     }
 
     /**
@@ -48,7 +48,7 @@ export default class FamilyInviteRequest <T extends BaseParamsInterface> extends
      * @param id
      */
     public refuse(id: number) {
-        return BaseRequest.axios.put<ApiParamsInterface>(BaseRequest.FINANCE + `/family-invite/refuse/${id}`);
+        return BaseRequest.axios.put<ApiParamsInterface>(BaseRequest.FINANCE + `/family-invite/${id}/refuse`);
     }
 
     /**
@@ -56,6 +56,6 @@ export default class FamilyInviteRequest <T extends BaseParamsInterface> extends
      * @param id
      */
     public cancel(id: number) {
-        return BaseRequest.axios.put<ApiParamsInterface>(BaseRequest.FINANCE + `/family-invite/cancel/${id}`);
+        return BaseRequest.axios.put<ApiParamsInterface>(BaseRequest.FINANCE + `/family-invite/${id}/cancel`);
     }
 }

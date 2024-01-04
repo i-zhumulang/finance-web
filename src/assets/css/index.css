@@ -2,18 +2,10 @@
     width: 100%;
 }
 
-.w-100 {
-    width: 100% !important;
-}
-
 .card-header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-}
-
-.custom-row {
-    margin-top: 10px !important;
 }
 
 .el-dropdown-link {
@@ -21,4 +13,16 @@
     color: var(--el-color-primary);
     display: flex;
     align-items: center;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.text-left {
+    text-align: left !important;
 }
