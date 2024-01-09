@@ -25,14 +25,20 @@ export default class IndexClass extends BaseClass {
                 _this.loadingClass.close();
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
-                    let option: EChartsOption;
-                    option = {
+                    const option: EChartsOption = {
+                        tooltip: {
+                            trigger: 'axis',
+                            formatter: '{b0}<br /> {a0} {c0} 元',
+                        },
                         xAxis: {
                             type: 'category',
                             data: apiParams.data.xAxis.data
                         },
                         yAxis: {
-                            type: 'value'
+                            type: 'value',
+                            axisLabel: {
+                                formatter: '{value} 元'
+                            }
                         },
                         series: apiParams.data.series
                     };
