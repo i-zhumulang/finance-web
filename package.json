@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@types/crypto-js": "^4.1.1",
+    "@types/echarts": "^4.9.22",
     "axios": "^1.3.4",
     "crypto-js": "^4.1.1",
     "echarts": "^5.4.3",

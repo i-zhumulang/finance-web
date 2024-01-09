@@ -1,11 +1,20 @@
 <script lang="ts">
+import IndexComponent from "@/components/Index/IndexComponent.vue";
+
+import IndexClass from "@/typescripts/Index/IndexClass";
+
 export default {
-  name: "IndexView"
+  name: "IndexView",
+  components: {IndexComponent},
+  setup() {
+    const indexClass = new IndexClass();
+    return {indexClass};
+  }
 }
 </script>
 
 <template>
-  <div>Index</div>
+  <IndexComponent :indexClass="indexClass"/>
 </template>
 
 <style scoped>
