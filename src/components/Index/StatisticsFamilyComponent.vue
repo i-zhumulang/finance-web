@@ -2,16 +2,16 @@
 import { getCurrentInstance, onMounted } from "vue";
 import type { ComponentInternalInstance } from "vue";
 
-import IndexClass from "@/typescripts/Index/IndexClass";
+import StatisticsFamilyClass from "@/typescripts/Index/StatisticsFamilyClass";
 
 export default {
-  name: "IndexComponent",
+  name: "StatisticsFamilyComponent",
   props: {
-    indexClass: {type: IndexClass, required: true}
+    statisticsFamilyClass: {type: StatisticsFamilyClass, required: true}
   },
   setup() {
     const instance = getCurrentInstance() as ComponentInternalInstance;
-    const currentClass: IndexClass = instance.props.indexClass as IndexClass;
+    const currentClass: StatisticsFamilyClass = instance.props.statisticsFamilyClass as StatisticsFamilyClass;
     onMounted(() => {
       currentClass.index();
     });

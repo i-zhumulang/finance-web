@@ -1,20 +1,20 @@
 <script lang="ts">
-import IndexComponent from "@/components/Index/IndexComponent.vue";
+import StatisticsFamilyComponent from "@/components/Index/StatisticsFamilyComponent.vue";
 
-import IndexClass from "@/typescripts/Index/IndexClass";
+import StatisticsFamilyClass from "@/typescripts/Index/StatisticsFamilyClass";
 
 export default {
   name: "IndexView",
-  components: {IndexComponent},
+  components: {StatisticsFamilyComponent},
   setup() {
-    const indexClass = new IndexClass();
-    return {indexClass};
+    const statisticsFamilyClass = new StatisticsFamilyClass();
+    return {statisticsFamilyClass};
   }
 }
 </script>
 
 <template>
-  <IndexComponent :indexClass="indexClass"/>
+  <StatisticsFamilyComponent :statisticsFamilyClass="statisticsFamilyClass"/>
 </template>
 
 <style scoped>
