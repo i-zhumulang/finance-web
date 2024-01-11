@@ -320,7 +320,7 @@ export default class IndexClass extends BaseClass {
     }
 
     /**
-     * 设置默认家庭
+     * 设置默认消费组
      */
     public default() {
         const _this = this;
