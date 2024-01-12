@@ -30,7 +30,7 @@ export default {
               <span>消费组</span>
             </div>
           </template>
-          <div id="main" ref="chart" style="height: 500px; width: 100%"></div>
+          <div id="statistics-family" ref="chart" style="height: 500px; width: 100%"></div>
         </el-card>
       </el-col>
     </el-row>

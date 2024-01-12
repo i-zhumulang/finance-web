@@ -15,8 +15,8 @@ export default class IndexClass extends BaseClass {
         query: {
             offset: 1,
             limit: PaginationClass.indexPageSize,
-            family_id: 0,
-            type: 'ALL',
+            family_id: '',
+            type: '',
         },
         table: {
             index: [],

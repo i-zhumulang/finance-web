@@ -1,7 +1,7 @@
 import type OptsInterface from "@/typescripts/Common/Common/Interfaces/OptsInterface";
 
 interface FamilyInterface {
-    id: number,
+    id: string,
     data: {
         name: string
     }
@@ -16,7 +16,7 @@ export interface IndexDataInterface {
     query: {
         offset: number,
         limit: number,
-        family_id: number,
+        family_id: string,
         type: string,
     },
     table: {

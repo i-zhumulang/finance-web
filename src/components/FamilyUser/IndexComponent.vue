@@ -59,6 +59,13 @@ export default {
                     </el-text>
                   </template>
                 </el-table-column>
+                <el-table-column prop="family_user" label="成员">
+                  <template #default="scope">
+                    <el-link type="primary" :underline="false">
+                      {{ scope.row.family_user.length }}
+                    </el-link>
+                  </template>
+                </el-table-column>
                 <el-table-column prop="inviter.name" label="邀请人"/>
                 <el-table-column prop="data.created_at_format" label="加入时间"/>
                 <el-table-column label="操作" width="120">

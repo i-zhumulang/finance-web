@@ -9,7 +9,7 @@ export default class StatisticsFamilyClass extends BaseClass {
 
     public index(): void {
         type EChartsOption = echarts.EChartsOption;
-        const chartDom = document.getElementById('main')!;
+        const chartDom = document.getElementById('statistics-family')!;
         const myChart = echarts.init(chartDom);
 
         myChart.showLoading('default', {text: 'loading'});

@@ -31,6 +31,7 @@ export default {
               <el-select
                   v-model="currentClass.data.query.family_id"
                   style="width: 100%"
+                  clearable
                   filterable
                   placeholder="消费组">
                 <el-option
@@ -45,6 +46,7 @@ export default {
               <el-select
                   v-model="currentClass.data.query.type"
                   style="width: 100%"
+                  clearable
                   filterable
                   placeholder="类型">
                 <el-option
