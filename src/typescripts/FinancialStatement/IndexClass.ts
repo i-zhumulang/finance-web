@@ -1,7 +1,7 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import { reactive, ref } from "vue";
 import type { UnwrapNestedRefs } from "vue";
-import type { IndexDataInterface } from "@/typescripts/FinancialStatement/DataTypeInterface";
+import type { IndexDataInterface, IndexDataQueryInterface } from "@/typescripts/FinancialStatement/DataTypeInterface";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
 import FinancialStatementRequest from "@/requests/FinancialStatementRequest";
 import type { AxiosError, AxiosResponse } from "axios";
@@ -15,6 +15,7 @@ export default class IndexClass extends BaseClass {
         query: {
             offset: 1,
             limit: PaginationClass.indexPageSize,
+            family_user_id: undefined,
             category_id: undefined,
             payment_method_id: undefined,
             payment_account_id: undefined,
@@ -26,6 +27,7 @@ export default class IndexClass extends BaseClass {
         options: {
             operate: [],
             category: [],
+            family_user: [],
             payment_method: [],
             payment_account: [],
         },
@@ -52,7 +54,7 @@ export default class IndexClass extends BaseClass {
         const _this = this;
         _this.loadingClass.show();
         new FinancialStatementRequest()
-            .index(_this.data.query)
+            .index(_this.getQuery())
             .then((response: AxiosResponse) => {
                 _this.loadingClass.close();
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
@@ -80,7 +82,7 @@ export default class IndexClass extends BaseClass {
     public count() {
         const _this = this;
         new FinancialStatementRequest()
-            .count(_this.data.query)
+            .count(_this.getQuery())
             .then((response: AxiosResponse) => {
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
                 if (apiParams.flag === "Success") {
@@ -101,6 +103,26 @@ export default class IndexClass extends BaseClass {
     }
 
     /**
+     * 获取默认参数
+     */
+    public getQuery(): IndexDataQueryInterface {
+        const _this = this
+        if (_this.data.query.category_id === undefined) {
+            _this.data.query.category_id = '';
+        }
+        if (_this.data.query.family_user_id === undefined) {
+            _this.data.query.family_user_id = '';
+        }
+        if (_this.data.query.payment_method_id === undefined) {
+            _this.data.query.payment_method_id = '';
+        }
+        if (_this.data.query.payment_account_id === undefined) {
+            _this.data.query.payment_account_id = '';
+        }
+        return _this.data.query;
+    }
+
+    /**
      * 搜索、表格头部参数
      */
     public options() {
@@ -112,6 +134,7 @@ export default class IndexClass extends BaseClass {
                 if (apiParams.flag === "Success") {
                     _this.data.options.operate = apiParams.data.operate;
                     _this.data.options.category = apiParams.data.category;
+                    _this.data.options.family_user = apiParams.data.familyUser;
                     _this.data.options.payment_method = apiParams.data.paymentMethod;
                 } else {
                     ElMessage.error(apiParams.message);

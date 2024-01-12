@@ -15,6 +15,14 @@ export interface PaymentAccountInterface {
     }
 }
 
+export interface FamilyUserInterface {
+    id: number,
+    data: {
+        id: string,
+        name: string,
+    }
+}
+
 export interface PaymentMethodInterface {
     id: number,
     data: {
@@ -36,14 +44,17 @@ export interface Files {
     url: string
 }
 
+export interface IndexDataQueryInterface {
+    offset: number,
+    limit: number,
+    category_id?: string,
+    family_user_id?: string,
+    payment_method_id?: string,
+    payment_account_id?: string,
+}
+
 export interface IndexDataInterface {
-    query: {
-        offset: number,
-        limit: number,
-        category_id?: number,
-        payment_method_id?: number,
-        payment_account_id?: number,
-    },
+    query: IndexDataQueryInterface,
     table: {
         index: [],
         count: number
@@ -51,6 +62,7 @@ export interface IndexDataInterface {
     options: {
         operate: OptsInterface[],
         category: CategoryInterface[],
+        family_user: FamilyUserInterface[],
         payment_method: PaymentMethodInterface[],
         payment_account: PaymentAccountInterface[]
     },

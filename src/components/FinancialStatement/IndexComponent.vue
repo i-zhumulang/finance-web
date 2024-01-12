@@ -29,6 +29,21 @@ export default {
           <el-form :inline="true" :model="currentClass.data.query">
             <el-form-item>
               <el-select
+                  v-model="currentClass.data.query.family_user_id"
+                  style="width: 100%"
+                  clearable
+                  filterable
+                  placeholder="成员">
+                <el-option
+                    v-for="family_user in currentClass.data.options.family_user"
+                    :key="family_user.id"
+                    :label="family_user.data.name"
+                    :value="family_user.id"
+                />
+              </el-select>
+            </el-form-item>
+            <el-form-item>
+              <el-select
                   v-model="currentClass.data.query.category_id"
                   style="width: 100%"
                   clearable
