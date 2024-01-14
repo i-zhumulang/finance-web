@@ -7,17 +7,16 @@ import { ElMessage } from "element-plus";
 import type { Index } from "@/typescripts/Index/DataTypeInterface";
 import { ref } from "vue";
 
-export default class StatisticsFamilyClass extends BaseClass implements Index {
-
-    public statisticsFamilyRef = ref();
+export default class StatisticsCategoryClass extends BaseClass implements Index {
+    public statisticsCategoryRef = ref();
 
     public index(): void {
         type EChartsOption = echarts.EChartsOption;
-        const myChart = echarts.init(this.statisticsFamilyRef.value);
+        const myChart = echarts.init(this.statisticsCategoryRef.value);
 
         myChart.showLoading('default', {text: 'loading'});
         new IndexRequest()
-            .statisticsFamily('day')
+            .statisticsCategory('day')
             .then((response: AxiosResponse) => {
                 myChart.hideLoading();
                 const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
