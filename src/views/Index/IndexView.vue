@@ -1,20 +1,25 @@
 <script lang="ts">
+import IndexClass from "@/typescripts/Index/IndexClass";
 import StatisticsFamilyComponent from "@/components/Index/StatisticsFamilyComponent.vue";
-
-import StatisticsFamilyClass from "@/typescripts/Index/StatisticsFamilyClass";
 
 export default {
   name: "IndexView",
   components: {StatisticsFamilyComponent},
   setup() {
-    const statisticsFamilyClass = new StatisticsFamilyClass();
-    return {statisticsFamilyClass};
+    const indexClass = new IndexClass();
+    return {indexClass};
   }
 }
 </script>
 
 <template>
-  <StatisticsFamilyComponent :statisticsFamilyClass="statisticsFamilyClass"/>
+  <el-card>
+    <el-tabs v-model="indexClass.activeName" class="demo-tabs" @tab-click="indexClass.handleClick">
+      <el-tab-pane label="消费组" name="statistics-family">
+        <StatisticsFamilyComponent :indexClass="indexClass"/>
+      </el-tab-pane>
+    </el-tabs>
+  </el-card>
 </template>
 
 <style scoped>
