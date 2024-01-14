@@ -8,11 +8,13 @@ import type { Index } from "@/typescripts/Index/DataTypeInterface";
 import { ref } from "vue";
 
 export default class StatisticsCategoryClass extends BaseClass implements Index {
+
     public statisticsCategoryRef = ref();
 
     public index(): void {
         type EChartsOption = echarts.EChartsOption;
         const myChart = echarts.init(this.statisticsCategoryRef.value);
+        myChart.resize({height: 700, width: 1599})
 
         myChart.showLoading('default', {text: 'loading'});
         new IndexRequest()
@@ -28,6 +30,7 @@ export default class StatisticsCategoryClass extends BaseClass implements Index 
                 }
             })
             .catch((error: AxiosError) => {
+                myChart.hideLoading();
                 if (error.code === "ERR_BAD_RESPONSE") {
                     if (error.response) {
                         ElMessage.error(error.response.statusText);
@@ -36,5 +39,6 @@ export default class StatisticsCategoryClass extends BaseClass implements Index 
                     ElMessage.error(error.message);
                 }
             });
+
     }
 }

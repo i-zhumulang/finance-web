@@ -22,14 +22,12 @@ export default {
       <el-tab-pane
           label="消费组"
           name="statistics-family">
-        <StatisticsFamilyComponent
-            :indexClass="indexClass"/>
+        <StatisticsFamilyComponent :indexClass="indexClass"/>
       </el-tab-pane>
       <el-tab-pane
           label="支出分类"
           name="statistics-category">
-        <StatisticsCategoryComponent
-            :indexClass="indexClass"/>
+        <StatisticsCategoryComponent :indexClass="indexClass"/>
       </el-tab-pane>
     </el-tabs>
   </el-card>

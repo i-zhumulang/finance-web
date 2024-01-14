@@ -30,7 +30,7 @@ export default {
           <div
               id="statistics-family"
               :ref="currentClass.statisticsFamilyRef"
-              style="height: 700px; width: 100%"></div>
+              style="height: 700px!important; width: 100%!important;"></div>
         </el-card>
       </el-col>
     </el-row>

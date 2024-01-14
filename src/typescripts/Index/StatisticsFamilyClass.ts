@@ -14,6 +14,7 @@ export default class StatisticsFamilyClass extends BaseClass implements Index {
     public index(): void {
         type EChartsOption = echarts.EChartsOption;
         const myChart = echarts.init(this.statisticsFamilyRef.value);
+        myChart.resize({height: 700, width: 1599})
 
         myChart.showLoading('default', {text: 'loading'});
         new IndexRequest()
@@ -29,6 +30,7 @@ export default class StatisticsFamilyClass extends BaseClass implements Index {
                 }
             })
             .catch((error: AxiosError) => {
+                myChart.hideLoading();
                 if (error.code === "ERR_BAD_RESPONSE") {
                     if (error.response) {
                         ElMessage.error(error.response.statusText);
