@@ -18,4 +18,12 @@ export default class IndexRequest<T extends BaseParamsInterface> extends BaseReq
     public statisticsCategory(type: string) {
         return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + `/index/statistics-category/${type}`);
     }
+
+    /**
+     * 成员每日消费
+     * @param type
+     */
+    public statisticsUser(type: string) {
+        return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE + `/index/statistics-user/${type}`);
+    }
 }
