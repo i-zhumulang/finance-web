@@ -1,13 +1,13 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
-import { reactive, ref } from "vue";
-import type { UnwrapNestedRefs } from "vue";
-import type { IndexDataInterface } from "@/typescripts/FamilyUser/DataTypeInterface";
+import {reactive, ref} from "vue";
+import type {UnwrapNestedRefs} from "vue";
+import type {IndexDataInterface} from "@/typescripts/FamilyUser/DataTypeInterface";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
 import LoadingClass from "@/typescripts/Common/Common/Objects/LoadingClass";
 import FamilyUserRequest from "@/requests/FamilyUserRequest";
-import type { AxiosError, AxiosResponse } from "axios";
+import type {AxiosError, AxiosResponse} from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
-import { ElLoading, ElMessage, ElMessageBox } from "element-plus";
+import {ElLoading, ElMessage, ElMessageBox} from "element-plus";
 import FamilyRequest from "@/requests/FamilyRequest";
 import DialogClass from "@/typescripts/Common/Common/Objects/DialogClass";
 
@@ -45,7 +45,7 @@ export default class IndexClass extends BaseClass {
     /**
      * 列表数据
      */
-    public index() {
+    public index(): void {
         const _this = this;
         _this.loadingClass.show();
         new FamilyUserRequest()
@@ -100,7 +100,7 @@ export default class IndexClass extends BaseClass {
     /**
      * 搜索、表格头部参数
      */
-    public options() {
+    public options(): void {
         const _this = this;
         new FamilyUserRequest()
             .options({})

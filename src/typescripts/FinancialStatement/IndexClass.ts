@@ -9,8 +9,9 @@ import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiP
 import { ElLoading, ElMessage, ElMessageBox } from "element-plus";
 import DialogClass from "@/typescripts/Common/Common/Objects/DialogClass";
 import LoadingClass from "@/typescripts/Common/Common/Objects/LoadingClass";
+import type {IndexInterface} from "@/typescripts/Common/Common/Interfaces/IndexInterface";
 
-export default class IndexClass extends BaseClass {
+export default class IndexClass extends BaseClass implements IndexInterface {
     public data = reactive<IndexDataInterface>({
         query: {
             offset: 1,

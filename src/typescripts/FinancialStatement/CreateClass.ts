@@ -21,8 +21,10 @@ import type { AxiosError, AxiosResponse } from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
 import type { InternalRuleItem } from "async-validator/dist-types/interface";
 import LoadingClass from "@/typescripts/Common/Common/Objects/LoadingClass";
+import CreateCallbackClass from "@/typescripts/Common/Common/Objects/CreateCallbackClass";
+import type {CreateCallbackInterface} from "@/typescripts/Common/Common/Interfaces/CreateCallbackInterface";
 
-export default class CreateClass extends BaseClass {
+export default class CreateClass extends BaseClass implements CreateCallbackInterface{
     public indexClass: IndexClass;
 
     public formRef = ref<FormInstance>();
@@ -204,31 +206,15 @@ export default class CreateClass extends BaseClass {
             return false;
         }
         const _this = this;
-        console.log(_this.fileList);
-        formRef.validate((valid: boolean) => {
-            if (!valid) {
-                return false;
+        formRef.validate((isValid: boolean) => {
+            if (!isValid) {
+                return;
             }
             _this.loadingClass.show();
             _this.data.files_id = _this.fileList.value.map((e: Files) => e.id);
             new FinancialStatementRequest()
                 .store(_this.data)
-                .then((response: AxiosResponse) => {
-                    _this.loadingClass.close();
-                    const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
-                    if (apiParams.flag === "Success") {
-                        ElMessage({
-                            type: "success",
-                            message: apiParams.message,
-                            onClose: function () {
-                                _this.close();
-                                _this.indexClass.search()
-                            }
-                        });
-                    } else {
-                        ElMessage.error(apiParams.message);
-                    }
-                })
+                .then(CreateCallbackClass.success(_this))
                 .catch((error: AxiosError) => {
                     _this.loadingClass.close();
                     if (error.code === "ERR_BAD_RESPONSE") {
@@ -239,7 +225,7 @@ export default class CreateClass extends BaseClass {
                         ElMessage.error(error.message);
                     }
                 });
-        });
+        }).then(r => r);
     }
 
     /**

@@ -1,17 +1,19 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/Category/IndexClass";
-import { reactive, ref } from "vue";
-import type { UnwrapNestedRefs } from "vue";
-import type { FormInstance, FormRules } from "element-plus";
-import type { CreateDataInterface, OptionsInterface } from "@/typescripts/Category/DataTypeInterface";
+import {reactive, ref} from "vue";
+import type {UnwrapNestedRefs} from "vue";
+import type {FormInstance, FormRules} from "element-plus";
+import type {CreateDataInterface, OptionsInterface} from "@/typescripts/Category/DataTypeInterface";
 import CategoryRequest from "@/requests/CategoryRequest";
-import type { AxiosError, AxiosResponse } from "axios";
+import type {AxiosError, AxiosResponse} from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
-import { ElMessage } from "element-plus";
-import type { InternalRuleItem } from "async-validator/dist-types/interface";
+import {ElMessage} from "element-plus";
+import type {InternalRuleItem} from "async-validator/dist-types/interface";
 import LoadingClass from "@/typescripts/Common/Common/Objects/LoadingClass";
+import type {CreateCallbackInterface} from "@/typescripts/Common/Common/Interfaces/CreateCallbackInterface";
+import CreateCallbackClass from "@/typescripts/Common/Common/Objects/CreateCallbackClass";
 
-export default class CreateClass extends BaseClass {
+export default class CreateClass extends BaseClass implements CreateCallbackInterface {
     public indexClass: IndexClass;
 
     public formRef = ref<FormInstance>();
@@ -95,9 +97,9 @@ export default class CreateClass extends BaseClass {
             return false;
         }
         const _this = this;
-        formRef.validate((valid: boolean) => {
-            if (!valid) {
-                return false;
+        formRef.validate((isValid: boolean) => {
+            if (!isValid) {
+                return;
             }
             if (_this.data.parent_id === undefined) {
                 _this.data.parent_id = 0;
@@ -105,22 +107,7 @@ export default class CreateClass extends BaseClass {
             _this.loadingClass.show();
             new CategoryRequest()
                 .store(_this.data)
-                .then((response: AxiosResponse) => {
-                    _this.loadingClass.close();
-                    const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
-                    if (apiParams.flag === "Success") {
-                        ElMessage({
-                            type: "success",
-                            message: apiParams.message,
-                            onClose: function () {
-                                _this.close();
-                                _this.indexClass.search()
-                            }
-                        });
-                    } else {
-                        ElMessage.error(apiParams.message);
-                    }
-                })
+                .then(CreateCallbackClass.success(_this))
                 .catch((error: AxiosError) => {
                     _this.loadingClass.close();
                     if (error.code === "ERR_BAD_RESPONSE") {
@@ -131,7 +118,7 @@ export default class CreateClass extends BaseClass {
                         ElMessage.error(error.message);
                     }
                 });
-        });
+        }).then(r => r);
     }
 
     /**

@@ -1,7 +1,7 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
 import type IndexClass from "@/typescripts/FinancialStatement/IndexClass";
-import { reactive, ref } from "vue";
-import type { UnwrapNestedRefs } from "vue";
+import {reactive, ref} from "vue";
+import type {UnwrapNestedRefs} from "vue";
 import type {
     FormInstance,
     FormRules,
@@ -10,19 +10,21 @@ import type {
     UploadProps,
     UploadRequestOptions
 } from "element-plus";
-import { ElMessage } from "element-plus";
+import {ElMessage} from "element-plus";
 import type {
     UpdateDataInterface,
     OptionsInterface,
     Files
 } from "@/typescripts/FinancialStatement/DataTypeInterface";
-import type { InternalRuleItem } from "async-validator/dist-types/interface";
+import type {InternalRuleItem} from "async-validator/dist-types/interface";
 import FinancialStatementRequest from "@/requests/FinancialStatementRequest";
-import type { AxiosError, AxiosResponse } from "axios";
+import type {AxiosError, AxiosResponse} from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
 import LoadingClass from "@/typescripts/Common/Common/Objects/LoadingClass";
+import UpdateCallbackClass from "@/typescripts/Common/Common/Objects/UpdateCallbackClass";
+import type {CreateCallbackInterface} from "@/typescripts/Common/Common/Interfaces/CreateCallbackInterface";
 
-export default class UpdateClass extends BaseClass {
+export default class UpdateClass extends BaseClass implements CreateCallbackInterface {
     public indexClass: IndexClass;
 
     public formRef = ref<FormInstance>();
@@ -214,30 +216,15 @@ export default class UpdateClass extends BaseClass {
         }
         const _this = this;
         const params = _this.indexClass.params.value;
-        formRef.validate((valid: boolean) => {
-            if (!valid) {
-                return false;
+        formRef.validate((isValid: boolean) => {
+            if (!isValid) {
+                return;
             }
             _this.loadingClass.show();
             _this.data.files_id = _this.fileList.value.map((e: Files) => e.id);
             new FinancialStatementRequest()
                 .update(params.id, _this.data)
-                .then((response: AxiosResponse) => {
-                    _this.loadingClass.close();
-                    const apiParams: ApiParamsInterface = <ApiParamsInterface>response.data
-                    if (apiParams.flag === "Success") {
-                        ElMessage({
-                            type: "success",
-                            message: apiParams.message,
-                            onClose: function () {
-                                _this.close();
-                                _this.indexClass.index();
-                            }
-                        });
-                    } else {
-                        ElMessage.error(apiParams.message);
-                    }
-                })
+                .then(UpdateCallbackClass.success(_this))
                 .catch((error: AxiosError) => {
                     _this.loadingClass.close();
                     if (error.code === "ERR_BAD_RESPONSE") {
@@ -248,7 +235,7 @@ export default class UpdateClass extends BaseClass {
                         ElMessage.error(error.message);
                     }
                 });
-        });
+        }).then(r => r);
     }
 
     /**

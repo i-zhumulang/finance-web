@@ -1,16 +1,17 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
-import { reactive, ref } from "vue";
-import type { UnwrapNestedRefs } from "vue";
-import type { IndexDataInterface } from "@/typescripts/Category/DataTypeInterface";
+import {reactive, ref} from "vue";
+import type {UnwrapNestedRefs} from "vue";
+import type {IndexDataInterface} from "@/typescripts/Category/DataTypeInterface";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
 import CategoryRequest from "@/requests/CategoryRequest";
-import type { AxiosError, AxiosResponse } from "axios";
+import type {AxiosError, AxiosResponse} from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
-import { ElLoading, ElMessage, ElMessageBox } from "element-plus";
+import {ElLoading, ElMessage, ElMessageBox} from "element-plus";
 import DialogClass from "@/typescripts/Common/Common/Objects/DialogClass";
 import LoadingClass from "@/typescripts/Common/Common/Objects/LoadingClass";
+import type {IndexInterface} from "@/typescripts/Common/Common/Interfaces/IndexInterface";
 
-export default class IndexClass extends BaseClass {
+export default class IndexClass extends BaseClass implements IndexInterface {
     public data = reactive<IndexDataInterface>({
         query: {
             offset: 1,

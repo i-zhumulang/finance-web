@@ -113,9 +113,9 @@ export default class RegisterClass extends BaseClass {
             return false;
         }
         const _this = this;
-        formRef.validate((valid: boolean) => {
-            if (!valid) {
-                return false;
+        formRef.validate((isValid: boolean) => {
+            if (!isValid) {
+                return;
             }
             const loadingInstance = ElLoading.service({fullscreen: true});
             new RegisterRequest()
@@ -145,7 +145,7 @@ export default class RegisterClass extends BaseClass {
                         ElMessage.error(error.message);
                     }
                 });
-        });
+        }).then(r => r);
     }
 
     /**

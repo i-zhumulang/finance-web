@@ -9,4 +9,9 @@ export default abstract class BaseRequest {
      * finance 项目
      */
     static readonly FINANCE = 'http://finance.api.com';
+
+    /**
+     * finance 文件系统项目
+     */
+    static readonly FINANCE_FILE = 'http://finance.file.com';
 }

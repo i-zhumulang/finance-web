@@ -61,9 +61,9 @@ export default class LoginClass extends BaseClass {
             return false;
         }
         const _this = this;
-        formRef.validate((valid: boolean) => {
-            if (!valid) {
-                return false;
+        formRef.validate((isValid: boolean) => {
+            if (!isValid) {
+                return;
             }
             const loadingInstance = ElLoading.service({fullscreen: true});
             new AuthRequest<loginFormData>()
@@ -78,7 +78,7 @@ export default class LoginClass extends BaseClass {
                             onClose: function () {
                                 const userStore = useUser();
                                 userStore.setUser(apiParams.data);
-                                _this.router.push({name: "Index"});
+                                _this.router.push({name: "Index"}).then(r => r);
                             }
                         });
                     } else {
@@ -95,7 +95,7 @@ export default class LoginClass extends BaseClass {
                         ElMessage.error(error.message);
                     }
                 });
-        });
+        }).then(r => r);
     }
 
     /**

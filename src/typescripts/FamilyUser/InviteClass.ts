@@ -56,9 +56,9 @@ export default class InviteClass extends BaseClass {
         }
         const _this = this;
         _this.data.family_id = _this.indexClass.params.value.family_id
-        formRef.validate((valid: boolean) => {
-            if (!valid) {
-                return false;
+        formRef.validate((isValid: boolean) => {
+            if (!isValid) {
+                return;
             }
             _this.loadingClass.show();
             new FamilyInviteRequest()
@@ -89,7 +89,7 @@ export default class InviteClass extends BaseClass {
                         ElMessage.error(error.message);
                     }
                 });
-        });
+        }).then(r => r);
     }
 
     /**
