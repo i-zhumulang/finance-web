@@ -74,7 +74,7 @@ export default class IndexClass extends BaseClass {
     /**
      * 列表数量
      */
-    public count() {
+    public count(): void {
         const _this = this;
         new FamilyUserRequest()
             .count(_this.data.query)

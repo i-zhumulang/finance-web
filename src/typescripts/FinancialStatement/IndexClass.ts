@@ -51,7 +51,7 @@ export default class IndexClass extends BaseClass implements IndexInterface {
     /**
      * 列表数据
      */
-    public index() {
+    public index(): void {
         const _this = this;
         _this.loadingClass.show();
         new FinancialStatementRequest()
@@ -80,7 +80,7 @@ export default class IndexClass extends BaseClass implements IndexInterface {
     /**
      * 列表数量
      */
-    public count() {
+    public count(): void {
         const _this = this;
         new FinancialStatementRequest()
             .count(_this.getQuery())
@@ -126,7 +126,7 @@ export default class IndexClass extends BaseClass implements IndexInterface {
     /**
      * 搜索、表格头部参数
      */
-    public options() {
+    public options(): void {
         const _this = this;
         new FinancialStatementRequest()
             .options({})

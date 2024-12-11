@@ -1,12 +1,12 @@
 import BaseClass from "@/typescripts/Common/Common/Objects/BaseClass";
-import { reactive, ref } from "vue";
-import type { UnwrapNestedRefs } from "vue";
-import type { IndexDataInterface } from "@/typescripts/PaymentAccount/DataTypeInterface";
+import {reactive, ref} from "vue";
+import type {UnwrapNestedRefs} from "vue";
+import type {IndexDataInterface} from "@/typescripts/PaymentAccount/DataTypeInterface";
 import PaginationClass from "@/typescripts/Common/Common/Objects/PaginationClass";
 import PaymentAccountRequest from "@/requests/PaymentAccountRequest";
-import type { AxiosError, AxiosResponse } from "axios";
+import type {AxiosError, AxiosResponse} from "axios";
 import type ApiParamsInterface from "@/typescripts/Common/Common/Interfaces/ApiParamsInterface";
-import { ElLoading, ElMessage, ElMessageBox } from "element-plus";
+import {ElLoading, ElMessage, ElMessageBox} from "element-plus";
 import DialogClass from "@/typescripts/Common/Common/Objects/DialogClass";
 import LoadingClass from "@/typescripts/Common/Common/Objects/LoadingClass";
 import type {IndexInterface} from "@/typescripts/Common/Common/Interfaces/IndexInterface";
@@ -43,7 +43,7 @@ export default class IndexClass extends BaseClass implements IndexInterface {
     /**
      * 列表数据
      */
-    public index() {
+    public index(): void {
         const _this = this;
         _this.loadingClass.show();
         new PaymentAccountRequest()
@@ -72,7 +72,7 @@ export default class IndexClass extends BaseClass implements IndexInterface {
     /**
      * 列表数量
      */
-    public count() {
+    public count(): void {
         const _this = this;
         new PaymentAccountRequest()
             .count(_this.data.query)
@@ -98,7 +98,7 @@ export default class IndexClass extends BaseClass implements IndexInterface {
     /**
      * 搜索、表格头部参数
      */
-    public options() {
+    public options(): void {
         const _this = this;
         new PaymentAccountRequest()
             .options({})

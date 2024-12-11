@@ -46,7 +46,7 @@ export default class IndexClass extends BaseClass {
     /**
      * 列表数据
      */
-    public index() {
+    public index(): void {
         const _this = this;
         _this.loadingClass.show();
         new FamilyInviteRequest()
@@ -75,7 +75,7 @@ export default class IndexClass extends BaseClass {
     /**
      * 列表数量
      */
-    public count() {
+    public count(): void {
         const _this = this;
         new FamilyInviteRequest()
             .count(_this.data.query)
@@ -101,7 +101,7 @@ export default class IndexClass extends BaseClass {
     /**
      * 搜索、表格头部参数
      */
-    public options() {
+    public options(): void {
         const _this = this;
         new FamilyInviteRequest()
             .options({})
