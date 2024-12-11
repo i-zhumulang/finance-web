@@ -72,16 +72,7 @@ export default class UpdateClass extends BaseClass implements CreateCallbackInte
                     ElMessage.error(apiParams.message);
                 }
             })
-            .catch((error: AxiosError) => {
-                _this.loadingClass.close();
-                if (error.code === "ERR_BAD_RESPONSE") {
-                    if (error.response) {
-                        ElMessage.error(error.response.statusText);
-                    }
-                } else {
-                    ElMessage.error(error.message);
-                }
-            });
+            .catch(UpdateCallbackClass.failure(_this));
     }
 
     /**
@@ -102,16 +93,7 @@ export default class UpdateClass extends BaseClass implements CreateCallbackInte
             new FamilyRequest()
                 .update(params.id, _this.data)
                 .then(UpdateCallbackClass.success(_this))
-                .catch((error: AxiosError) => {
-                    _this.loadingClass.close();
-                    if (error.code === "ERR_BAD_RESPONSE") {
-                        if (error.response) {
-                            ElMessage.error(error.response.statusText);
-                        }
-                    } else {
-                        ElMessage.error(error.message);
-                    }
-                });
+                .catch(UpdateCallbackClass.failure(_this));
         }).then(r => r);
     }
 

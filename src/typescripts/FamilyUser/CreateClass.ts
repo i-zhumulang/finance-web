@@ -70,16 +70,7 @@ export default class CreateClass extends BaseClass implements CreateCallbackInte
             new FamilyRequest()
                 .store(_this.data)
                 .then(CreateCallbackClass.success(_this))
-                .catch((error: AxiosError) => {
-                    _this.loadingClass.close();
-                    if (error.code === "ERR_BAD_RESPONSE") {
-                        if (error.response) {
-                            ElMessage.error(error.response.statusText);
-                        }
-                    } else {
-                        ElMessage.error(error.message);
-                    }
-                });
+                .catch(CreateCallbackClass.failure(_this));
         }).then(r => r);
     }
 
