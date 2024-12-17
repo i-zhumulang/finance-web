@@ -26,4 +26,12 @@ export default class FilesRequest<T extends BaseParamsInterface> extends BaseReq
     public options(formData: T) {
         return BaseRequest.axios.get<ApiParamsInterface>(BaseRequest.FINANCE_FILE + "/files/options", {params: formData});
     }
+
+    /**
+     * 删除
+     * @param id
+     */
+    public destroy(id: number) {
+        return BaseRequest.axios.delete<ApiParamsInterface>(BaseRequest.FINANCE_FILE + `/files/${id}`);
+    }
 }
