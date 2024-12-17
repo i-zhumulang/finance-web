@@ -135,7 +135,7 @@ export default class IndexClass extends BaseClass implements IndexInterface {
      * @param e
      * @param params
      */
-    public event(e: string, params: any = null) {
+    public event(e: string, params: any = null): void {
         this.params.value = params;
         switch (e) {
             case 'create':

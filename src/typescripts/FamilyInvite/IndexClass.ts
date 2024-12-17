@@ -140,7 +140,7 @@ export default class IndexClass extends BaseClass {
      * @param e
      * @param params
      */
-    public event(e: string, params: any = null) {
+    public event(e: string, params: any = null): void {
         console.log(e);
         console.log(params);
         this.params.value = params;
