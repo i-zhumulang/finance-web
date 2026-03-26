@@ -2,7 +2,7 @@ import type { MessageConfigContext } from 'element-plus/es/components/message';
 export declare const messageConfig: MessageConfigContext;
 declare const ConfigProvider: import("vue").DefineComponent<{
     readonly emptyValues: ArrayConstructor;
-    readonly valueOnClear: import("element-plus/es/utils").EpPropFinalized<readonly [StringConstructor, NumberConstructor, BooleanConstructor, FunctionConstructor], unknown, unknown, undefined, boolean>;
+    readonly valueOnClear: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => string | number | boolean | Function) | (() => string | number | boolean | Function | null) | ((new (...args: any[]) => string | number | boolean | Function) | (() => string | number | boolean | Function | null))[], unknown, unknown, undefined, boolean>;
     readonly a11y: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
     readonly locale: {
         readonly type: import("vue").PropType<import("element-plus/es/locale").Language>;
@@ -17,7 +17,25 @@ declare const ConfigProvider: import("vue").DefineComponent<{
         __epPropKey: true;
     };
     readonly button: {
-        readonly type: import("vue").PropType<import("element-plus/es/element-plus").ButtonConfigContext>;
+        readonly type: import("vue").PropType<import("element-plus").ButtonConfigContext>;
+        readonly required: false;
+        readonly validator: ((val: unknown) => boolean) | undefined;
+        __epPropKey: true;
+    };
+    readonly card: {
+        readonly type: import("vue").PropType<import("element-plus").CardConfigContext>;
+        readonly required: false;
+        readonly validator: ((val: unknown) => boolean) | undefined;
+        __epPropKey: true;
+    };
+    readonly dialog: {
+        readonly type: import("vue").PropType<import("element-plus").DialogConfigContext>;
+        readonly required: false;
+        readonly validator: ((val: unknown) => boolean) | undefined;
+        __epPropKey: true;
+    };
+    readonly link: {
+        readonly type: import("vue").PropType<import("element-plus").LinkConfigContext>;
         readonly required: false;
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
@@ -41,7 +59,7 @@ declare const ConfigProvider: import("vue").DefineComponent<{
     [key: string]: any;
 }>, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     readonly emptyValues: ArrayConstructor;
-    readonly valueOnClear: import("element-plus/es/utils").EpPropFinalized<readonly [StringConstructor, NumberConstructor, BooleanConstructor, FunctionConstructor], unknown, unknown, undefined, boolean>;
+    readonly valueOnClear: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => string | number | boolean | Function) | (() => string | number | boolean | Function | null) | ((new (...args: any[]) => string | number | boolean | Function) | (() => string | number | boolean | Function | null))[], unknown, unknown, undefined, boolean>;
     readonly a11y: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
     readonly locale: {
         readonly type: import("vue").PropType<import("element-plus/es/locale").Language>;
@@ -56,7 +74,25 @@ declare const ConfigProvider: import("vue").DefineComponent<{
         __epPropKey: true;
     };
     readonly button: {
-        readonly type: import("vue").PropType<import("element-plus/es/element-plus").ButtonConfigContext>;
+        readonly type: import("vue").PropType<import("element-plus").ButtonConfigContext>;
+        readonly required: false;
+        readonly validator: ((val: unknown) => boolean) | undefined;
+        __epPropKey: true;
+    };
+    readonly card: {
+        readonly type: import("vue").PropType<import("element-plus").CardConfigContext>;
+        readonly required: false;
+        readonly validator: ((val: unknown) => boolean) | undefined;
+        __epPropKey: true;
+    };
+    readonly dialog: {
+        readonly type: import("vue").PropType<import("element-plus").DialogConfigContext>;
+        readonly required: false;
+        readonly validator: ((val: unknown) => boolean) | undefined;
+        __epPropKey: true;
+    };
+    readonly link: {
+        readonly type: import("vue").PropType<import("element-plus").LinkConfigContext>;
         readonly required: false;
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
@@ -77,10 +113,10 @@ declare const ConfigProvider: import("vue").DefineComponent<{
     readonly zIndex: NumberConstructor;
     readonly namespace: import("element-plus/es/utils").EpPropFinalized<StringConstructor, unknown, unknown, "el", boolean>;
 }>>, {
-    readonly valueOnClear: import("element-plus/es/utils").EpPropMergeType<readonly [StringConstructor, NumberConstructor, BooleanConstructor, FunctionConstructor], unknown, unknown>;
+    readonly valueOnClear: import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => string | number | boolean | Function) | (() => string | number | boolean | Function | null) | ((new (...args: any[]) => string | number | boolean | Function) | (() => string | number | boolean | Function | null))[], unknown, unknown>;
     readonly a11y: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
     readonly keyboardNavigation: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
     readonly namespace: string;
 }>;
-export type ConfigProviderInstance = InstanceType<typeof ConfigProvider>;
+export type ConfigProviderInstance = InstanceType<typeof ConfigProvider> & unknown;
 export default ConfigProvider;

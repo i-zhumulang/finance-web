@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, StyleValue } from 'vue';
+import type { ExtractPropTypes, StyleValue, __ExtractPublicPropTypes } from 'vue';
 import type { Dayjs } from 'dayjs';
 import type Countdown from './countdown.vue';
 export declare const countdownProps: {
@@ -15,9 +15,10 @@ export declare const countdownProps: {
     };
 };
 export type CountdownProps = ExtractPropTypes<typeof countdownProps>;
+export type CountdownPropsPublic = __ExtractPublicPropTypes<typeof countdownProps>;
 export declare const countdownEmits: {
     finish: () => boolean;
     change: (value: number) => boolean;
 };
 export type CountdownEmits = typeof countdownEmits;
-export type CountdownInstance = InstanceType<typeof Countdown>;
+export type CountdownInstance = InstanceType<typeof Countdown> & unknown;

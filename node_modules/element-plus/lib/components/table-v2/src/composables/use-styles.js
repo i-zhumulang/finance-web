@@ -18,7 +18,6 @@ const useStyles = (props, {
     const ret = width - vScrollbarSize;
     return fixed ? Math.max(Math.round(vue.unref(columnsTotalWidth)), ret) : ret;
   });
-  const headerWidth = vue.computed(() => vue.unref(bodyWidth) + props.vScrollbarSize);
   const mainTableHeight = vue.computed(() => {
     const { height = 0, maxHeight = 0, footerHeight: footerHeight2, hScrollbarSize } = props;
     if (maxHeight > 0) {
@@ -69,7 +68,6 @@ const useStyles = (props, {
     mainTableHeight,
     leftTableWidth,
     rightTableWidth,
-    headerWidth,
     windowHeight,
     footerHeight,
     emptyStyle,

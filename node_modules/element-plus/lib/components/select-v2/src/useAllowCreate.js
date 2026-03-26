@@ -12,6 +12,10 @@ function useAllowCreate(props, states) {
   const enableAllowCreateMode = vue.computed(() => {
     return props.allowCreate && props.filterable;
   });
+  vue.watch(() => props.options, (options) => {
+    const optionLabelsSet = new Set(options.map((option) => getLabel(option)));
+    states.createdOptions = states.createdOptions.filter((createdOption) => !optionLabelsSet.has(getLabel(createdOption)));
+  });
   function hasExistingOption(query) {
     const hasOption = (option) => getLabel(option) === query;
     return props.options && props.options.some(hasOption) || states.createdOptions.some(hasOption);
@@ -30,6 +34,7 @@ function useAllowCreate(props, states) {
     if (enableAllowCreateMode.value) {
       if (query && query.length > 0) {
         if (hasExistingOption(query)) {
+          states.createdOptions = states.createdOptions.filter((createdOption) => getLabel(createdOption) !== states.previousQuery);
           return;
         }
         const newOption = {

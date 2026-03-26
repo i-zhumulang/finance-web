@@ -1,5 +1,5 @@
 import { isNil } from 'lodash-unified';
-import { buildProps } from '../../../utils/vue/props/runtime.mjs';
+import { buildProps, definePropType } from '../../../utils/vue/props/runtime.mjs';
 import { useSizeProp } from '../../../hooks/use-size/index.mjs';
 import { isNumber } from '../../../utils/types.mjs';
 import { useAriaProps } from '../../../hooks/use-aria/index.mjs';
@@ -17,13 +17,15 @@ const inputNumberProps = buildProps({
   stepStrictly: Boolean,
   max: {
     type: Number,
-    default: Number.POSITIVE_INFINITY
+    default: Number.MAX_SAFE_INTEGER
   },
   min: {
     type: Number,
-    default: Number.NEGATIVE_INFINITY
+    default: Number.MIN_SAFE_INTEGER
   },
-  modelValue: Number,
+  modelValue: {
+    type: [Number, null]
+  },
   readonly: Boolean,
   disabled: Boolean,
   size: useSizeProp,
@@ -51,7 +53,16 @@ const inputNumberProps = buildProps({
     type: Boolean,
     default: true
   },
-  ...useAriaProps(["ariaLabel"])
+  ...useAriaProps(["ariaLabel"]),
+  inputmode: {
+    type: definePropType(String),
+    default: void 0
+  },
+  align: {
+    type: definePropType(String),
+    default: "center"
+  },
+  disabledScientific: Boolean
 });
 const inputNumberEmits = {
   [CHANGE_EVENT]: (cur, prev) => prev !== cur,

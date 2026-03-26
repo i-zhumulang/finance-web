@@ -1,4 +1,5 @@
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, __ExtractPublicPropTypes } from 'vue';
+import type Image from './image.vue';
 export declare const imageProps: {
     readonly hideOnClickModal: BooleanConstructor;
     readonly src: import("element-plus/es/utils").EpPropFinalized<StringConstructor, unknown, unknown, "", boolean>;
@@ -28,8 +29,10 @@ export declare const imageProps: {
     readonly infinite: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
     readonly closeOnPressEscape: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
     readonly zoomRate: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 1.2, boolean>;
+    readonly scale: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 1, boolean>;
     readonly minScale: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 0.2, boolean>;
     readonly maxScale: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 7, boolean>;
+    readonly showProgress: BooleanConstructor;
     readonly crossorigin: {
         readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => "" | "anonymous" | "use-credentials") | (() => "" | "anonymous" | "use-credentials") | ((new (...args: any[]) => "" | "anonymous" | "use-credentials") | (() => "" | "anonymous" | "use-credentials"))[], unknown, unknown>>;
         readonly required: false;
@@ -38,6 +41,7 @@ export declare const imageProps: {
     };
 };
 export type ImageProps = ExtractPropTypes<typeof imageProps>;
+export type ImagePropsPublic = __ExtractPublicPropTypes<typeof imageProps>;
 export declare const imageEmits: {
     load: (evt: Event) => boolean;
     error: (evt: Event) => boolean;
@@ -46,3 +50,4 @@ export declare const imageEmits: {
     show: () => boolean;
 };
 export type ImageEmits = typeof imageEmits;
+export type ImageInstance = InstanceType<typeof Image> & unknown;

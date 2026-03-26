@@ -30,7 +30,7 @@ const usePopperContainer = () => {
   vue.onBeforeMount(() => {
     if (!core.isClient)
       return;
-    if (process.env.NODE_ENV === "test" || !document.body.querySelector(selector.value)) {
+    if (!document.body.querySelector(selector.value)) {
       createContainer(id.value);
     }
   });

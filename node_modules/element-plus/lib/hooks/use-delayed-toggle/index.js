@@ -33,7 +33,7 @@ const useDelayedToggle = ({
     registerTimeout: registerTimeoutForAutoClose,
     cancelTimeout: cancelTimeoutForAutoClose
   } = index.useTimeout();
-  const onOpen = (event) => {
+  const onOpen = (event, delay = vue.unref(showAfter)) => {
     registerTimeout(() => {
       open(event);
       const _autoClose = vue.unref(autoClose);
@@ -42,13 +42,13 @@ const useDelayedToggle = ({
           close(event);
         }, _autoClose);
       }
-    }, vue.unref(showAfter));
+    }, delay);
   };
-  const onClose = (event) => {
+  const onClose = (event, delay = vue.unref(hideAfter)) => {
     cancelTimeoutForAutoClose();
     registerTimeout(() => {
       close(event);
-    }, vue.unref(hideAfter));
+    }, delay);
   };
   return {
     onOpen,

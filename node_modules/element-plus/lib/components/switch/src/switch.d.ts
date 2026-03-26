@@ -1,5 +1,5 @@
 import type Switch from './switch.vue';
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes, PropType, __ExtractPublicPropTypes } from 'vue';
 export declare const switchProps: {
     readonly ariaLabel: StringConstructor;
     readonly modelValue: import("element-plus/es/utils").EpPropFinalized<readonly [BooleanConstructor, StringConstructor, NumberConstructor], unknown, unknown, false, boolean>;
@@ -58,10 +58,11 @@ export declare const switchProps: {
     };
 };
 export type SwitchProps = ExtractPropTypes<typeof switchProps>;
+export type SwitchPropsPublic = __ExtractPublicPropTypes<typeof switchProps>;
 export declare const switchEmits: {
     "update:modelValue": (val: boolean | string | number) => boolean;
     change: (val: boolean | string | number) => boolean;
     input: (val: boolean | string | number) => boolean;
 };
 export type SwitchEmits = typeof switchEmits;
-export type SwitchInstance = InstanceType<typeof Switch>;
+export type SwitchInstance = InstanceType<typeof Switch> & unknown;

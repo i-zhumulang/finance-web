@@ -14,6 +14,15 @@ const configProviderProps = buildProps({
   button: {
     type: definePropType(Object)
   },
+  card: {
+    type: definePropType(Object)
+  },
+  dialog: {
+    type: definePropType(Object)
+  },
+  link: {
+    type: definePropType(Object)
+  },
   experimentalFeatures: {
     type: definePropType(Object)
   },

@@ -48,22 +48,13 @@ const treeProps = buildProps({
       class: "" /* CLASS */
     })
   },
-  highlightCurrent: {
-    type: Boolean,
-    default: false
-  },
-  showCheckbox: {
-    type: Boolean,
-    default: false
-  },
+  highlightCurrent: Boolean,
+  showCheckbox: Boolean,
   defaultCheckedKeys: {
     type: definePropType(Array),
     default: () => mutable([])
   },
-  checkStrictly: {
-    type: Boolean,
-    default: false
-  },
+  checkStrictly: Boolean,
   defaultExpandedKeys: {
     type: definePropType(Array),
     default: () => mutable([])
@@ -80,58 +71,36 @@ const treeProps = buildProps({
     type: Boolean,
     default: true
   },
-  checkOnClickNode: {
+  checkOnClickNode: Boolean,
+  checkOnClickLeaf: {
     type: Boolean,
-    default: false
+    default: true
   },
   currentNodeKey: {
     type: definePropType([String, Number])
   },
-  accordion: {
-    type: Boolean,
-    default: false
-  },
+  accordion: Boolean,
   filterMethod: {
     type: definePropType(Function)
   },
   perfMode: {
     type: Boolean,
     default: true
-  }
+  },
+  scrollbarAlwaysOn: Boolean
 });
 const treeNodeProps = buildProps({
   node: {
     type: definePropType(Object),
     default: () => mutable(EMPTY_NODE)
   },
-  expanded: {
-    type: Boolean,
-    default: false
-  },
-  checked: {
-    type: Boolean,
-    default: false
-  },
-  indeterminate: {
-    type: Boolean,
-    default: false
-  },
-  showCheckbox: {
-    type: Boolean,
-    default: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  current: {
-    type: Boolean,
-    default: false
-  },
-  hiddenExpandIcon: {
-    type: Boolean,
-    default: false
-  },
+  expanded: Boolean,
+  checked: Boolean,
+  indeterminate: Boolean,
+  showCheckbox: Boolean,
+  disabled: Boolean,
+  current: Boolean,
+  hiddenExpandIcon: Boolean,
   itemSize
 });
 const treeNodeContentProps = buildProps({

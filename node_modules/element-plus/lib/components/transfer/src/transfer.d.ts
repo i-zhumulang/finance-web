@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, h as H, VNode } from 'vue';
+import type { ExtractPropTypes, h as H, VNode, __ExtractPublicPropTypes } from 'vue';
 import type Transfer from './transfer.vue';
 export type TransferKey = string | number;
 export type TransferDirection = 'left' | 'right';
@@ -50,6 +50,7 @@ export declare const transferProps: {
     readonly validateEvent: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
 };
 export type TransferProps = ExtractPropTypes<typeof transferProps>;
+export type TransferPropsPublic = __ExtractPublicPropTypes<typeof transferProps>;
 export declare const transferCheckedChangeFn: (value: TransferKey[], movedKeys?: TransferKey[]) => boolean;
 export declare const transferEmits: {
     change: (value: TransferKey[], direction: TransferDirection, movedKeys: TransferKey[]) => boolean;
@@ -58,4 +59,4 @@ export declare const transferEmits: {
     "right-check-change": (value: TransferKey[], movedKeys?: TransferKey[]) => boolean;
 };
 export type TransferEmits = typeof transferEmits;
-export type TransferInstance = InstanceType<typeof Transfer>;
+export type TransferInstance = InstanceType<typeof Transfer> & unknown;

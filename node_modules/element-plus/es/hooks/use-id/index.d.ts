@@ -1,4 +1,4 @@
-import { type MaybeRef } from '@vueuse/core';
+import type { MaybeRef } from '@vueuse/core';
 import type { InjectionKey, Ref } from 'vue';
 export type ElIdInjectionContext = {
     prefix: number;

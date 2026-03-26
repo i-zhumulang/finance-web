@@ -39,7 +39,6 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
       isNotEmpty,
       listRef,
       toggleExpand,
-      isExpanded,
       isIndeterminate,
       isChecked,
       isDisabled,
@@ -101,14 +100,15 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
           total: vue.unref(flattenTree).length,
           height: _ctx.height,
           "item-size": vue.unref(treeNodeSize),
-          "perf-mode": _ctx.perfMode
+          "perf-mode": _ctx.perfMode,
+          "scrollbar-always-on": _ctx.scrollbarAlwaysOn
         }, {
           default: vue.withCtx(({ data, index, style }) => [
             (vue.openBlock(), vue.createBlock(treeNode["default"], {
               key: data[index].key,
               style: vue.normalizeStyle(style),
               node: data[index],
-              expanded: vue.unref(isExpanded)(data[index]),
+              expanded: data[index].expanded,
               "show-checkbox": _ctx.showCheckbox,
               checked: vue.unref(isChecked)(data[index]),
               indeterminate: vue.unref(isIndeterminate)(data[index]),
@@ -123,7 +123,7 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
             }, null, 8, ["style", "node", "expanded", "show-checkbox", "checked", "indeterminate", "item-size", "disabled", "current", "hidden-expand-icon", "onClick", "onToggle", "onCheck", "onDrop"]))
           ]),
           _: 1
-        }, 8, ["class-name", "data", "total", "height", "item-size", "perf-mode"])) : (vue.openBlock(), vue.createElementBlock("div", {
+        }, 8, ["class-name", "data", "total", "height", "item-size", "perf-mode", "scrollbar-always-on"])) : (vue.openBlock(), vue.createElementBlock("div", {
           key: 1,
           class: vue.normalizeClass(vue.unref(ns).e("empty-block"))
         }, [

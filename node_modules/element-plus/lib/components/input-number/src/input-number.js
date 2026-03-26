@@ -21,13 +21,15 @@ const inputNumberProps = runtime.buildProps({
   stepStrictly: Boolean,
   max: {
     type: Number,
-    default: Number.POSITIVE_INFINITY
+    default: Number.MAX_SAFE_INTEGER
   },
   min: {
     type: Number,
-    default: Number.NEGATIVE_INFINITY
+    default: Number.MIN_SAFE_INTEGER
   },
-  modelValue: Number,
+  modelValue: {
+    type: [Number, null]
+  },
   readonly: Boolean,
   disabled: Boolean,
   size: index.useSizeProp,
@@ -55,7 +57,16 @@ const inputNumberProps = runtime.buildProps({
     type: Boolean,
     default: true
   },
-  ...index$1.useAriaProps(["ariaLabel"])
+  ...index$1.useAriaProps(["ariaLabel"]),
+  inputmode: {
+    type: runtime.definePropType(String),
+    default: void 0
+  },
+  align: {
+    type: runtime.definePropType(String),
+    default: "center"
+  },
+  disabledScientific: Boolean
 });
 const inputNumberEmits = {
   [event.CHANGE_EVENT]: (cur, prev) => prev !== cur,

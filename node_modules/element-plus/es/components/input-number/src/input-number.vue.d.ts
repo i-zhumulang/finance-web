@@ -5,13 +5,21 @@ declare function __VLS_template(): {
     suffix?(_: {}): any;
 };
 declare const __VLS_component: import("vue").DefineComponent<{
+    readonly inputmode: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => "search" | "text" | "none" | "url" | "email" | "tel" | "numeric" | "decimal") | (() => "search" | "text" | "none" | "url" | "email" | "tel" | "numeric" | "decimal" | undefined) | ((new (...args: any[]) => "search" | "text" | "none" | "url" | "email" | "tel" | "numeric" | "decimal") | (() => "search" | "text" | "none" | "url" | "email" | "tel" | "numeric" | "decimal" | undefined))[], unknown, unknown, undefined, boolean>;
+    readonly align: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => "center" | "left" | "right") | (() => "center" | "left" | "right") | ((new (...args: any[]) => "center" | "left" | "right") | (() => "center" | "left" | "right"))[], unknown, unknown, "center", boolean>;
+    readonly disabledScientific: BooleanConstructor;
     readonly ariaLabel: StringConstructor;
     readonly id: import("element-plus/es/utils").EpPropFinalized<StringConstructor, unknown, unknown, undefined, boolean>;
     readonly step: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 1, boolean>;
     readonly stepStrictly: BooleanConstructor;
     readonly max: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, number, boolean>;
     readonly min: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, number, boolean>;
-    readonly modelValue: NumberConstructor;
+    readonly modelValue: {
+        readonly type: import("vue").PropType<any>;
+        readonly required: false;
+        readonly validator: ((val: unknown) => boolean) | undefined;
+        __epPropKey: true;
+    };
     readonly readonly: BooleanConstructor;
     readonly disabled: BooleanConstructor;
     readonly size: {
@@ -38,19 +46,27 @@ declare const __VLS_component: import("vue").DefineComponent<{
     /** @description remove focus the input component */
     blur: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
+    focus: (e: FocusEvent) => void;
     "update:modelValue": (val: number | undefined) => void;
     change: (cur: number | undefined, prev: number | undefined) => void;
     input: (val: number | null | undefined) => void;
     blur: (e: FocusEvent) => void;
-    focus: (e: FocusEvent) => void;
 }, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    readonly inputmode: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => "search" | "text" | "none" | "url" | "email" | "tel" | "numeric" | "decimal") | (() => "search" | "text" | "none" | "url" | "email" | "tel" | "numeric" | "decimal" | undefined) | ((new (...args: any[]) => "search" | "text" | "none" | "url" | "email" | "tel" | "numeric" | "decimal") | (() => "search" | "text" | "none" | "url" | "email" | "tel" | "numeric" | "decimal" | undefined))[], unknown, unknown, undefined, boolean>;
+    readonly align: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => "center" | "left" | "right") | (() => "center" | "left" | "right") | ((new (...args: any[]) => "center" | "left" | "right") | (() => "center" | "left" | "right"))[], unknown, unknown, "center", boolean>;
+    readonly disabledScientific: BooleanConstructor;
     readonly ariaLabel: StringConstructor;
     readonly id: import("element-plus/es/utils").EpPropFinalized<StringConstructor, unknown, unknown, undefined, boolean>;
     readonly step: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 1, boolean>;
     readonly stepStrictly: BooleanConstructor;
     readonly max: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, number, boolean>;
     readonly min: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, number, boolean>;
-    readonly modelValue: NumberConstructor;
+    readonly modelValue: {
+        readonly type: import("vue").PropType<any>;
+        readonly required: false;
+        readonly validator: ((val: unknown) => boolean) | undefined;
+        __epPropKey: true;
+    };
     readonly readonly: BooleanConstructor;
     readonly disabled: BooleanConstructor;
     readonly size: {
@@ -85,9 +101,12 @@ declare const __VLS_component: import("vue").DefineComponent<{
     readonly min: number;
     readonly max: number;
     readonly validateEvent: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
+    readonly inputmode: import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => "search" | "text" | "none" | "url" | "email" | "tel" | "numeric" | "decimal") | (() => "search" | "text" | "none" | "url" | "email" | "tel" | "numeric" | "decimal" | undefined) | ((new (...args: any[]) => "search" | "text" | "none" | "url" | "email" | "tel" | "numeric" | "decimal") | (() => "search" | "text" | "none" | "url" | "email" | "tel" | "numeric" | "decimal" | undefined))[], unknown, unknown>;
+    readonly align: import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => "center" | "left" | "right") | (() => "center" | "left" | "right") | ((new (...args: any[]) => "center" | "left" | "right") | (() => "center" | "left" | "right"))[], unknown, unknown>;
     readonly step: number;
     readonly controls: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
     readonly controlsPosition: import("element-plus/es/utils").EpPropMergeType<StringConstructor, "" | "right", unknown>;
+    readonly disabledScientific: boolean;
     readonly stepStrictly: boolean;
 }>;
 declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, ReturnType<typeof __VLS_template>>;

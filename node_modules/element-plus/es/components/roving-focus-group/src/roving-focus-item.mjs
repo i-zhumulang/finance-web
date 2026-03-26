@@ -16,17 +16,14 @@ const _sfc_main = defineComponent({
       type: Boolean,
       default: true
     },
-    active: {
-      type: Boolean,
-      default: false
-    }
+    active: Boolean
   },
   emits: ["mousedown", "focus", "keydown"],
   setup(props, { emit }) {
     const { currentTabbedId, loop, onItemFocus, onItemShiftTab } = inject(ROVING_FOCUS_GROUP_INJECTION_KEY, void 0);
     const { getItems } = inject(COLLECTION_INJECTION_KEY, void 0);
     const id = useId();
-    const rovingFocusGroupItemRef = ref(null);
+    const rovingFocusGroupItemRef = ref();
     const handleMousedown = composeEventHandlers((e) => {
       emit("mousedown", e);
     }, (e) => {

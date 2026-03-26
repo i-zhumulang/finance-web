@@ -1,14 +1,15 @@
 import type { Option } from './types';
 declare function __VLS_template(): {
     default?(_: {
-        item: Option;
+        item: any;
     }): any;
 };
 declare const __VLS_component: import("vue").DefineComponent<{
     ariaLabel: StringConstructor;
     direction: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical") | ((new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical"))[], unknown, unknown, string, boolean>;
     options: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => Option[]) | (() => Option[]) | ((new (...args: any[]) => Option[]) | (() => Option[]))[], unknown, unknown, () => never[], boolean>;
-    modelValue: import("element-plus/es/utils").EpPropFinalized<(NumberConstructor | StringConstructor | BooleanConstructor)[], unknown, unknown, undefined, boolean>;
+    modelValue: import("element-plus/es/utils").EpPropFinalized<(BooleanConstructor | NumberConstructor | StringConstructor)[], unknown, unknown, undefined, boolean>;
+    props: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("./segmented").Props) | (() => import("./segmented").Props) | ((new (...args: any[]) => import("./segmented").Props) | (() => import("./segmented").Props))[], unknown, unknown, () => Required<import("./segmented").Props>, boolean>;
     block: BooleanConstructor;
     size: {
         readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<StringConstructor, "" | "small" | "default" | "large", never>>;
@@ -27,7 +28,8 @@ declare const __VLS_component: import("vue").DefineComponent<{
     ariaLabel: StringConstructor;
     direction: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical") | ((new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical"))[], unknown, unknown, string, boolean>;
     options: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => Option[]) | (() => Option[]) | ((new (...args: any[]) => Option[]) | (() => Option[]))[], unknown, unknown, () => never[], boolean>;
-    modelValue: import("element-plus/es/utils").EpPropFinalized<(NumberConstructor | StringConstructor | BooleanConstructor)[], unknown, unknown, undefined, boolean>;
+    modelValue: import("element-plus/es/utils").EpPropFinalized<(BooleanConstructor | NumberConstructor | StringConstructor)[], unknown, unknown, undefined, boolean>;
+    props: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("./segmented").Props) | (() => import("./segmented").Props) | ((new (...args: any[]) => import("./segmented").Props) | (() => import("./segmented").Props))[], unknown, unknown, () => Required<import("./segmented").Props>, boolean>;
     block: BooleanConstructor;
     size: {
         readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<StringConstructor, "" | "small" | "default" | "large", never>>;
@@ -46,7 +48,8 @@ declare const __VLS_component: import("vue").DefineComponent<{
     disabled: boolean;
     direction: import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical") | ((new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical"))[], unknown, unknown>;
     block: boolean;
-    modelValue: import("element-plus/es/utils").EpPropMergeType<(NumberConstructor | StringConstructor | BooleanConstructor)[], unknown, unknown>;
+    props: import("./segmented").Props;
+    modelValue: import("element-plus/es/utils").EpPropMergeType<(BooleanConstructor | NumberConstructor | StringConstructor)[], unknown, unknown>;
     options: Option[];
     validateEvent: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
 }>;

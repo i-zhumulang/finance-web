@@ -1,7 +1,7 @@
 import type { PopperEffect } from 'element-plus/es/components/popper';
 import type { MenuItemClicked } from './types';
 import type { NavigationFailure } from 'vue-router';
-import type { Component, ExtractPropTypes, VNode } from 'vue';
+import type { Component, ExtractPropTypes, VNode, __ExtractPublicPropTypes } from 'vue';
 export declare const menuProps: {
     readonly mode: import("element-plus/es/utils").EpPropFinalized<StringConstructor, "horizontal" | "vertical", unknown, "vertical", boolean>;
     readonly defaultActive: import("element-plus/es/utils").EpPropFinalized<StringConstructor, unknown, unknown, "", boolean>;
@@ -22,8 +22,10 @@ export declare const menuProps: {
     readonly popperClass: StringConstructor;
     readonly showTimeout: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 300, boolean>;
     readonly hideTimeout: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 300, boolean>;
+    readonly persistent: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
 };
 export type MenuProps = ExtractPropTypes<typeof menuProps>;
+export type MenuPropsPublic = __ExtractPublicPropTypes<typeof menuProps>;
 export declare const menuEmits: {
     close: (index: string, indexPath: string[]) => boolean;
     open: (index: string, indexPath: string[]) => boolean;
@@ -50,6 +52,7 @@ declare const _default: import("vue").DefineComponent<{
     readonly popperClass: StringConstructor;
     readonly showTimeout: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 300, boolean>;
     readonly hideTimeout: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 300, boolean>;
+    readonly persistent: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
 }, () => VNode<import("vue").RendererNode, import("vue").RendererElement, {
     [key: string]: any;
 }>, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
@@ -76,14 +79,16 @@ declare const _default: import("vue").DefineComponent<{
     readonly popperClass: StringConstructor;
     readonly showTimeout: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 300, boolean>;
     readonly hideTimeout: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 300, boolean>;
+    readonly persistent: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
 }>> & {
     onSelect?: ((index: string, indexPath: string[], item: MenuItemClicked, routerResult?: Promise<void | NavigationFailure> | undefined) => any) | undefined;
-    onClose?: ((index: string, indexPath: string[]) => any) | undefined;
     onOpen?: ((index: string, indexPath: string[]) => any) | undefined;
+    onClose?: ((index: string, indexPath: string[]) => any) | undefined;
 }, {
     readonly ellipsis: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
     readonly collapse: boolean;
     readonly mode: import("element-plus/es/utils").EpPropMergeType<StringConstructor, "horizontal" | "vertical", unknown>;
+    readonly persistent: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
     readonly showTimeout: number;
     readonly hideTimeout: number;
     readonly defaultActive: string;

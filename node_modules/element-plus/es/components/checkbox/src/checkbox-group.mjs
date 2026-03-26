@@ -23,12 +23,24 @@ const checkboxGroupProps = buildProps({
     type: Boolean,
     default: true
   },
+  options: {
+    type: definePropType(Array)
+  },
+  props: {
+    type: definePropType(Object),
+    default: () => checkboxDefaultProps
+  },
   ...useAriaProps(["ariaLabel"])
 });
 const checkboxGroupEmits = {
   [UPDATE_MODEL_EVENT]: (val) => isArray(val),
   change: (val) => isArray(val)
 };
+const checkboxDefaultProps = {
+  label: "label",
+  value: "value",
+  disabled: "disabled"
+};
 
-export { checkboxGroupEmits, checkboxGroupProps };
+export { checkboxDefaultProps, checkboxGroupEmits, checkboxGroupProps };
 //# sourceMappingURL=checkbox-group.mjs.map

@@ -1,4 +1,4 @@
-import { type ShallowRef } from 'vue';
+import type { ShallowRef } from 'vue';
 type DropType = 'before' | 'after';
 interface UseDragTagOptions {
     wrapperRef: ShallowRef<HTMLElement | undefined>;

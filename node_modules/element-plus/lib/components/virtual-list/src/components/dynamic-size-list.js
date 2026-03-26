@@ -5,9 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var buildList = require('../builders/build-list.js');
 var utils = require('../utils.js');
 var defaults = require('../defaults.js');
-var error = require('../../../../utils/error.js');
 
-const SCOPE = "ElDynamicSizeList";
 const getItemFromCache = (props, index, listCache) => {
   const { itemSize } = props;
   const { items, lastVisitedIndex } = listCache;
@@ -146,13 +144,6 @@ const DynamicSizeList = buildList["default"]({
   },
   clearCache: false,
   validateProps: ({ itemSize }) => {
-    if (process.env.NODE_ENV !== "production") {
-      if (typeof itemSize !== "function") {
-        error.throwError(SCOPE, `
-          itemSize is required as function, but the given value was ${typeof itemSize}
-        `);
-      }
-    }
   }
 });
 

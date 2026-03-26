@@ -1,4 +1,4 @@
-import { radioPropsBase } from './radio.mjs';
+import { radioPropsBase } from './radio2.mjs';
 import { buildProps } from '../../../utils/vue/props/runtime.mjs';
 
 const radioButtonProps = buildProps({

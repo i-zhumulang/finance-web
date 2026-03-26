@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes } from 'vue';
+import type { CSSProperties, ExtractPropTypes, __ExtractPublicPropTypes } from 'vue';
 import type { SortOrder } from './constants';
 import type { Column, ColumnCommonParams, DataGetter, KeyType, RowCommonParams, SortBy, SortState } from './types';
 /**
@@ -160,7 +160,7 @@ export declare const tableV2Props: {
         __epPropKey: true;
     };
     readonly onEndReached: {
-        readonly type: import("vue").PropType<(distance: number) => void>;
+        readonly type: import("vue").PropType<(remainDistance: number) => void>;
         readonly required: false;
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
@@ -191,3 +191,4 @@ export declare const tableV2Props: {
     };
 };
 export type TableV2Props = ExtractPropTypes<typeof tableV2Props>;
+export type TableV2PropsPublic = __ExtractPublicPropTypes<typeof tableV2Props>;

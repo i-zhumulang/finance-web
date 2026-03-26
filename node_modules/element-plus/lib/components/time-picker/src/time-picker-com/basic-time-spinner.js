@@ -13,6 +13,7 @@ var basicTimeSpinner = require('../props/basic-time-spinner.js');
 var useTimePicker = require('../composables/use-time-picker.js');
 var pluginVue_exportHelper = require('../../../../_virtual/plugin-vue_export-helper.js');
 var index$3 = require('../../../../directives/repeat-click/index.js');
+var event = require('../../../../constants/event.js');
 var index = require('../../../../hooks/use-namespace/index.js');
 var style = require('../../../../utils/dom/style.js');
 var types = require('../../../../utils/types.js');
@@ -20,11 +21,11 @@ var types = require('../../../../utils/types.js');
 const _sfc_main = /* @__PURE__ */ vue.defineComponent({
   __name: "basic-time-spinner",
   props: basicTimeSpinner.basicTimeSpinnerProps,
-  emits: ["change", "select-range", "set-option"],
+  emits: [event.CHANGE_EVENT, "select-range", "set-option"],
   setup(__props, { emit }) {
     const props = __props;
-    const pickerBase = vue.inject("EP_PICKER_BASE");
-    const { isRange } = pickerBase.props;
+    const pickerBase = vue.inject(constants.PICKER_BASE_INJECTION_KEY);
+    const { isRange, format } = pickerBase.props;
     const ns = index.useNamespace("time");
     const { getHoursList, getMinutesList, getSecondsList } = useTimePicker.getTimeLists(props.disabledHours, props.disabledMinutes, props.disabledSeconds);
     let isScrolling = false;
@@ -80,16 +81,26 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
       return content;
     };
     const emitSelectRange = (type) => {
-      let range;
+      let range = [0, 0];
+      const actualFormat = format || constants.DEFAULT_FORMATS_TIME;
+      const hourIndex = actualFormat.indexOf("HH");
+      const minuteIndex = actualFormat.indexOf("mm");
+      const secondIndex = actualFormat.indexOf("ss");
       switch (type) {
         case "hours":
-          range = [0, 2];
+          if (hourIndex !== -1) {
+            range = [hourIndex, hourIndex + 2];
+          }
           break;
         case "minutes":
-          range = [3, 5];
+          if (minuteIndex !== -1) {
+            range = [minuteIndex, minuteIndex + 2];
+          }
           break;
         case "seconds":
-          range = [6, 8];
+          if (secondIndex !== -1) {
+            range = [secondIndex, secondIndex + 2];
+          }
           break;
       }
       const [left, right] = range;
@@ -165,7 +176,7 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
           changeTo = props.spinnerDate.hour(hours).minute(minutes).second(value);
           break;
       }
-      emit("change", changeTo);
+      emit(event.CHANGE_EVENT, changeTo);
     };
     const handleClick = (type, { value, disabled }) => {
       if (!disabled) {

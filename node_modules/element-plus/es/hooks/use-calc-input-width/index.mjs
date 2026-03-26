@@ -1,10 +1,10 @@
 import { shallowRef, ref, computed } from 'vue';
 import { useResizeObserver } from '@vueuse/core';
+import { MINIMUM_INPUT_WIDTH } from '../../constants/form.mjs';
 
 function useCalcInputWidth() {
   const calculatorRef = shallowRef();
   const calculatorWidth = ref(0);
-  const MINIMUM_INPUT_WIDTH = 11;
   const inputStyle = computed(() => ({
     minWidth: `${Math.max(calculatorWidth.value, MINIMUM_INPUT_WIDTH)}px`
   }));

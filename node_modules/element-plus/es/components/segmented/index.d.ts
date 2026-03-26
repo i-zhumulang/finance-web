@@ -6,14 +6,16 @@ export declare const ElSegmented: import("element-plus/es/utils").SFCWithInstall
             disabled: boolean;
             direction: import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical") | ((new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical"))[], unknown, unknown>;
             block: boolean;
-            modelValue: import("element-plus/es/utils").EpPropMergeType<(NumberConstructor | StringConstructor | BooleanConstructor)[], unknown, unknown>;
+            props: import("./src/segmented").Props;
+            modelValue: import("element-plus/es/utils").EpPropMergeType<(BooleanConstructor | NumberConstructor | StringConstructor)[], unknown, unknown>;
             options: import("./src/types.js").Option[];
             validateEvent: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
         }> & Omit<Readonly<import("vue").ExtractPropTypes<{
             ariaLabel: StringConstructor;
             direction: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical") | ((new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical"))[], unknown, unknown, string, boolean>;
             options: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("./src/types.js").Option[]) | (() => import("./src/types.js").Option[]) | ((new (...args: any[]) => import("./src/types.js").Option[]) | (() => import("./src/types.js").Option[]))[], unknown, unknown, () => never[], boolean>;
-            modelValue: import("element-plus/es/utils").EpPropFinalized<(NumberConstructor | StringConstructor | BooleanConstructor)[], unknown, unknown, undefined, boolean>;
+            modelValue: import("element-plus/es/utils").EpPropFinalized<(BooleanConstructor | NumberConstructor | StringConstructor)[], unknown, unknown, undefined, boolean>;
+            props: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("./src/segmented").Props) | (() => import("./src/segmented").Props) | ((new (...args: any[]) => import("./src/segmented").Props) | (() => import("./src/segmented").Props))[], unknown, unknown, () => Required<import("./src/segmented").Props>, boolean>;
             block: BooleanConstructor;
             size: {
                 readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<StringConstructor, "" | "small" | "default" | "large", never>>;
@@ -28,7 +30,7 @@ export declare const ElSegmented: import("element-plus/es/utils").SFCWithInstall
         }>> & {
             "onUpdate:modelValue"?: ((val: any) => any) | undefined;
             onChange?: ((val: any) => any) | undefined;
-        } & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, "disabled" | "direction" | "block" | "modelValue" | "options" | "validateEvent">;
+        } & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, "disabled" | "direction" | "block" | "props" | "modelValue" | "options" | "validateEvent">;
         $attrs: {
             [x: string]: unknown;
         };
@@ -44,7 +46,8 @@ export declare const ElSegmented: import("element-plus/es/utils").SFCWithInstall
             ariaLabel: StringConstructor;
             direction: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical") | ((new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical"))[], unknown, unknown, string, boolean>;
             options: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("./src/types.js").Option[]) | (() => import("./src/types.js").Option[]) | ((new (...args: any[]) => import("./src/types.js").Option[]) | (() => import("./src/types.js").Option[]))[], unknown, unknown, () => never[], boolean>;
-            modelValue: import("element-plus/es/utils").EpPropFinalized<(NumberConstructor | StringConstructor | BooleanConstructor)[], unknown, unknown, undefined, boolean>;
+            modelValue: import("element-plus/es/utils").EpPropFinalized<(BooleanConstructor | NumberConstructor | StringConstructor)[], unknown, unknown, undefined, boolean>;
+            props: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("./src/segmented").Props) | (() => import("./src/segmented").Props) | ((new (...args: any[]) => import("./src/segmented").Props) | (() => import("./src/segmented").Props))[], unknown, unknown, () => Required<import("./src/segmented").Props>, boolean>;
             block: BooleanConstructor;
             size: {
                 readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<StringConstructor, "" | "small" | "default" | "large", never>>;
@@ -66,7 +69,8 @@ export declare const ElSegmented: import("element-plus/es/utils").SFCWithInstall
             disabled: boolean;
             direction: import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical") | ((new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical"))[], unknown, unknown>;
             block: boolean;
-            modelValue: import("element-plus/es/utils").EpPropMergeType<(NumberConstructor | StringConstructor | BooleanConstructor)[], unknown, unknown>;
+            props: import("./src/segmented").Props;
+            modelValue: import("element-plus/es/utils").EpPropMergeType<(BooleanConstructor | NumberConstructor | StringConstructor)[], unknown, unknown>;
             options: import("./src/types.js").Option[];
             validateEvent: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
         }> & {
@@ -93,7 +97,8 @@ export declare const ElSegmented: import("element-plus/es/utils").SFCWithInstall
         ariaLabel: StringConstructor;
         direction: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical") | ((new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical"))[], unknown, unknown, string, boolean>;
         options: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("./src/types.js").Option[]) | (() => import("./src/types.js").Option[]) | ((new (...args: any[]) => import("./src/types.js").Option[]) | (() => import("./src/types.js").Option[]))[], unknown, unknown, () => never[], boolean>;
-        modelValue: import("element-plus/es/utils").EpPropFinalized<(NumberConstructor | StringConstructor | BooleanConstructor)[], unknown, unknown, undefined, boolean>;
+        modelValue: import("element-plus/es/utils").EpPropFinalized<(BooleanConstructor | NumberConstructor | StringConstructor)[], unknown, unknown, undefined, boolean>;
+        props: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("./src/segmented").Props) | (() => import("./src/segmented").Props) | ((new (...args: any[]) => import("./src/segmented").Props) | (() => import("./src/segmented").Props))[], unknown, unknown, () => Required<import("./src/segmented").Props>, boolean>;
         block: BooleanConstructor;
         size: {
             readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<StringConstructor, "" | "small" | "default" | "large", never>>;
@@ -116,7 +121,8 @@ export declare const ElSegmented: import("element-plus/es/utils").SFCWithInstall
     ariaLabel: StringConstructor;
     direction: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical") | ((new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical"))[], unknown, unknown, string, boolean>;
     options: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("./src/types.js").Option[]) | (() => import("./src/types.js").Option[]) | ((new (...args: any[]) => import("./src/types.js").Option[]) | (() => import("./src/types.js").Option[]))[], unknown, unknown, () => never[], boolean>;
-    modelValue: import("element-plus/es/utils").EpPropFinalized<(NumberConstructor | StringConstructor | BooleanConstructor)[], unknown, unknown, undefined, boolean>;
+    modelValue: import("element-plus/es/utils").EpPropFinalized<(BooleanConstructor | NumberConstructor | StringConstructor)[], unknown, unknown, undefined, boolean>;
+    props: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("./src/segmented").Props) | (() => import("./src/segmented").Props) | ((new (...args: any[]) => import("./src/segmented").Props) | (() => import("./src/segmented").Props))[], unknown, unknown, () => Required<import("./src/segmented").Props>, boolean>;
     block: BooleanConstructor;
     size: {
         readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<StringConstructor, "" | "small" | "default" | "large", never>>;
@@ -138,13 +144,14 @@ export declare const ElSegmented: import("element-plus/es/utils").SFCWithInstall
     disabled: boolean;
     direction: import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical") | ((new (...args: any[]) => "horizontal" | "vertical") | (() => "horizontal" | "vertical"))[], unknown, unknown>;
     block: boolean;
-    modelValue: import("element-plus/es/utils").EpPropMergeType<(NumberConstructor | StringConstructor | BooleanConstructor)[], unknown, unknown>;
+    props: import("./src/segmented").Props;
+    modelValue: import("element-plus/es/utils").EpPropMergeType<(BooleanConstructor | NumberConstructor | StringConstructor)[], unknown, unknown>;
     options: import("./src/types.js").Option[];
     validateEvent: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
 }> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & (new () => {
     $slots: {
         default?(_: {
-            item: import("./src/types.js").Option;
+            item: any;
         }): any;
     };
 })> & Record<string, any>;

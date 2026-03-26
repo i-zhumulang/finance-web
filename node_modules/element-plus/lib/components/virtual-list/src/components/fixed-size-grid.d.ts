@@ -16,7 +16,7 @@ declare const FixedSizeGrid: import("vue").DefineComponent<{
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
     };
-    readonly useIsScrolling: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, false, boolean>;
+    readonly useIsScrolling: BooleanConstructor;
     readonly width: {
         readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<readonly [NumberConstructor, StringConstructor], unknown, unknown>>;
         readonly required: false;
@@ -24,10 +24,10 @@ declare const FixedSizeGrid: import("vue").DefineComponent<{
         __epPropKey: true;
     };
     readonly perfMode: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
-    readonly scrollbarAlwaysOn: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, false, boolean>;
+    readonly scrollbarAlwaysOn: BooleanConstructor;
     readonly columnCache: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, never, never, 2, false>;
     readonly columnWidth: {
-        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => number | import("element-plus/es/element-plus").ItemSize) | (() => number | import("element-plus/es/element-plus").ItemSize) | ((new (...args: any[]) => number | import("element-plus/es/element-plus").ItemSize) | (() => number | import("element-plus/es/element-plus").ItemSize))[], never, never>>;
+        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => number | import("element-plus").ItemSize) | (() => number | import("element-plus").ItemSize) | ((new (...args: any[]) => number | import("element-plus").ItemSize) | (() => number | import("element-plus").ItemSize))[], never, never>>;
         readonly required: true;
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
@@ -46,12 +46,12 @@ declare const FixedSizeGrid: import("vue").DefineComponent<{
     };
     readonly initScrollLeft: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, never, never, 0, false>;
     readonly initScrollTop: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, never, never, 0, false>;
-    readonly itemKey: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("element-plus/es/element-plus").GridItemKeyGetter) | (() => import("element-plus/es/element-plus").GridItemKeyGetter) | {
-        (): import("element-plus/es/element-plus").GridItemKeyGetter;
+    readonly itemKey: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("element-plus").GridItemKeyGetter) | (() => import("element-plus").GridItemKeyGetter) | {
+        (): import("element-plus").GridItemKeyGetter;
         new (): any;
         readonly prototype: any;
-    } | ((new (...args: any[]) => import("element-plus/es/element-plus").GridItemKeyGetter) | (() => import("element-plus/es/element-plus").GridItemKeyGetter) | {
-        (): import("element-plus/es/element-plus").GridItemKeyGetter;
+    } | ((new (...args: any[]) => import("element-plus").GridItemKeyGetter) | (() => import("element-plus").GridItemKeyGetter) | {
+        (): import("element-plus").GridItemKeyGetter;
         new (): any;
         readonly prototype: any;
     })[], unknown, unknown, ({ columnIndex, rowIndex, }: {
@@ -60,7 +60,7 @@ declare const FixedSizeGrid: import("vue").DefineComponent<{
     }) => string, boolean>;
     readonly rowCache: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, never, never, 2, false>;
     readonly rowHeight: {
-        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => number | import("element-plus/es/element-plus").ItemSize) | (() => number | import("element-plus/es/element-plus").ItemSize) | ((new (...args: any[]) => number | import("element-plus/es/element-plus").ItemSize) | (() => number | import("element-plus/es/element-plus").ItemSize))[], never, never>>;
+        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => number | import("element-plus").ItemSize) | (() => number | import("element-plus").ItemSize) | ((new (...args: any[]) => number | import("element-plus").ItemSize) | (() => number | import("element-plus").ItemSize))[], never, never>>;
         readonly required: true;
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
@@ -102,7 +102,7 @@ declare const FixedSizeGrid: import("vue").DefineComponent<{
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
     };
-    readonly useIsScrolling: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, false, boolean>;
+    readonly useIsScrolling: BooleanConstructor;
     readonly width: {
         readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<readonly [NumberConstructor, StringConstructor], unknown, unknown>>;
         readonly required: false;
@@ -110,10 +110,10 @@ declare const FixedSizeGrid: import("vue").DefineComponent<{
         __epPropKey: true;
     };
     readonly perfMode: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
-    readonly scrollbarAlwaysOn: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, false, boolean>;
+    readonly scrollbarAlwaysOn: BooleanConstructor;
     readonly columnCache: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, never, never, 2, false>;
     readonly columnWidth: {
-        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => number | import("element-plus/es/element-plus").ItemSize) | (() => number | import("element-plus/es/element-plus").ItemSize) | ((new (...args: any[]) => number | import("element-plus/es/element-plus").ItemSize) | (() => number | import("element-plus/es/element-plus").ItemSize))[], never, never>>;
+        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => number | import("element-plus").ItemSize) | (() => number | import("element-plus").ItemSize) | ((new (...args: any[]) => number | import("element-plus").ItemSize) | (() => number | import("element-plus").ItemSize))[], never, never>>;
         readonly required: true;
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
@@ -132,12 +132,12 @@ declare const FixedSizeGrid: import("vue").DefineComponent<{
     };
     readonly initScrollLeft: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, never, never, 0, false>;
     readonly initScrollTop: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, never, never, 0, false>;
-    readonly itemKey: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("element-plus/es/element-plus").GridItemKeyGetter) | (() => import("element-plus/es/element-plus").GridItemKeyGetter) | {
-        (): import("element-plus/es/element-plus").GridItemKeyGetter;
+    readonly itemKey: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("element-plus").GridItemKeyGetter) | (() => import("element-plus").GridItemKeyGetter) | {
+        (): import("element-plus").GridItemKeyGetter;
         new (): any;
         readonly prototype: any;
-    } | ((new (...args: any[]) => import("element-plus/es/element-plus").GridItemKeyGetter) | (() => import("element-plus/es/element-plus").GridItemKeyGetter) | {
-        (): import("element-plus/es/element-plus").GridItemKeyGetter;
+    } | ((new (...args: any[]) => import("element-plus").GridItemKeyGetter) | (() => import("element-plus").GridItemKeyGetter) | {
+        (): import("element-plus").GridItemKeyGetter;
         new (): any;
         readonly prototype: any;
     })[], unknown, unknown, ({ columnIndex, rowIndex, }: {
@@ -146,7 +146,7 @@ declare const FixedSizeGrid: import("vue").DefineComponent<{
     }) => string, boolean>;
     readonly rowCache: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, never, never, 2, false>;
     readonly rowHeight: {
-        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => number | import("element-plus/es/element-plus").ItemSize) | (() => number | import("element-plus/es/element-plus").ItemSize) | ((new (...args: any[]) => number | import("element-plus/es/element-plus").ItemSize) | (() => number | import("element-plus/es/element-plus").ItemSize))[], never, never>>;
+        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => number | import("element-plus").ItemSize) | (() => number | import("element-plus").ItemSize) | ((new (...args: any[]) => number | import("element-plus").ItemSize) | (() => number | import("element-plus").ItemSize))[], never, never>>;
         readonly required: true;
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
@@ -177,10 +177,10 @@ declare const FixedSizeGrid: import("vue").DefineComponent<{
     readonly className: string;
     readonly containerElement: import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => string | Element) | (() => string | Element) | ((new (...args: any[]) => string | Element) | (() => string | Element))[], unknown, unknown>;
     readonly innerElement: import("element-plus/es/utils").EpPropMergeType<readonly [StringConstructor, ObjectConstructor], unknown, unknown>;
-    readonly useIsScrolling: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
     readonly perfMode: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
-    readonly scrollbarAlwaysOn: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
-    readonly itemKey: import("element-plus/es/element-plus").GridItemKeyGetter;
+    readonly useIsScrolling: boolean;
+    readonly scrollbarAlwaysOn: boolean;
+    readonly itemKey: import("element-plus").GridItemKeyGetter;
     readonly columnCache: number;
     readonly initScrollLeft: number;
     readonly initScrollTop: number;

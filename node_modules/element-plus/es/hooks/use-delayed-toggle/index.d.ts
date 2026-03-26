@@ -9,6 +9,6 @@ export type UseDelayedToggleProps = {
     close: (event?: Event) => void;
 } & ToRefs<ExtractPropTypes<typeof useDelayedToggleProps>>;
 export declare const useDelayedToggle: ({ showAfter, hideAfter, autoClose, open, close, }: UseDelayedToggleProps) => {
-    onOpen: (event?: Event) => void;
-    onClose: (event?: Event) => void;
+    onOpen: (event?: Event, delay?: number) => void;
+    onClose: (event?: Event, delay?: number) => void;
 };

@@ -12,7 +12,7 @@ const DEFAULT_ARROW_OFFSET = 0;
 const usePopperContent = (props) => {
   const { popperInstanceRef, contentRef, triggerRef, role } = vue.inject(constants.POPPER_INJECTION_KEY, void 0);
   const arrowRef = vue.ref();
-  const arrowOffset = vue.ref();
+  const arrowOffset = vue.computed(() => props.arrowOffset);
   const eventListenerModifier = vue.computed(() => {
     return {
       name: "eventListeners",
@@ -45,11 +45,13 @@ const usePopperContent = (props) => {
   });
   const computedReference = vue.computed(() => utils.unwrapMeasurableEl(props.referenceEl) || vue.unref(triggerRef));
   const { attributes, state, styles, update, forceUpdate, instanceRef } = index.usePopper(computedReference, contentRef, options);
-  vue.watch(instanceRef, (instance) => popperInstanceRef.value = instance);
+  vue.watch(instanceRef, (instance) => popperInstanceRef.value = instance, {
+    flush: "sync"
+  });
   vue.onMounted(() => {
     vue.watch(() => {
-      var _a;
-      return (_a = vue.unref(computedReference)) == null ? void 0 : _a.getBoundingClientRect();
+      var _a, _b;
+      return (_b = (_a = vue.unref(computedReference)) == null ? void 0 : _a.getBoundingClientRect) == null ? void 0 : _b.call(_a);
     }, () => {
       update();
     });

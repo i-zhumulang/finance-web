@@ -81,7 +81,6 @@ function useTable(props) {
     mainTableHeight,
     leftTableWidth,
     rightTableWidth,
-    headerWidth,
     windowHeight,
     footerHeight,
     emptyStyle,
@@ -104,6 +103,7 @@ function useTable(props) {
       return rowHeight;
     return vue.unref(rowHeights)[vue.unref(data)[rowIndex][rowKey]] || estimatedRowHeight;
   }
+  const isEndReached = vue.ref(false);
   function onMaybeEndReached() {
     const { onEndReached } = props;
     if (!onEndReached)
@@ -111,11 +111,15 @@ function useTable(props) {
     const { scrollTop } = vue.unref(scrollPos);
     const _totalHeight = vue.unref(rowsHeight);
     const clientHeight = vue.unref(windowHeight);
-    const heightUntilEnd = _totalHeight - (scrollTop + clientHeight) + props.hScrollbarSize;
-    if (vue.unref(lastRenderedRowIndex) >= 0 && _totalHeight === scrollTop + vue.unref(mainTableHeight) - vue.unref(headerHeight)) {
-      onEndReached(heightUntilEnd);
+    const remainDistance = _totalHeight - (scrollTop + clientHeight) + props.hScrollbarSize;
+    if (!isEndReached.value && vue.unref(lastRenderedRowIndex) >= 0 && _totalHeight <= scrollTop + vue.unref(mainTableHeight) - vue.unref(headerHeight)) {
+      isEndReached.value = true;
+      onEndReached(remainDistance);
+    } else {
+      isEndReached.value = false;
     }
   }
+  vue.watch(() => vue.unref(rowsHeight), () => isEndReached.value = false);
   vue.watch(() => props.expandedRowKeys, (val) => expandedRowKeys.value = val, {
     deep: true
   });
@@ -140,7 +144,6 @@ function useTable(props) {
     bodyWidth,
     emptyStyle,
     rootStyle,
-    headerWidth,
     footerHeight,
     mainTableHeight,
     fixedTableHeight,

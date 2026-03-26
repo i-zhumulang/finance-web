@@ -68,7 +68,7 @@ const RowRenderer = (props, {
     rowEventHandlers,
     style
   };
-  const handlerMosueEnter = (e) => {
+  const handlerMouseEnter = (e) => {
     onRowHover == null ? void 0 : onRowHover({
       hovered: true,
       rowKey: _rowKey,
@@ -88,7 +88,7 @@ const RowRenderer = (props, {
   };
   return vue.createVNode(row["default"], vue.mergeProps(_rowProps, {
     "onRowExpand": onRowExpanded,
-    "onMouseenter": handlerMosueEnter,
+    "onMouseenter": handlerMouseEnter,
     "onMouseleave": handlerMouseLeave,
     "rowkey": _rowKey
   }), _isSlot(slots) ? slots : {

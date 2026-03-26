@@ -1,7 +1,7 @@
 import type Tag from './tag.vue';
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, __ExtractPublicPropTypes } from 'vue';
 export declare const tagProps: {
-    readonly type: import("element-plus/es/utils").EpPropFinalized<StringConstructor, "success" | "warning" | "info" | "primary" | "danger", unknown, "primary", boolean>;
+    readonly type: import("element-plus/es/utils").EpPropFinalized<StringConstructor, "primary" | "success" | "warning" | "info" | "danger", unknown, "primary", boolean>;
     readonly closable: BooleanConstructor;
     readonly disableTransitions: BooleanConstructor;
     readonly hit: BooleanConstructor;
@@ -16,9 +16,10 @@ export declare const tagProps: {
     readonly round: BooleanConstructor;
 };
 export type TagProps = ExtractPropTypes<typeof tagProps>;
+export type TagPropsPublic = __ExtractPublicPropTypes<typeof tagProps>;
 export declare const tagEmits: {
     close: (evt: MouseEvent) => boolean;
     click: (evt: MouseEvent) => boolean;
 };
 export type TagEmits = typeof tagEmits;
-export type TagInstance = InstanceType<typeof Tag>;
+export type TagInstance = InstanceType<typeof Tag> & unknown;

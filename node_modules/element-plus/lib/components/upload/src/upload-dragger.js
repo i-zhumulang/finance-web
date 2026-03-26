@@ -6,10 +6,7 @@ var runtime = require('../../../utils/vue/props/runtime.js');
 var shared = require('@vue/shared');
 
 const uploadDraggerProps = runtime.buildProps({
-  disabled: {
-    type: Boolean,
-    default: false
-  }
+  disabled: Boolean
 });
 const uploadDraggerEmits = {
   file: (file) => shared.isArray(file)

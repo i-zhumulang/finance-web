@@ -9,6 +9,7 @@ var pluginVue_exportHelper = require('../../../_virtual/plugin-vue_export-helper
 var index = require('../../../hooks/use-namespace/index.js');
 var scroll = require('../../../utils/dom/scroll.js');
 var style = require('../../../utils/dom/style.js');
+var event = require('../../../constants/event.js');
 var error = require('../../../utils/error.js');
 
 const COMPONENT_NAME = "ElAffix";
@@ -78,14 +79,25 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
         fixed.value = windowHeight.value - offset < rootBottom.value;
       }
     };
-    const handleScroll = () => {
+    const updateRootRect = async () => {
+      if (!fixed.value) {
+        updateRoot();
+        return;
+      }
+      fixed.value = false;
+      await vue.nextTick();
       updateRoot();
+      fixed.value = true;
+    };
+    const handleScroll = async () => {
+      updateRoot();
+      await vue.nextTick();
       emit("scroll", {
         scrollTop: scrollTop.value,
         fixed: fixed.value
       });
     };
-    vue.watch(fixed, (val) => emit("change", val));
+    vue.watch(fixed, (val) => emit(event.CHANGE_EVENT, val));
     vue.onMounted(() => {
       var _a;
       if (props.target) {
@@ -102,7 +114,7 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
     vue.watchEffect(update);
     expose({
       update,
-      updateRoot
+      updateRoot: updateRootRect
     });
     return (_ctx, _cache) => {
       return vue.openBlock(), vue.createElementBlock("div", {

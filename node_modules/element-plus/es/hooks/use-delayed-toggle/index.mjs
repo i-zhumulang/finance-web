@@ -29,7 +29,7 @@ const useDelayedToggle = ({
     registerTimeout: registerTimeoutForAutoClose,
     cancelTimeout: cancelTimeoutForAutoClose
   } = useTimeout();
-  const onOpen = (event) => {
+  const onOpen = (event, delay = unref(showAfter)) => {
     registerTimeout(() => {
       open(event);
       const _autoClose = unref(autoClose);
@@ -38,13 +38,13 @@ const useDelayedToggle = ({
           close(event);
         }, _autoClose);
       }
-    }, unref(showAfter));
+    }, delay);
   };
-  const onClose = (event) => {
+  const onClose = (event, delay = unref(hideAfter)) => {
     cancelTimeoutForAutoClose();
     registerTimeout(() => {
       close(event);
-    }, unref(hideAfter));
+    }, delay);
   };
   return {
     onOpen,

@@ -14,7 +14,6 @@ const useStyles = (props, {
     const ret = width - vScrollbarSize;
     return fixed ? Math.max(Math.round(unref(columnsTotalWidth)), ret) : ret;
   });
-  const headerWidth = computed(() => unref(bodyWidth) + props.vScrollbarSize);
   const mainTableHeight = computed(() => {
     const { height = 0, maxHeight = 0, footerHeight: footerHeight2, hScrollbarSize } = props;
     if (maxHeight > 0) {
@@ -65,7 +64,6 @@ const useStyles = (props, {
     mainTableHeight,
     leftTableWidth,
     rightTableWidth,
-    headerWidth,
     windowHeight,
     footerHeight,
     emptyStyle,

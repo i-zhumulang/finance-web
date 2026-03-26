@@ -44,7 +44,9 @@ const _sfc_main = vue.defineComponent({
       }
       onItemEnter(e);
       if (!e.defaultPrevented) {
-        target == null ? void 0 : target.focus();
+        target == null ? void 0 : target.focus({
+          preventScroll: true
+        });
       }
     }));
     const handlePointerLeave = event.composeEventHandlers((e) => {

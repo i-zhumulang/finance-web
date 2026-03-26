@@ -1,4 +1,5 @@
 import { reactive } from 'vue';
+import { isNil } from 'lodash-unified';
 import { markNodeData, NODE_KEY } from './util.mjs';
 import { hasOwn, isArray, isFunction, isString } from '@vue/shared';
 import { isBoolean, isUndefined } from '../../../../utils/types.mjs';
@@ -52,12 +53,20 @@ const getPropertyFromData = function(node, prop) {
     return data[config];
   } else if (isUndefined(config)) {
     const dataProp = data[prop];
-    return dataProp === void 0 ? "" : dataProp;
+    return isUndefined(dataProp) ? "" : dataProp;
   }
+};
+const setCanFocus = function(childNodes, focus) {
+  childNodes.forEach((item) => {
+    item.canFocus = focus;
+    setCanFocus(item.childNodes, focus);
+  });
 };
 let nodeIdSeed = 0;
 class Node {
   constructor(options) {
+    this.isLeafByUser = void 0;
+    this.isLeaf = void 0;
     this.id = nodeIdSeed++;
     this.text = null;
     this.checked = false;
@@ -82,6 +91,7 @@ class Node {
     }
   }
   initialize() {
+    var _a;
     const store = this.store;
     if (!store) {
       throw new Error("[Node]store is required!");
@@ -110,7 +120,7 @@ class Node {
       return;
     const defaultExpandedKeys = store.defaultExpandedKeys;
     const key = store.key;
-    if (key && defaultExpandedKeys && defaultExpandedKeys.includes(this.key)) {
+    if (key && !isNil(this.key) && defaultExpandedKeys && defaultExpandedKeys.includes(this.key)) {
       this.expand(null, store.autoExpandParent);
     }
     if (key && store.currentNodeKey !== void 0 && this.key === store.currentNodeKey) {
@@ -121,7 +131,7 @@ class Node {
       store._initDefaultCheckedNode(this);
     }
     this.updateLeafState();
-    if (this.parent && (this.level === 1 || this.parent.expanded === true))
+    if (this.level === 1 || ((_a = this.parent) == null ? void 0 : _a.expanded) === true)
       this.canFocus = true;
   }
   setData(data) {
@@ -187,11 +197,11 @@ class Node {
     if (!(child instanceof Node)) {
       if (!batch) {
         const children = this.getChildren(true);
-        if (!children.includes(child.data)) {
+        if (!(children == null ? void 0 : children.includes(child.data))) {
           if (isUndefined(index) || index < 0) {
-            children.push(child.data);
+            children == null ? void 0 : children.push(child.data);
           } else {
-            children.splice(index, 0, child.data);
+            children == null ? void 0 : children.splice(index, 0, child.data);
           }
         }
       }
@@ -258,7 +268,7 @@ class Node {
     const done = () => {
       if (expandParent) {
         let parent = this.parent;
-        while (parent.level > 0) {
+        while (parent && parent.level > 0) {
           parent.expanded = true;
           parent = parent.parent;
         }
@@ -266,9 +276,7 @@ class Node {
       this.expanded = true;
       if (callback)
         callback();
-      this.childNodes.forEach((item) => {
-        item.canFocus = true;
-      });
+      setCanFocus(this.childNodes, true);
     };
     if (this.shouldLoadData()) {
       this.loadData((data) => {
@@ -292,12 +300,10 @@ class Node {
   }
   collapse() {
     this.expanded = false;
-    this.childNodes.forEach((item) => {
-      item.canFocus = false;
-    });
+    setCanFocus(this.childNodes, false);
   }
   shouldLoadData() {
-    return this.store.lazy === true && this.store.load && !this.loaded;
+    return Boolean(this.store.lazy === true && this.store.load && !this.loaded);
   }
   updateLeafState() {
     if (this.store.lazy === true && this.loaded !== true && typeof this.isLeafByUser !== "undefined") {
@@ -368,7 +374,7 @@ class Node {
     if (props) {
       children = props.children || "children";
     }
-    if (data[children] === void 0) {
+    if (isUndefined(data[children])) {
       data[children] = null;
     }
     if (forceInit && !data[children]) {
@@ -383,7 +389,7 @@ class Node {
     const newNodes = [];
     newData.forEach((item, index) => {
       const key = item[NODE_KEY];
-      const isNodeExists = !!key && oldData.findIndex((data) => data[NODE_KEY] === key) >= 0;
+      const isNodeExists = !!key && oldData.findIndex((data) => (data == null ? void 0 : data[NODE_KEY]) === key) >= 0;
       if (isNodeExists) {
         newDataMap[key] = { index, data: item };
       } else {
@@ -392,7 +398,7 @@ class Node {
     });
     if (!this.store.lazy) {
       oldData.forEach((item) => {
-        if (!newDataMap[item[NODE_KEY]])
+        if (!newDataMap[item == null ? void 0 : item[NODE_KEY]])
           this.removeChildByData(item);
       });
     }

@@ -16,7 +16,7 @@ declare const FixedSizeList: import("vue").DefineComponent<{
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
     };
-    readonly useIsScrolling: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, false, boolean>;
+    readonly useIsScrolling: BooleanConstructor;
     readonly width: {
         readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<readonly [NumberConstructor, StringConstructor], unknown, unknown>>;
         readonly required: false;
@@ -24,7 +24,7 @@ declare const FixedSizeList: import("vue").DefineComponent<{
         __epPropKey: true;
     };
     readonly perfMode: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
-    readonly scrollbarAlwaysOn: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, false, boolean>;
+    readonly scrollbarAlwaysOn: BooleanConstructor;
     readonly cache: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, never, never, 2, false>;
     readonly estimatedItemSize: {
         readonly type: import("vue").PropType<number>;
@@ -41,7 +41,7 @@ declare const FixedSizeList: import("vue").DefineComponent<{
         __epPropKey: true;
     };
     readonly itemSize: {
-        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => number | import("element-plus/es/element-plus").ItemSize) | (() => number | import("element-plus/es/element-plus").ItemSize) | ((new (...args: any[]) => number | import("element-plus/es/element-plus").ItemSize) | (() => number | import("element-plus/es/element-plus").ItemSize))[], never, never>>;
+        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => number | import("element-plus").ItemSize) | (() => number | import("element-plus").ItemSize) | ((new (...args: any[]) => number | import("element-plus").ItemSize) | (() => number | import("element-plus").ItemSize))[], never, never>>;
         readonly required: true;
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
@@ -88,14 +88,14 @@ declare const FixedSizeList: import("vue").DefineComponent<{
         scrollOffset: number;
         updateRequested: boolean;
         isScrollbarDragging: boolean;
-        scrollbarAlwaysOn: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
+        scrollbarAlwaysOn: boolean;
     }>;
     getItemStyle: (idx: number) => import("vue").CSSProperties;
     onScroll: (e: Event) => void;
     onScrollbarScroll: (distanceToGo: number, totalSteps: number) => void;
     onWheel: (e: WheelEvent) => void;
     scrollTo: (offset: number) => void;
-    scrollToItem: (idx: number, alignment?: import("element-plus/es/element-plus").Alignment) => void;
+    scrollToItem: (idx: number, alignment?: import("element-plus").Alignment) => void;
     resetScrollTop: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("scroll" | "itemRendered")[], "scroll" | "itemRendered", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     readonly className: import("element-plus/es/utils").EpPropFinalized<StringConstructor, unknown, unknown, "", boolean>;
@@ -115,7 +115,7 @@ declare const FixedSizeList: import("vue").DefineComponent<{
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
     };
-    readonly useIsScrolling: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, false, boolean>;
+    readonly useIsScrolling: BooleanConstructor;
     readonly width: {
         readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<readonly [NumberConstructor, StringConstructor], unknown, unknown>>;
         readonly required: false;
@@ -123,7 +123,7 @@ declare const FixedSizeList: import("vue").DefineComponent<{
         __epPropKey: true;
     };
     readonly perfMode: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
-    readonly scrollbarAlwaysOn: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, false, boolean>;
+    readonly scrollbarAlwaysOn: BooleanConstructor;
     readonly cache: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, never, never, 2, false>;
     readonly estimatedItemSize: {
         readonly type: import("vue").PropType<number>;
@@ -140,7 +140,7 @@ declare const FixedSizeList: import("vue").DefineComponent<{
         __epPropKey: true;
     };
     readonly itemSize: {
-        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => number | import("element-plus/es/element-plus").ItemSize) | (() => number | import("element-plus/es/element-plus").ItemSize) | ((new (...args: any[]) => number | import("element-plus/es/element-plus").ItemSize) | (() => number | import("element-plus/es/element-plus").ItemSize))[], never, never>>;
+        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => number | import("element-plus").ItemSize) | (() => number | import("element-plus").ItemSize) | ((new (...args: any[]) => number | import("element-plus").ItemSize) | (() => number | import("element-plus").ItemSize))[], never, never>>;
         readonly required: true;
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
@@ -155,11 +155,11 @@ declare const FixedSizeList: import("vue").DefineComponent<{
     readonly className: string;
     readonly containerElement: import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => string | Element) | (() => string | Element) | ((new (...args: any[]) => string | Element) | (() => string | Element))[], unknown, unknown>;
     readonly innerElement: import("element-plus/es/utils").EpPropMergeType<readonly [StringConstructor, ObjectConstructor], unknown, unknown>;
-    readonly useIsScrolling: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
     readonly perfMode: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
-    readonly scrollbarAlwaysOn: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
+    readonly useIsScrolling: boolean;
+    readonly scrollbarAlwaysOn: boolean;
     readonly cache: number;
     readonly initScrollOffset: number;
 }>;
-export type FixedSizeListInstance = InstanceType<typeof FixedSizeList>;
+export type FixedSizeListInstance = InstanceType<typeof FixedSizeList> & unknown;
 export default FixedSizeList;

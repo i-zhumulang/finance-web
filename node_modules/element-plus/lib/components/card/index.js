@@ -8,6 +8,7 @@ var install = require('../../utils/vue/install.js');
 
 const ElCard = install.withInstall(card$1["default"]);
 
+exports.cardContextKey = card.cardContextKey;
 exports.cardProps = card.cardProps;
 exports.ElCard = ElCard;
 exports["default"] = ElCard;

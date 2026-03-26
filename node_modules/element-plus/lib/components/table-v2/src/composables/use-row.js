@@ -73,6 +73,11 @@ const useRow = (props, {
       rowKey
     });
     (_b = props.onExpandedRowsChange) == null ? void 0 : _b.call(props, _expandedRowKeys);
+    const tableRoot = tableInstance.vnode.el;
+    const hoverRow = tableRoot.querySelector(`.${ns.is("hovered")}[rowkey="${String(rowKey)}"]`);
+    if (hoverRow) {
+      vue.nextTick(() => onRowHovered({ hovered: true, rowKey }));
+    }
   }
   const flushingRowHeights = lodashUnified.debounce(() => {
     var _a, _b, _c, _d;

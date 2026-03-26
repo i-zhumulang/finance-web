@@ -53,7 +53,9 @@ const _sfc_main = defineComponent({
           "insertBefore",
           "insertAfter"
         ]),
-        ...pick(select.value, ["focus", "blur", "selectedLabel"])
+        ...pick(select.value, ["focus", "blur", "selectedLabel"]),
+        treeRef: tree.value,
+        selectRef: select.value
       });
     });
     return () => h(ElSelect, reactive({

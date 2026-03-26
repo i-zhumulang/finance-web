@@ -1,4 +1,4 @@
-import type { Component, ExtractPropTypes } from 'vue';
+import type { Component, ExtractPropTypes, __ExtractPublicPropTypes } from 'vue';
 import type Rate from './rate.vue';
 export declare const rateProps: {
     readonly ariaLabel: StringConstructor;
@@ -29,9 +29,10 @@ export declare const rateProps: {
     readonly clearable: BooleanConstructor;
 };
 export type RateProps = ExtractPropTypes<typeof rateProps>;
+export type RatePropsPublic = __ExtractPublicPropTypes<typeof rateProps>;
 export declare const rateEmits: {
     change: (value: number) => boolean;
     "update:modelValue": (value: number) => boolean;
 };
 export type RateEmits = typeof rateEmits;
-export type RateInstance = InstanceType<typeof Rate>;
+export type RateInstance = InstanceType<typeof Rate> & unknown;

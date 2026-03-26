@@ -8,10 +8,7 @@ const uploadListProps = buildProps({
     type: definePropType(Array),
     default: () => mutable([])
   },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  disabled: Boolean,
   handlePreview: {
     type: definePropType(Function),
     default: NOOP

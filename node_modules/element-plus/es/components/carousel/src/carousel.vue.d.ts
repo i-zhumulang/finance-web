@@ -17,7 +17,7 @@ declare const __VLS_component: import("vue").DefineComponent<{
     readonly motionBlur: BooleanConstructor;
 }, {
     /** @description active slide index */
-    activeIndex: import("vue").Ref<number>;
+    activeIndex: import("vue").WritableComputedRef<number>;
     /** @description manually switch slide, index of the slide to be switched to, starting from 0; or the `name` of corresponding `el-carousel-item` */
     setActiveItem: (index: number | string) => void;
     /** @description switch to the previous slide */

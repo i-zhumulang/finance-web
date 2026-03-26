@@ -27,13 +27,26 @@ const checkboxGroupProps = runtime.buildProps({
     type: Boolean,
     default: true
   },
+  options: {
+    type: runtime.definePropType(Array)
+  },
+  props: {
+    type: runtime.definePropType(Object),
+    default: () => checkboxDefaultProps
+  },
   ...index$1.useAriaProps(["ariaLabel"])
 });
 const checkboxGroupEmits = {
   [event.UPDATE_MODEL_EVENT]: (val) => shared.isArray(val),
   change: (val) => shared.isArray(val)
 };
+const checkboxDefaultProps = {
+  label: "label",
+  value: "value",
+  disabled: "disabled"
+};
 
+exports.checkboxDefaultProps = checkboxDefaultProps;
 exports.checkboxGroupEmits = checkboxGroupEmits;
 exports.checkboxGroupProps = checkboxGroupProps;
 //# sourceMappingURL=checkbox-group.js.map

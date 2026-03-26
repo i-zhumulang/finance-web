@@ -49,22 +49,22 @@ function proxyTableProps(store, props) {
 function handleValue(value, propsKey, store) {
   let newVal = value;
   let storeKey = InitialStateMap[propsKey];
-  if (shared.isObject(InitialStateMap[propsKey])) {
+  if (shared.isObject(storeKey)) {
+    newVal = newVal || storeKey.default;
     storeKey = storeKey.key;
-    newVal = newVal || InitialStateMap[propsKey].default;
   }
   store.states[storeKey].value = newVal;
 }
-function getArrKeysValue(props, keys) {
-  if (keys.includes(".")) {
-    const keyList = keys.split(".");
+function getArrKeysValue(props, key) {
+  if (key.includes(".")) {
+    const keyList = key.split(".");
     let value = props;
-    keyList.forEach((key) => {
-      value = value[key];
+    keyList.forEach((k) => {
+      value = value[k];
     });
     return value;
   } else {
-    return props[keys];
+    return props[key];
   }
 }
 

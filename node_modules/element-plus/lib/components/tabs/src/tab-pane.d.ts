@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, __ExtractPublicPropTypes } from 'vue';
 import type TabPane from './tab-pane.vue';
 export declare const tabPaneProps: {
     readonly label: import("element-plus/es/utils").EpPropFinalized<StringConstructor, unknown, unknown, "", boolean>;
@@ -8,9 +8,10 @@ export declare const tabPaneProps: {
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
     };
-    readonly closable: BooleanConstructor;
+    readonly closable: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, undefined, boolean>;
     readonly disabled: BooleanConstructor;
     readonly lazy: BooleanConstructor;
 };
 export type TabPaneProps = ExtractPropTypes<typeof tabPaneProps>;
-export type TabPaneInstance = InstanceType<typeof TabPane>;
+export type TabPanePropsPublic = __ExtractPublicPropTypes<typeof tabPaneProps>;
+export type TabPaneInstance = InstanceType<typeof TabPane> & unknown;

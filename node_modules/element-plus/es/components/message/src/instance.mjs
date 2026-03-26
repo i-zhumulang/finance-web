@@ -1,7 +1,14 @@
 import { shallowReactive } from 'vue';
 
-const instances = shallowReactive([]);
-const getInstance = (id) => {
+const placementInstances = shallowReactive({});
+const getOrCreatePlacementInstances = (placement) => {
+  if (!placementInstances[placement]) {
+    placementInstances[placement] = shallowReactive([]);
+  }
+  return placementInstances[placement];
+};
+const getInstance = (id, placement) => {
+  const instances = placementInstances[placement] || [];
   const idx = instances.findIndex((instance) => instance.id === id);
   const current = instances[idx];
   let prev;
@@ -10,16 +17,17 @@ const getInstance = (id) => {
   }
   return { current, prev };
 };
-const getLastOffset = (id) => {
-  const { prev } = getInstance(id);
+const getLastOffset = (id, placement) => {
+  const { prev } = getInstance(id, placement);
   if (!prev)
     return 0;
   return prev.vm.exposed.bottom.value;
 };
-const getOffsetOrSpace = (id, offset) => {
+const getOffsetOrSpace = (id, offset, placement) => {
+  const instances = placementInstances[placement] || [];
   const idx = instances.findIndex((instance) => instance.id === id);
   return idx > 0 ? 16 : offset;
 };
 
-export { getInstance, getLastOffset, getOffsetOrSpace, instances };
+export { getInstance, getLastOffset, getOffsetOrSpace, getOrCreatePlacementInstances, placementInstances };
 //# sourceMappingURL=instance.mjs.map

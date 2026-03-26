@@ -4,10 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var buildGrid = require('../builders/build-grid.js');
 var defaults = require('../defaults.js');
-var types = require('../../../../utils/types.js');
-var error = require('../../../../utils/error.js');
 
-const SCOPE = "ElFixedSizeGrid";
 const FixedSizeGrid = buildGrid["default"]({
   name: "ElFixedSizeGrid",
   getColumnPosition: ({ columnWidth }, index) => [
@@ -115,20 +112,6 @@ const FixedSizeGrid = buildGrid["default"]({
   initCache: () => void 0,
   clearCache: true,
   validateProps: ({ columnWidth, rowHeight }) => {
-    if (process.env.NODE_ENV !== "production") {
-      if (!types.isNumber(columnWidth)) {
-        error.throwError(SCOPE, `
-          "columnWidth" must be passed as number,
-            instead ${typeof columnWidth} was given.
-        `);
-      }
-      if (!types.isNumber(rowHeight)) {
-        error.throwError(SCOPE, `
-          "columnWidth" must be passed as number,
-            instead ${typeof rowHeight} was given.
-        `);
-      }
-    }
   }
 });
 

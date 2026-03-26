@@ -11,8 +11,10 @@ var install = require('../../utils/vue/install.js');
 const ElDialog = install.withInstall(dialog$1["default"]);
 
 exports.useDialog = useDialog.useDialog;
+exports.dialogContextKey = dialog.dialogContextKey;
 exports.dialogEmits = dialog.dialogEmits;
 exports.dialogProps = dialog.dialogProps;
+exports.DEFAULT_DIALOG_TRANSITION = constants.DEFAULT_DIALOG_TRANSITION;
 exports.dialogInjectionKey = constants.dialogInjectionKey;
 exports.ElDialog = ElDialog;
 exports["default"] = ElDialog;

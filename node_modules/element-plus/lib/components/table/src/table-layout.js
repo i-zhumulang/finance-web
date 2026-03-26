@@ -60,12 +60,14 @@ class TableLayout {
     const el = this.table.vnode.el;
     value = util.parseHeight(value);
     this.height.value = Number(value);
-    if (!el && (value || value === 0))
-      return vue.nextTick(() => this.setHeight(value, prop));
-    if (types.isNumber(value)) {
+    if (!el && (value || value === 0)) {
+      vue.nextTick(() => this.setHeight(value, prop));
+      return;
+    }
+    if (el && types.isNumber(value)) {
       el.style[prop] = `${value}px`;
       this.updateElsHeight();
-    } else if (shared.isString(value)) {
+    } else if (el && shared.isString(value)) {
       el.style[prop] = value;
       this.updateElsHeight();
     }
@@ -102,10 +104,11 @@ class TableLayout {
     return false;
   }
   updateColumnsWidth() {
+    var _a;
     if (!core.isClient)
       return;
     const fit = this.fit;
-    const bodyWidth = this.table.vnode.el.clientWidth;
+    const bodyWidth = (_a = this.table.vnode.el) == null ? void 0 : _a.clientWidth;
     let bodyMinWidth = 0;
     const flattenColumns = this.getFlattenColumns();
     const flexColumns = flattenColumns.filter((column) => !types.isNumber(column.width));

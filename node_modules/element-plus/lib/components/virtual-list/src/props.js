@@ -60,10 +60,7 @@ const virtualizedProps = runtime.buildProps({
   style: {
     type: runtime.definePropType([Object, String, Array])
   },
-  useIsScrolling: {
-    type: Boolean,
-    default: false
-  },
+  useIsScrolling: Boolean,
   width: {
     type: [Number, String],
     required: false
@@ -72,10 +69,7 @@ const virtualizedProps = runtime.buildProps({
     type: Boolean,
     default: true
   },
-  scrollbarAlwaysOn: {
-    type: Boolean,
-    default: false
-  }
+  scrollbarAlwaysOn: Boolean
 });
 const virtualizedListProps = runtime.buildProps({
   cache,

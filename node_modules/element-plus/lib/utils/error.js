@@ -2,8 +2,6 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var shared = require('@vue/shared');
-
 class ElementPlusError extends Error {
   constructor(m) {
     super(m);
@@ -14,10 +12,6 @@ function throwError(scope, m) {
   throw new ElementPlusError(`[${scope}] ${m}`);
 }
 function debugWarn(scope, message) {
-  if (process.env.NODE_ENV !== "production") {
-    const error = shared.isString(scope) ? new ElementPlusError(`[${scope}] ${message}`) : scope;
-    console.warn(error);
-  }
 }
 
 exports.debugWarn = debugWarn;

@@ -1,10 +1,11 @@
 import { computed } from 'vue';
 import { buildProps, definePropType } from '../../../utils/vue/props/runtime.mjs';
 import { NOOP } from '@vue/shared';
+import { UPDATE_MODEL_EVENT, CHANGE_EVENT } from '../../../constants/event.mjs';
 
 const CommonProps = buildProps({
   modelValue: {
-    type: definePropType([Number, String, Array])
+    type: definePropType([Number, String, Array, Object])
   },
   options: {
     type: definePropType(Array),
@@ -27,7 +28,27 @@ const DefaultProps = {
   children: "children",
   leaf: "leaf",
   disabled: "disabled",
-  hoverThreshold: 500
+  hoverThreshold: 500,
+  checkOnClickNode: false,
+  checkOnClickLeaf: true,
+  showPrefix: true
+};
+const cascaderPanelProps = buildProps({
+  ...CommonProps,
+  border: {
+    type: Boolean,
+    default: true
+  },
+  renderLabel: {
+    type: Function
+  }
+});
+const emitChangeFn = (value) => true;
+const cascaderPanelEmits = {
+  [UPDATE_MODEL_EVENT]: emitChangeFn,
+  [CHANGE_EVENT]: emitChangeFn,
+  close: () => true,
+  "expand-change": (value) => value
 };
 const useCascaderConfig = (props) => {
   return computed(() => ({
@@ -36,5 +57,5 @@ const useCascaderConfig = (props) => {
   }));
 };
 
-export { CommonProps, DefaultProps, useCascaderConfig };
+export { CommonProps, DefaultProps, cascaderPanelEmits, cascaderPanelProps, useCascaderConfig };
 //# sourceMappingURL=config.mjs.map

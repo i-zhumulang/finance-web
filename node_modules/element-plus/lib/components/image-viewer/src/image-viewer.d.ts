@@ -1,4 +1,4 @@
-import type { Component, ExtractPropTypes } from 'vue';
+import type { Component, ExtractPropTypes, __ExtractPublicPropTypes } from 'vue';
 import type ImageViewer from './image-viewer.vue';
 export type ImageViewerAction = 'zoomIn' | 'zoomOut' | 'clockwise' | 'anticlockwise';
 export declare const imageViewerProps: {
@@ -15,8 +15,10 @@ export declare const imageViewerProps: {
     readonly teleported: BooleanConstructor;
     readonly closeOnPressEscape: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
     readonly zoomRate: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 1.2, boolean>;
+    readonly scale: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 1, boolean>;
     readonly minScale: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 0.2, boolean>;
     readonly maxScale: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 7, boolean>;
+    readonly showProgress: BooleanConstructor;
     readonly crossorigin: {
         readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => "" | "anonymous" | "use-credentials") | (() => "" | "anonymous" | "use-credentials") | ((new (...args: any[]) => "" | "anonymous" | "use-credentials") | (() => "" | "anonymous" | "use-credentials"))[], unknown, unknown>>;
         readonly required: false;
@@ -25,8 +27,10 @@ export declare const imageViewerProps: {
     };
 };
 export type ImageViewerProps = ExtractPropTypes<typeof imageViewerProps>;
+export type ImageViewerPropsPublic = __ExtractPublicPropTypes<typeof imageViewerProps>;
 export declare const imageViewerEmits: {
     close: () => boolean;
+    error: (evt: Event) => boolean;
     switch: (index: number) => boolean;
     rotate: (deg: number) => boolean;
 };
@@ -35,4 +39,4 @@ export interface ImageViewerMode {
     name: string;
     icon: Component;
 }
-export type ImageViewerInstance = InstanceType<typeof ImageViewer>;
+export type ImageViewerInstance = InstanceType<typeof ImageViewer> & unknown;

@@ -57,11 +57,12 @@ function useTree(watcherData) {
           level
         };
       }
-    }, childrenColumnName.value, lazyColumnIdentifier.value);
+    }, childrenColumnName.value, lazyColumnIdentifier.value, lazy.value);
     return res;
   };
-  const updateTreeData = (ifChangeExpandRowKeys = false, ifExpandAll = ((_a) => (_a = instance.store) == null ? void 0 : _a.states.defaultExpandAll.value)()) => {
-    var _a2;
+  const updateTreeData = (ifChangeExpandRowKeys = false, ifExpandAll) => {
+    var _a, _b;
+    ifExpandAll || (ifExpandAll = (_a = instance.store) == null ? void 0 : _a.states.defaultExpandAll.value);
     const nested = normalizedData.value;
     const normalizedLazyNode_ = normalizedLazyNode.value;
     const keys = Object.keys(nested);
@@ -96,10 +97,11 @@ function useTree(watcherData) {
       const lazyKeys = Object.keys(normalizedLazyNode_);
       if (lazy.value && lazyKeys.length && rootLazyRowKeys.length) {
         lazyKeys.forEach((key) => {
+          var _a2;
           const oldValue = oldTreeData[key];
           const lazyNodeChildren = normalizedLazyNode_[key].children;
           if (rootLazyRowKeys.includes(key)) {
-            if (newTreeData[key].children.length !== 0) {
+            if (((_a2 = newTreeData[key].children) == null ? void 0 : _a2.length) !== 0) {
               throw new Error("[ElTable]children must be an empty array.");
             }
             newTreeData[key].children = lazyNodeChildren;
@@ -111,14 +113,14 @@ function useTree(watcherData) {
               loading: !!loading,
               expanded: getExpanded(oldValue, key),
               children: lazyNodeChildren,
-              level: ""
+              level: void 0
             };
           }
         });
       }
     }
     treeData.value = newTreeData;
-    (_a2 = instance.store) == null ? void 0 : _a2.updateTableScrollY();
+    (_b = instance.store) == null ? void 0 : _b.updateTableScrollY();
   };
   watch(() => expandRowKeys.value, () => {
     updateTreeData(true);
@@ -133,6 +135,9 @@ function useTree(watcherData) {
     expandRowKeys.value = value;
     updateTreeData();
   };
+  const isUseLazy = (data) => {
+    return lazy.value && data && "loaded" in data && !data.loaded;
+  };
   const toggleTreeExpansion = (row, expanded) => {
     instance.store.assertRowKey();
     const rowKey = watcherData.rowKey.value;
@@ -145,6 +150,7 @@ function useTree(watcherData) {
       if (oldExpanded !== expanded) {
         instance.emit("expand-change", row, expanded);
       }
+      isUseLazy(data) && loadData(row, id, data);
       instance.store.updateTableScrollY();
     }
   };
@@ -153,7 +159,7 @@ function useTree(watcherData) {
     const rowKey = watcherData.rowKey.value;
     const id = getRowIdentity(row, rowKey);
     const data = treeData.value[id];
-    if (lazy.value && data && "loaded" in data && !data.loaded) {
+    if (isUseLazy(data)) {
       loadData(row, id, data);
     } else {
       toggleTreeExpansion(row, void 0);

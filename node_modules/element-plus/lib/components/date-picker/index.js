@@ -2,15 +2,13 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var datePicker$1 = require('./src/date-picker.js');
-var constants = require('./src/constants.js');
-var datePicker = require('./src/props/date-picker.js');
+var datePicker = require('./src/date-picker.js');
+var props = require('./src/props.js');
 var install = require('../../utils/vue/install.js');
 
-const ElDatePicker = install.withInstall(datePicker$1["default"]);
+const ElDatePicker = install.withInstall(datePicker["default"]);
 
-exports.ROOT_PICKER_INJECTION_KEY = constants.ROOT_PICKER_INJECTION_KEY;
-exports.datePickerProps = datePicker.datePickerProps;
+exports.datePickerProps = props.datePickerProps;
 exports.ElDatePicker = ElDatePicker;
 exports["default"] = ElDatePicker;
 //# sourceMappingURL=index.js.map

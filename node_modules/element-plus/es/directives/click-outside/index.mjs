@@ -1,6 +1,6 @@
 import { isClient } from '@vueuse/core';
-import { isArray } from '@vue/shared';
 import { isElement } from '../../utils/types.mjs';
+import { isArray } from '@vue/shared';
 
 const nodeList = /* @__PURE__ */ new Map();
 if (isClient) {

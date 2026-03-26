@@ -6,6 +6,9 @@ var lodashUnified = require('lodash-unified');
 var shared = require('@vue/shared');
 
 const unique = (arr) => [...new Set(arr)];
+const extractFirst = (arr) => {
+  return shared.isArray(arr) ? arr[0] : arr;
+};
 const castArray = (arr) => {
   if (!arr && arr !== 0)
     return [];
@@ -17,5 +20,6 @@ Object.defineProperty(exports, 'ensureArray', {
   get: function () { return lodashUnified.castArray; }
 });
 exports.castArray = castArray;
+exports.extractFirst = extractFirst;
 exports.unique = unique;
 //# sourceMappingURL=arrays.js.map

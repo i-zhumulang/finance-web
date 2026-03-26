@@ -12,10 +12,7 @@ const uploadListProps = runtime.buildProps({
     type: runtime.definePropType(Array),
     default: () => typescript.mutable([])
   },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  disabled: Boolean,
   handlePreview: {
     type: runtime.definePropType(Function),
     default: shared.NOOP

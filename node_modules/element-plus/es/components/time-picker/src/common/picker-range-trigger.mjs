@@ -1,6 +1,7 @@
-import { defineComponent, ref, openBlock, createElementBlock, normalizeClass, unref, normalizeStyle, renderSlot, createElementVNode, mergeProps } from 'vue';
-import { timePickerRngeTriggerProps } from './props.mjs';
+import { defineComponent, reactive, computed, ref, openBlock, createElementBlock, normalizeClass, unref, normalizeStyle, renderSlot, createElementVNode, mergeProps } from 'vue';
+import { timePickerRangeTriggerProps } from './props.mjs';
 import _export_sfc from '../../../../_virtual/plugin-vue_export-helper.mjs';
+import { useFormItem, useFormItemInputId } from '../../../form/src/hooks/use-form-item.mjs';
 import { useAttrs } from '../../../../hooks/use-attrs/index.mjs';
 import { useNamespace } from '../../../../hooks/use-namespace/index.mjs';
 import { useFocusController } from '../../../../hooks/use-focus-controller/index.mjs';
@@ -11,7 +12,7 @@ const __default__ = defineComponent({
 });
 const _sfc_main = /* @__PURE__ */ defineComponent({
   ...__default__,
-  props: timePickerRngeTriggerProps,
+  props: timePickerRangeTriggerProps,
   emits: [
     "mouseenter",
     "mouseleave",
@@ -25,12 +26,22 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     "endChange"
   ],
   setup(__props, { expose, emit }) {
+    const props = __props;
+    const { formItem } = useFormItem();
+    const { inputId } = useFormItemInputId(reactive({ id: computed(() => {
+      var _a;
+      return (_a = props.id) == null ? void 0 : _a[0];
+    }) }), {
+      formItemContext: formItem
+    });
     const attrs = useAttrs();
     const nsDate = useNamespace("date");
     const nsRange = useNamespace("range");
     const inputRef = ref();
     const endInputRef = ref();
-    const { wrapperRef, isFocused } = useFocusController(inputRef);
+    const { wrapperRef, isFocused } = useFocusController(inputRef, {
+      disabled: computed(() => props.disabled)
+    });
     const handleClick = (evt) => {
       emit("click", evt);
     };
@@ -41,7 +52,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       emit("mouseleave", evt);
     };
     const handleTouchStart = (evt) => {
-      emit("mouseenter", evt);
+      emit("touchstart", evt);
     };
     const handleStartInput = (evt) => {
       emit("startInput", evt);
@@ -81,16 +92,17 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }, [
         renderSlot(_ctx.$slots, "prefix"),
         createElementVNode("input", mergeProps(unref(attrs), {
-          id: _ctx.id && _ctx.id[0],
+          id: unref(inputId),
           ref_key: "inputRef",
           ref: inputRef,
           name: _ctx.name && _ctx.name[0],
           placeholder: _ctx.startPlaceholder,
           value: _ctx.modelValue && _ctx.modelValue[0],
           class: unref(nsRange).b("input"),
+          disabled: _ctx.disabled,
           onInput: handleStartInput,
           onChange: handleStartChange
-        }), null, 16, ["id", "name", "placeholder", "value"]),
+        }), null, 16, ["id", "name", "placeholder", "value", "disabled"]),
         renderSlot(_ctx.$slots, "range-separator"),
         createElementVNode("input", mergeProps(unref(attrs), {
           id: _ctx.id && _ctx.id[1],
@@ -100,9 +112,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           placeholder: _ctx.endPlaceholder,
           value: _ctx.modelValue && _ctx.modelValue[1],
           class: unref(nsRange).b("input"),
+          disabled: _ctx.disabled,
           onInput: handleEndInput,
           onChange: handleEndChange
-        }), null, 16, ["id", "name", "placeholder", "value"]),
+        }), null, 16, ["id", "name", "placeholder", "value", "disabled"]),
         renderSlot(_ctx.$slots, "suffix")
       ], 38);
     };

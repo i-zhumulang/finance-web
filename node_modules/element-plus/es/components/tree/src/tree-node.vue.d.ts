@@ -1,7 +1,7 @@
 import Node from './model/node';
 import type { ComponentInternalInstance, PropType } from 'vue';
-import type { Nullable } from 'element-plus/es/utils';
 import type { RootTreeType, TreeNodeData, TreeOptionProps } from './tree.type';
+import type { CheckboxValueType } from 'element-plus/es/components/checkbox';
 declare const _default: import("vue").DefineComponent<{
     node: {
         type: typeof Node;
@@ -14,10 +14,7 @@ declare const _default: import("vue").DefineComponent<{
     accordion: BooleanConstructor;
     renderContent: FunctionConstructor;
     renderAfterExpand: BooleanConstructor;
-    showCheckbox: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
+    showCheckbox: BooleanConstructor;
 }, {
     ns: {
         namespace: import("vue").ComputedRef<string>;
@@ -37,12 +34,12 @@ declare const _default: import("vue").DefineComponent<{
         cssVarBlock: (object: Record<string, string>) => Record<string, string>;
         cssVarBlockName: (name: string) => string;
     };
-    node$: import("vue").Ref<Nullable<HTMLElement>>;
-    tree: RootTreeType | undefined;
+    node$: import("vue").Ref<HTMLElement | undefined>;
+    tree: RootTreeType;
     expanded: import("vue").Ref<boolean>;
     childNodeRendered: import("vue").Ref<boolean>;
-    oldChecked: import("vue").Ref<boolean>;
-    oldIndeterminate: import("vue").Ref<boolean>;
+    oldChecked: import("vue").Ref<boolean | undefined>;
+    oldIndeterminate: import("vue").Ref<boolean | undefined>;
     getNodeKey: (node: Node) => any;
     getNodeClass: (node: Node) => {
         [key: string]: boolean;
@@ -51,7 +48,7 @@ declare const _default: import("vue").DefineComponent<{
     handleClick: (e: MouseEvent) => void;
     handleContextMenu: (event: Event) => void;
     handleExpandIconClick: () => void;
-    handleCheckChange: (value: any, ev: any) => void;
+    handleCheckChange: (value: CheckboxValueType) => void;
     handleChildNodeExpand: (nodeData: TreeNodeData, node: Node, instance: ComponentInternalInstance) => void;
     handleDragStart: (event: DragEvent) => void;
     handleDragOver: (event: DragEvent) => void;
@@ -70,10 +67,7 @@ declare const _default: import("vue").DefineComponent<{
     accordion: BooleanConstructor;
     renderContent: FunctionConstructor;
     renderAfterExpand: BooleanConstructor;
-    showCheckbox: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
+    showCheckbox: BooleanConstructor;
 }>> & {
     "onNode-expand"?: ((...args: any[]) => any) | undefined;
 }, {

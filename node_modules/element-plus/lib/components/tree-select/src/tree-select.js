@@ -57,7 +57,9 @@ const _sfc_main = vue.defineComponent({
           "insertBefore",
           "insertAfter"
         ]),
-        ...lodashUnified.pick(select$1.value, ["focus", "blur", "selectedLabel"])
+        ...lodashUnified.pick(select$1.value, ["focus", "blur", "selectedLabel"]),
+        treeRef: tree$1.value,
+        selectRef: select$1.value
       });
     });
     return () => vue.h(index.ElSelect, vue.reactive({

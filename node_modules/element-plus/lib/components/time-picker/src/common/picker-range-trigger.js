@@ -5,6 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var vue = require('vue');
 var props = require('./props.js');
 var pluginVue_exportHelper = require('../../../../_virtual/plugin-vue_export-helper.js');
+var useFormItem = require('../../../form/src/hooks/use-form-item.js');
 var index = require('../../../../hooks/use-attrs/index.js');
 var index$1 = require('../../../../hooks/use-namespace/index.js');
 var index$2 = require('../../../../hooks/use-focus-controller/index.js');
@@ -15,7 +16,7 @@ const __default__ = vue.defineComponent({
 });
 const _sfc_main = /* @__PURE__ */ vue.defineComponent({
   ...__default__,
-  props: props.timePickerRngeTriggerProps,
+  props: props.timePickerRangeTriggerProps,
   emits: [
     "mouseenter",
     "mouseleave",
@@ -29,12 +30,22 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
     "endChange"
   ],
   setup(__props, { expose, emit }) {
+    const props = __props;
+    const { formItem } = useFormItem.useFormItem();
+    const { inputId } = useFormItem.useFormItemInputId(vue.reactive({ id: vue.computed(() => {
+      var _a;
+      return (_a = props.id) == null ? void 0 : _a[0];
+    }) }), {
+      formItemContext: formItem
+    });
     const attrs = index.useAttrs();
     const nsDate = index$1.useNamespace("date");
     const nsRange = index$1.useNamespace("range");
     const inputRef = vue.ref();
     const endInputRef = vue.ref();
-    const { wrapperRef, isFocused } = index$2.useFocusController(inputRef);
+    const { wrapperRef, isFocused } = index$2.useFocusController(inputRef, {
+      disabled: vue.computed(() => props.disabled)
+    });
     const handleClick = (evt) => {
       emit("click", evt);
     };
@@ -45,7 +56,7 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
       emit("mouseleave", evt);
     };
     const handleTouchStart = (evt) => {
-      emit("mouseenter", evt);
+      emit("touchstart", evt);
     };
     const handleStartInput = (evt) => {
       emit("startInput", evt);
@@ -85,16 +96,17 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
       }, [
         vue.renderSlot(_ctx.$slots, "prefix"),
         vue.createElementVNode("input", vue.mergeProps(vue.unref(attrs), {
-          id: _ctx.id && _ctx.id[0],
+          id: vue.unref(inputId),
           ref_key: "inputRef",
           ref: inputRef,
           name: _ctx.name && _ctx.name[0],
           placeholder: _ctx.startPlaceholder,
           value: _ctx.modelValue && _ctx.modelValue[0],
           class: vue.unref(nsRange).b("input"),
+          disabled: _ctx.disabled,
           onInput: handleStartInput,
           onChange: handleStartChange
-        }), null, 16, ["id", "name", "placeholder", "value"]),
+        }), null, 16, ["id", "name", "placeholder", "value", "disabled"]),
         vue.renderSlot(_ctx.$slots, "range-separator"),
         vue.createElementVNode("input", vue.mergeProps(vue.unref(attrs), {
           id: _ctx.id && _ctx.id[1],
@@ -104,9 +116,10 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
           placeholder: _ctx.endPlaceholder,
           value: _ctx.modelValue && _ctx.modelValue[1],
           class: vue.unref(nsRange).b("input"),
+          disabled: _ctx.disabled,
           onInput: handleEndInput,
           onChange: handleEndChange
-        }), null, 16, ["id", "name", "placeholder", "value"]),
+        }), null, 16, ["id", "name", "placeholder", "value", "disabled"]),
         vue.renderSlot(_ctx.$slots, "suffix")
       ], 38);
     };

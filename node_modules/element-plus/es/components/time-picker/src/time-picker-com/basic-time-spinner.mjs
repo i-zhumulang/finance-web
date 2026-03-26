@@ -3,12 +3,13 @@ import { debounce } from 'lodash-unified';
 import { ElScrollbar } from '../../../scrollbar/index.mjs';
 import { ElIcon } from '../../../icon/index.mjs';
 import { ArrowUp, ArrowDown } from '@element-plus/icons-vue';
-import { timeUnits } from '../constants.mjs';
+import { PICKER_BASE_INJECTION_KEY, timeUnits, DEFAULT_FORMATS_TIME } from '../constants.mjs';
 import { buildTimeList } from '../utils.mjs';
 import { basicTimeSpinnerProps } from '../props/basic-time-spinner.mjs';
 import { getTimeLists } from '../composables/use-time-picker.mjs';
 import _export_sfc from '../../../../_virtual/plugin-vue_export-helper.mjs';
 import { vRepeatClick } from '../../../../directives/repeat-click/index.mjs';
+import { CHANGE_EVENT } from '../../../../constants/event.mjs';
 import { useNamespace } from '../../../../hooks/use-namespace/index.mjs';
 import { getStyle } from '../../../../utils/dom/style.mjs';
 import { isNumber } from '../../../../utils/types.mjs';
@@ -16,11 +17,11 @@ import { isNumber } from '../../../../utils/types.mjs';
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "basic-time-spinner",
   props: basicTimeSpinnerProps,
-  emits: ["change", "select-range", "set-option"],
+  emits: [CHANGE_EVENT, "select-range", "set-option"],
   setup(__props, { emit }) {
     const props = __props;
-    const pickerBase = inject("EP_PICKER_BASE");
-    const { isRange } = pickerBase.props;
+    const pickerBase = inject(PICKER_BASE_INJECTION_KEY);
+    const { isRange, format } = pickerBase.props;
     const ns = useNamespace("time");
     const { getHoursList, getMinutesList, getSecondsList } = getTimeLists(props.disabledHours, props.disabledMinutes, props.disabledSeconds);
     let isScrolling = false;
@@ -76,16 +77,26 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return content;
     };
     const emitSelectRange = (type) => {
-      let range;
+      let range = [0, 0];
+      const actualFormat = format || DEFAULT_FORMATS_TIME;
+      const hourIndex = actualFormat.indexOf("HH");
+      const minuteIndex = actualFormat.indexOf("mm");
+      const secondIndex = actualFormat.indexOf("ss");
       switch (type) {
         case "hours":
-          range = [0, 2];
+          if (hourIndex !== -1) {
+            range = [hourIndex, hourIndex + 2];
+          }
           break;
         case "minutes":
-          range = [3, 5];
+          if (minuteIndex !== -1) {
+            range = [minuteIndex, minuteIndex + 2];
+          }
           break;
         case "seconds":
-          range = [6, 8];
+          if (secondIndex !== -1) {
+            range = [secondIndex, secondIndex + 2];
+          }
           break;
       }
       const [left, right] = range;
@@ -161,7 +172,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           changeTo = props.spinnerDate.hour(hours).minute(minutes).second(value);
           break;
       }
-      emit("change", changeTo);
+      emit(CHANGE_EVENT, changeTo);
     };
     const handleClick = (type, { value, disabled }) => {
       if (!disabled) {

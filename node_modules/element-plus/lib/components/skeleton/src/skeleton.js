@@ -5,10 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var runtime = require('../../../utils/vue/props/runtime.js');
 
 const skeletonProps = runtime.buildProps({
-  animated: {
-    type: Boolean,
-    default: false
-  },
+  animated: Boolean,
   count: {
     type: Number,
     default: 1

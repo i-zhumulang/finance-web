@@ -4,7 +4,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var vue = require('vue');
 var lodashUnified = require('lodash-unified');
-var error = require('../../utils/error.js');
 
 const DEFAULT_EXCLUDE_KEYS = ["class", "style"];
 const LISTENER_PREFIX = /^on[A-Z]/;
@@ -15,7 +14,6 @@ const useAttrs = (params = {}) => {
   });
   const instance = vue.getCurrentInstance();
   if (!instance) {
-    error.debugWarn("use-attrs", "getCurrentInstance() returned null. useAttrs() must be called at the top of a setup function");
     return vue.computed(() => ({}));
   }
   return vue.computed(() => {

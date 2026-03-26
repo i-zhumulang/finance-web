@@ -7,7 +7,7 @@ var browser = require('../../../utils/browser.js');
 
 const filterOption = (pattern, option) => {
   const lowerCase = pattern.toLowerCase();
-  const label = option.label || option.value;
+  const label = option.label || option.value || "";
   return label.toLowerCase().includes(lowerCase);
 };
 const getMentionCtx = (inputEl, prefix, split) => {

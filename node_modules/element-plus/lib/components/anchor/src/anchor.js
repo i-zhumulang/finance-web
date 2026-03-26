@@ -37,10 +37,7 @@ const anchorProps = runtime.buildProps({
     type: runtime.definePropType(String),
     default: "vertical"
   },
-  selectScrollTop: {
-    type: Boolean,
-    default: false
-  }
+  selectScrollTop: Boolean
 });
 const anchorEmits = {
   change: (href) => shared.isString(href),

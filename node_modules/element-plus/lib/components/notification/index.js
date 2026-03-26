@@ -3,7 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var notify = require('./src/notify.js');
-var notification = require('./src/notification2.js');
+var notification = require('./src/notification.js');
 var install = require('../../utils/vue/install.js');
 
 const ElNotification = install.withInstallFunction(notify["default"], "$notify");

@@ -3,14 +3,12 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var vue = require('vue');
-var error = require('../../../../utils/error.js');
 
 const useStops = (props, initData, minValue, maxValue) => {
   const stops = vue.computed(() => {
     if (!props.showStops || props.min > props.max)
       return [];
     if (props.step === 0) {
-      error.debugWarn("ElSlider", "step should not be 0.");
       return [];
     }
     const stopCount = (props.max - props.min) / props.step;

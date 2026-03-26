@@ -38,11 +38,17 @@ declare const __VLS_component: import("vue").DefineComponent<{
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
     };
-    readonly position: import("element-plus/es/utils").EpPropFinalized<StringConstructor, "top-right" | "top-left" | "bottom-right" | "bottom-left", unknown, "top-right", boolean>;
+    readonly position: import("element-plus/es/utils").EpPropFinalized<StringConstructor, "top-left" | "top-right" | "bottom-left" | "bottom-right", unknown, "top-right", boolean>;
     readonly showClose: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
     readonly title: import("element-plus/es/utils").EpPropFinalized<StringConstructor, unknown, unknown, "", boolean>;
-    readonly type: import("element-plus/es/utils").EpPropFinalized<StringConstructor, "" | "error" | "success" | "warning" | "info", unknown, "", boolean>;
+    readonly type: import("element-plus/es/utils").EpPropFinalized<StringConstructor, "" | "error" | "primary" | "success" | "warning" | "info", unknown, "", boolean>;
     readonly zIndex: NumberConstructor;
+    readonly closeIcon: {
+        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => (string | import("vue").Component) & {}) | (() => string | import("vue").Component) | ((new (...args: any[]) => (string | import("vue").Component) & {}) | (() => string | import("vue").Component))[], unknown, unknown>>;
+        readonly required: false;
+        readonly validator: ((val: unknown) => boolean) | undefined;
+        __epPropKey: true;
+    };
 }, {
     visible: import("vue").Ref<boolean>;
     /** @description close notification */
@@ -85,19 +91,25 @@ declare const __VLS_component: import("vue").DefineComponent<{
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
     };
-    readonly position: import("element-plus/es/utils").EpPropFinalized<StringConstructor, "top-right" | "top-left" | "bottom-right" | "bottom-left", unknown, "top-right", boolean>;
+    readonly position: import("element-plus/es/utils").EpPropFinalized<StringConstructor, "top-left" | "top-right" | "bottom-left" | "bottom-right", unknown, "top-right", boolean>;
     readonly showClose: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
     readonly title: import("element-plus/es/utils").EpPropFinalized<StringConstructor, unknown, unknown, "", boolean>;
-    readonly type: import("element-plus/es/utils").EpPropFinalized<StringConstructor, "" | "error" | "success" | "warning" | "info", unknown, "", boolean>;
+    readonly type: import("element-plus/es/utils").EpPropFinalized<StringConstructor, "" | "error" | "primary" | "success" | "warning" | "info", unknown, "", boolean>;
     readonly zIndex: NumberConstructor;
+    readonly closeIcon: {
+        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => (string | import("vue").Component) & {}) | (() => string | import("vue").Component) | ((new (...args: any[]) => (string | import("vue").Component) & {}) | (() => string | import("vue").Component))[], unknown, unknown>>;
+        readonly required: false;
+        readonly validator: ((val: unknown) => boolean) | undefined;
+        __epPropKey: true;
+    };
 }>> & {
     onDestroy?: (() => any) | undefined;
 }, {
     readonly title: string;
-    readonly position: import("element-plus/es/utils").EpPropMergeType<StringConstructor, "top-right" | "top-left" | "bottom-right" | "bottom-left", unknown>;
+    readonly position: import("element-plus/es/utils").EpPropMergeType<StringConstructor, "top-left" | "top-right" | "bottom-left" | "bottom-right", unknown>;
     readonly offset: number;
     readonly id: string;
-    readonly type: import("element-plus/es/utils").EpPropMergeType<StringConstructor, "" | "error" | "success" | "warning" | "info", unknown>;
+    readonly type: import("element-plus/es/utils").EpPropMergeType<StringConstructor, "" | "error" | "primary" | "success" | "warning" | "info", unknown>;
     readonly message: import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => string | import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
         [key: string]: any;
     }> | (() => import("vue").VNode)) | (() => string | import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
@@ -109,9 +121,9 @@ declare const __VLS_component: import("vue").DefineComponent<{
     }> | (() => import("vue").VNode)))[], unknown, unknown>;
     readonly onClick: () => void;
     readonly duration: number;
+    readonly showClose: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
     readonly customClass: string;
     readonly dangerouslyUseHTMLString: boolean;
-    readonly showClose: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
 }>;
 declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, ReturnType<typeof __VLS_template>>;
 export default _default;

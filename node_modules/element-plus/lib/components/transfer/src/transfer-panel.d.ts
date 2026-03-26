@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, VNode } from 'vue';
+import type { ExtractPropTypes, VNode, __ExtractPublicPropTypes } from 'vue';
 import type { TransferDataItem, TransferKey } from './transfer';
 import type TransferPanel from './transfer-panel.vue';
 export interface TransferPanelState {
@@ -34,8 +34,9 @@ export declare const transferPanelProps: {
     }>, boolean>;
 };
 export type TransferPanelProps = ExtractPropTypes<typeof transferPanelProps>;
+export type TransferPanelPropsPublic = __ExtractPublicPropTypes<typeof transferPanelProps>;
 export declare const transferPanelEmits: {
     "checked-change": (value: TransferKey[], movedKeys?: TransferKey[]) => boolean;
 };
 export type TransferPanelEmits = typeof transferPanelEmits;
-export type TransferPanelInstance = InstanceType<typeof TransferPanel>;
+export type TransferPanelInstance = InstanceType<typeof TransferPanel> & unknown;
